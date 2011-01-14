@@ -1,0 +1,55 @@
+﻿<UserControl 
+  x:Class="Kaxaml.Views.StatusView"
+  x:Name="This"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <Grid>
+    <Grid.Resources>
+      <ResourceDictionary>
+        <ResourceDictionary.MergedDictionaries>
+          <ResourceDictionary Source="\Resources\PluginTheme.xaml" />
+        </ResourceDictionary.MergedDictionaries>
+      </ResourceDictionary>
+    </Grid.Resources>
+
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="*" />
+      <ColumnDefinition Width="Auto" />
+      <ColumnDefinition Width="Auto" />
+    </Grid.ColumnDefinitions>
+
+    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" >
+      Ln 
+      <TextBlock Text="{Binding ElementName=This, Path=CurrentLineNumber}" />,
+      Pos
+      <TextBlock Text="{Binding ElementName=This, Path=CurrentLinePosition}" />
+    </TextBlock>
+
+    <Slider
+      Grid.Column="1" 
+      x:Name="ZoomSlider"
+      VerticalAlignment="Center"
+      IsSnapToTickEnabled="True"
+      Maximum="1000"
+      Minimum="25"
+      Value="{Binding ElementName=This, Path=Zoom, Mode=TwoWay}" 
+      Ticks="25,50,75,100,125,150,200,300,400,500,600,700,800,1000"/>
+
+    <ComboBox
+      Grid.Column="2" 
+      MinWidth="0"
+      Width="55"
+      HorizontalAlignment="Center"
+      Margin="3,0,0,0"
+      VerticalAlignment="Center"
+      FontFamily="Verdana"
+      FontSize="7.5pt"
+      Foreground="#DDD"
+      IsEditable="True"
+      ItemsSource="{Binding ElementName=ZoomSlider, Path=Ticks}"
+      Text="{Binding ElementName=ZoomSlider, Path=Value}"/>
+
+  </Grid>
+
+</UserControl>

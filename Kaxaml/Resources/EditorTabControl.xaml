@@ -1,0 +1,265 @@
+<ResourceDictionary
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:c="clr-namespace:Kaxaml.Controls"
+  xmlns:k="clr-namespace:Kaxaml"
+  xmlns:a="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"  >
+
+  <ResourceDictionary.MergedDictionaries>
+    <ResourceDictionary Source="\Resources\Brushes.xaml" />
+  </ResourceDictionary.MergedDictionaries>
+
+  <!-- 
+  *******************************************************************
+  EditorTabControlCloseButton
+  ********************************************************************
+  -->
+
+  <Style x:Key="EditorTabControlCloseButton" TargetType="{x:Type Button}">
+    <Setter Property="OverridesDefaultStyle" Value="True" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type Button}">
+          <Grid SnapsToDevicePixels="False">
+            <Ellipse x:Name="Ellipse" >
+              <Ellipse.Fill>
+                <RadialGradientBrush GradientOrigin="0.5,0.75">
+                  <GradientStop Color="#FF6E6E6E" Offset="0.874"/>
+                  <GradientStop Color="#FF2F2F2F" Offset="0.152"/>
+                  <GradientStop Color="#FF4E4E4E" Offset="0.628"/>
+                </RadialGradientBrush>
+              </Ellipse.Fill>
+              <Ellipse.Stroke>
+                <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
+                  <GradientStop Offset="0.1" Color="#50FFFFFF" />
+                  <GradientStop Offset="0.4" Color="#39FFFFFF" />
+                  <GradientStop Offset="0.7" Color="#3D000000" />
+                  <GradientStop Offset="0.8" Color="#50000000" />
+                </LinearGradientBrush>
+              </Ellipse.Stroke>
+            </Ellipse>
+            <Ellipse  Stroke="#28FFFFFF"  Margin="1" />
+
+
+            <Path x:Name="Path" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0"
+              Stroke="#CCC"
+              StrokeThickness="1.7"
+              Width="6" Height="6"
+              Data="M 0 0 L 6 6 M 6 0 L 0 6 Z"/>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+              <Setter TargetName="Ellipse" Property="Fill" >
+                <Setter.Value>
+                  <RadialGradientBrush GradientOrigin="0.5,0.766">
+                    <GradientStop Color="#FFDA4E26" Offset="0.874"/>
+                    <GradientStop Color="#FF531D0D" Offset="0.013"/>
+                    <GradientStop Color="#FFAB2F0C" Offset="0.628"/>
+                    <GradientStop Color="#FF6C220C" Offset="0.296"/>
+                  </RadialGradientBrush>
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+
+            <Trigger Property="IsPressed" Value="True">
+              <Setter TargetName="Ellipse" Property="Stroke" >
+                <Setter.Value>
+                  <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Offset="0.821" Color="#9EFFFFFF" />
+                    <GradientStop Color="#A81C1C1C" Offset="0.152"/>
+                    <GradientStop Color="#A03A3A3A" Offset="0.565"/>
+                    <GradientStop Color="#9E919191" Offset="0.713"/>
+                    <GradientStop Color="#A6323232" Offset="0.238"/>
+                  </LinearGradientBrush>
+                </Setter.Value>
+              </Setter>
+              <Setter TargetName="Ellipse" Property="Fill" >
+                <Setter.Value>
+                  <RadialGradientBrush GradientOrigin="0.5,0.25">
+                    <GradientStop Color="#FFDA4E26" Offset="0.874"/>
+                    <GradientStop Color="#FF8D280C" Offset="0.471"/>
+                  </RadialGradientBrush>
+                </Setter.Value>
+              </Setter>
+              <Setter TargetName="Path" Property="RenderTransform" >
+                <Setter.Value>
+                  <TranslateTransform Y="1" />
+                </Setter.Value>
+              </Setter>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+              <Setter Property="Visibility" Value="Collapsed" />
+            </Trigger>
+
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <!-- 
+  *******************************************************************
+  EditorTabItem
+  ********************************************************************
+  -->
+
+  <Style x:Key="EditorTabItem" TargetType="{x:Type TabItem}">
+    <Setter Property="OverridesDefaultStyle" Value="True" />
+    <Setter Property="SnapsToDevicePixels" Value="True" />
+    <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+    <Setter Property="Foreground" Value="#FFF" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type TabItem}">
+          <Border x:Name="Border" Background="Transparent" BorderBrush="Transparent" BorderThickness="0,1,0,0" Margin="0,-1,0,0">
+            <Grid>
+
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+              </Grid.ColumnDefinitions>
+
+              <Border x:Name="Shimmer" Opacity="0" Grid.ColumnSpan="3">
+                <Border.Background>
+                  <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Offset="0.0" Color="#40909090" />
+                    <!--<GradientStop Offset="0.5" Color="#40707070" />
+                    <GradientStop Offset="0.5" Color="#40646464" />-->
+                    <GradientStop Offset="1.0" Color="#40505050" />
+                  </LinearGradientBrush>
+                </Border.Background>
+              </Border>
+
+
+              <!--<Image Source="..\Images\wpfpage_small.png"  VerticalAlignment="Center" HorizontalAlignment="Left" Margin="7,0,0,2" Width="11" Height="13" SnapsToDevicePixels="True" />-->
+
+              <Ellipse Width="8" Height="8" Margin="6,-1,0,1" VerticalAlignment="Center" SnapsToDevicePixels="True" x:Name="DocumentTypeDot" ToolTip="WPF Document">
+                <Ellipse.Fill>
+                  <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#FFFFC800" Offset="0" />
+                    <GradientStop Color="#FFFF6C00" Offset="1" />
+                  </LinearGradientBrush>
+                </Ellipse.Fill>
+                <Ellipse.Stroke>
+                  <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="Black" Offset="0" />
+                    <GradientStop Color="#30FFFFFF" Offset="1" />
+                  </LinearGradientBrush>
+                </Ellipse.Stroke>
+              </Ellipse>
+
+
+              <ContentPresenter Grid.Column="1" x:Name="HeaderArea" ContentSource="Header" Margin="10,0,12,3" VerticalAlignment="Center" />
+              <Rectangle Grid.Column="0" x:Name="Highlight" Width="1" Fill="#2FFF" HorizontalAlignment="Left" />
+              <Rectangle Grid.Column="2" x:Name="Shadow" Width="1" Fill="#7000" HorizontalAlignment="Right" Margin="0,-1,0,0" />
+              <Button Margin="0,0,8,3" Grid.Column="2" x:Name="CloseButton" Style="{StaticResource EditorTabControlCloseButton}" Width="14" Height="14" Cursor="Hand" HorizontalAlignment="Right" VerticalAlignment="Center" Command="{x:Static k:MainWindow.CloseTabCommand}" CommandParameter="{Binding .}" />
+
+            </Grid>
+          </Border>
+          <ControlTemplate.Triggers>
+            <DataTrigger Binding="{Binding XamlDocumentType}" Value="AgDocument">
+              <Setter TargetName="DocumentTypeDot" Property="Fill">
+                <Setter.Value>
+                  <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#CCE0FF" Offset="0" />
+                    <GradientStop Color="#517AD4" Offset="1" />
+                  </LinearGradientBrush>
+                </Setter.Value>
+              </Setter>
+            </DataTrigger>
+            <Trigger Property="IsMouseOver" Value="True">
+              <Trigger.EnterActions>
+                <BeginStoryboard>
+                  <Storyboard >
+                    <DoubleAnimation Duration="0:0:0.07" Storyboard.TargetName="Shimmer" Storyboard.TargetProperty="Opacity" To="1.0" />
+                  </Storyboard>
+                </BeginStoryboard>
+              </Trigger.EnterActions>
+              <Trigger.ExitActions>
+                <BeginStoryboard>
+                  <Storyboard >
+                    <DoubleAnimation Duration="0:0:0.2" Storyboard.TargetName="Shimmer" Storyboard.TargetProperty="Opacity" />
+                  </Storyboard>
+                </BeginStoryboard>
+              </Trigger.ExitActions>
+            </Trigger>
+
+            <Trigger Property="IsSelected" Value="False">
+              <Setter TargetName="CloseButton" Property="Visibility" Value="Collapsed" />
+            </Trigger>
+
+            <Trigger Property="IsSelected" Value="True">
+              <Setter TargetName="Shimmer" Property="Opacity" Value="0" />
+              <Setter TargetName="Border" Property="Background">
+                <Setter.Value>
+                  <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Offset="0.0" Color="#909090" />
+                    <!--<GradientStop Offset="0.5" Color="#808080" />
+                    <GradientStop Offset="0.5" Color="#747474" />-->
+                    <GradientStop Offset="1.0" Color="#505050" />
+                  </LinearGradientBrush>
+                </Setter.Value>
+              </Setter>
+              <Setter TargetName="Border" Property="BorderBrush" Value="#BBB" />
+              <Setter TargetName="Highlight" Property="Fill" Value="#3FFF" />
+              <Setter TargetName="Shadow" Property="Fill" Value="#8000" />
+            </Trigger>
+
+            <Trigger Property="c:IndexingStackPanel.Index" Value="0">
+              <Setter TargetName="Border" Property="CornerRadius" Value="4,0,0,0" />
+              <Setter TargetName="Shimmer" Property="CornerRadius" Value="4,0,0,0" />
+            </Trigger>
+
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <!-- 
+  *******************************************************************
+  EditorTabControl
+  ********************************************************************
+  -->
+
+  <Style x:Key="EditorTabControl" TargetType="{x:Type TabControl}">
+    <Setter Property="OverridesDefaultStyle" Value="True" />
+    <Setter Property="SnapsToDevicePixels" Value="True" />
+    <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+    <Setter Property="ItemContainerStyle" Value="{StaticResource EditorTabItem}" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type TabControl}">
+          <Grid>
+            <Grid.RowDefinitions>
+              <RowDefinition Height="25" />
+              <!--<RowDefinition Height="*" />-->
+            </Grid.RowDefinitions>
+            <Border
+              CornerRadius="4,4,0,0"
+              BorderBrush="#777"
+              BorderThickness="0,1,0,0">
+              <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                  <GradientStop Offset="0.0" Color="#505050" />
+                  <GradientStop Offset="1.0" Color="#282828" />
+                </LinearGradientBrush>
+              </Border.Background>
+              <StackPanel Orientation="Horizontal">
+                <c:IndexingStackPanel Orientation="Horizontal" IsItemsHost="True" />
+                <Rectangle x:Name="Highlight" Width="1" Fill="#2FFF" HorizontalAlignment="Left" />
+              </StackPanel>
+            </Border>
+            <!--<Border Grid.Row="1">
+              <ContentPresenter ContentSource="SelectedContent" />
+            </Border>-->
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+
+
+</ResourceDictionary>

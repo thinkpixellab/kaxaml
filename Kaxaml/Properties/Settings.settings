@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Kaxaml.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="EnableAutoParse" Roaming="true" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="EnableErrorColor" Roaming="true" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="AutoParseTimeout" Roaming="true" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="EditorFontSize" Roaming="true" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="EnableAutoBackup" Roaming="true" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="EditorOnTop" Roaming="true" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConvertTabs" Roaming="true" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ConvertTabsCount" Roaming="true" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="AutoCompleteTags" Roaming="true" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="CreateFileAssociation" Roaming="true" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="WPFSchema" Roaming="true" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Schemas\XamlPresentation2006.xsd</Value>
+    </Setting>
+    <Setting Name="EditorFontFamily" Type="System.Windows.Media.FontFamily" Scope="User">
+      <Value Profile="(Default)">Consolas</Value>
+    </Setting>
+    <Setting Name="ShowLineNumbers" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="EnableXmlFolding" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="EnableSyntaxHighlighting" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="EnableCodeCompletion" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="PasteImageFolder" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Images</Value>
+    </Setting>
+    <Setting Name="PasteImageFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Image$number$.jpg</Value>
+    </Setting>
+    <Setting Name="PasteImageXaml" Type="System.String" Scope="User">
+      <Value Profile="(Default)">&lt;Image Source="$source$" Stretch="None" /&gt;</Value>
+    </Setting>
+    <Setting Name="WPFDefaultXaml" Roaming="true" Type="System.String" Scope="User">
+      <Value Profile="(Default)">&lt;Page
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"&gt;
+  &lt;Grid&gt;  
+  
+  &lt;/Grid&gt;
+&lt;/Page&gt;</Value>
+    </Setting>
+    <Setting Name="EnablePseudoSilverlight" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="AgDefaultXaml" Type="System.String" Scope="User">
+      <Value Profile="(Default)">&lt;Grid
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"&gt;
+
+&lt;/Grid&gt;</Value>
+    </Setting>
+    <Setting Name="AgSchema" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Schemas\wpfe.xsd</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

@@ -1,0 +1,58 @@
+<UserControl x:Class="Kaxaml.Views.MenuView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:k="clr-namespace:Kaxaml"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <UserControl.Resources>
+
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="\Resources\MainMenu.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+
+  </UserControl.Resources>
+
+  <Menu>
+
+    <MenuItem Header="_File"  >
+      <MenuItem Command="k:MainWindow.NewWPFTabCommand" InputGestureText="Ctrl+T" />
+      <MenuItem Command="k:MainWindow.NewAgTabCommand" InputGestureText="Ctrl+L" />
+      <MenuItem Command="k:MainWindow.CloseTabCommand" InputGestureText="Ctrl+W" />
+      <Separator />
+      <MenuItem Command="k:MainWindow.OpenCommand" InputGestureText="Ctrl+O" />
+      <MenuItem Command="k:MainWindow.SaveCommand" InputGestureText="Ctrl+S" />
+      <MenuItem Command="k:MainWindow.SaveAsCommand" InputGestureText="Ctrl+Alt+S" />
+      <!--Separator / -->
+      <Separator />
+      <MenuItem Command="k:MainWindow.ExitCommand"  />
+    </MenuItem>
+
+    <MenuItem Header="_Edit">
+      <MenuItem Command="k:MainWindow.UndoCommand" InputGestureText="Ctrl+Z" />
+      <MenuItem Command="k:MainWindow.RedoCommand" InputGestureText="Ctrl+Y" />
+      <Separator />
+      <MenuItem Command="k:MainWindow.CutCommand" InputGestureText="Ctrl+X" />
+      <MenuItem Command="k:MainWindow.CopyCommand" InputGestureText="Ctrl+C" />
+      <MenuItem Command="k:MainWindow.PasteCommand" InputGestureText="Ctrl+V" />
+      <MenuItem Command="k:MainWindow.PasteImageCommand" InputGestureText="Ctrl+Shift+V" />
+      <MenuItem Command="k:MainWindow.DeleteCommand" InputGestureText="Del" />
+      <Separator />
+      <MenuItem Command="k:MainWindow.FindCommand" InputGestureText="Ctrl+F" />
+      <MenuItem Command="k:MainWindow.FindNextCommand" InputGestureText="F3" />
+      <MenuItem Command="k:MainWindow.ReplaceCommand" InputGestureText="Ctrl+H" />
+    </MenuItem>
+
+    <MenuItem Header="_View">
+      <MenuItem Command="k:MainWindow.ZoomInCommand" InputGestureText="Ctrl++" />
+      <MenuItem Command="k:MainWindow.ZoomOutCommand" InputGestureText="Ctrl+-" />
+      <MenuItem Command="k:MainWindow.ActualSizeCommand" InputGestureText="Ctrl+1" />
+    </MenuItem>
+
+    <MenuItem Header="_XAML">
+      <MenuItem Command="k:MainWindow.ParseCommand" InputGestureText="F5" />
+    </MenuItem>
+
+  </Menu>
+
+</UserControl>

@@ -1,0 +1,11 @@
+﻿<Application
+  x:Class="Kaxaml.App"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  Startup="app_Startup" 
+  StartupUri="MainWindow.xaml">
+  
+  
+
+  
+</Application>

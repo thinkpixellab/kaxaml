@@ -1,0 +1,227 @@
+<UserControl x:Name="SnippetsMain" x:Class="Kaxaml.Plugins.Default.Snippets"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:l="clr-namespace:Kaxaml.Plugins.Default"
+  xmlns:s="clr-namespace:Kaxaml.Plugins.Controls;assembly=KaxamlPlugins">
+
+
+  <UserControl.Resources>
+    <ResourceDictionary>
+
+      <Style x:Key="TextBoxOverlayStyle"  TargetType="{x:Type l:TextBoxOverlay}" >
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+        <Setter Property="Foreground"	Value="#FFF"/>
+        <Setter Property="FocusVisualStyle"	Value="{x:Null}"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="AllowDrop" Value="true"/>
+        <Setter Property="Template">
+          <Setter.Value>
+            <ControlTemplate TargetType="{x:Type TextBoxBase}">
+              <Border
+                Name="Border"
+                Padding="{TemplateBinding Padding}"
+                Background="#909090" >
+                <ScrollViewer Margin="0,1,0,0" x:Name="PART_ContentHost"/>
+              </Border>
+            </ControlTemplate>
+          </Setter.Value>
+        </Setter>
+      </Style>
+
+    </ResourceDictionary>
+  </UserControl.Resources>
+
+  <Grid MinHeight="15" Margin="0,5" Background="Transparent" Name="MainGrid" Loaded="GridLoaded" >
+
+    <Grid.ContextMenu>
+      <ContextMenu>
+        <MenuItem Header="New Category" Click="NewCategory" />
+      </ContextMenu>
+    </Grid.ContextMenu>
+
+    <Grid.Resources>
+
+      <ContextMenu x:Key="SnippetContextMenu">
+        <MenuItem Header="Rename" Click="RenameSnippet" />
+        <MenuItem Header="Edit" Click="EditSnippet" />
+        <Separator />
+        <MenuItem Header="Move Up" Click="MoveSnippetUp" />
+        <MenuItem Header="Move Down" Click="MoveSnippetDown" />
+        <Separator />
+        <MenuItem Header="Delete" Click="DeleteSnippet" />
+      </ContextMenu>
+
+      <ContextMenu x:Key="CategoryContextMenu">
+        <MenuItem Header="Rename " Click="RenameCategory" />
+        <MenuItem Header="New Category" Click="NewCategory" />
+        <Separator />
+        <MenuItem Header="Move Up" Click="MoveCategoryUp" />
+        <MenuItem Header="Move Down" Click="MoveCategoryDown" />
+        <Separator />
+        <MenuItem Header="Delete" Click="DeleteCategory" />
+      </ContextMenu>
+
+      <DataTemplate DataType="{x:Type l:Snippet}">
+        <s:TextDragger Text="{Binding Text}"  Data="{Binding}">
+          <Grid VerticalAlignment="Center" Margin="0,0,5,1">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*" />
+              <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0"  HorizontalAlignment="Left"  TextTrimming="CharacterEllipsis" Text="{Binding Name}" />
+            <TextBlock Grid.Column="1"  HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="7.0pt" Text="{Binding Shortcut}" />
+          </Grid>
+        </s:TextDragger>
+      </DataTemplate>
+
+      <Style TargetType="{x:Type TabControl}">
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Template">
+          <Setter.Value>
+            <ControlTemplate TargetType="{x:Type TabControl}">
+              <StackPanel IsItemsHost="True" />
+            </ControlTemplate>
+          </Setter.Value>
+        </Setter>
+      </Style>
+
+      <Style TargetType="{x:Type TabItem}">
+        <EventSetter Event="Drop" Handler="DoDrop" />
+        <Setter Property="AllowDrop" Value="True" />
+        <Setter Property="ContextMenu" Value="{DynamicResource CategoryContextMenu}" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Header" Value="{Binding Name}" />
+        <Setter Property="Content" Value="{Binding Root}" />
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="Template">
+          <Setter.Value>
+            <ControlTemplate TargetType="{x:Type TabItem}">
+              <Border
+                Name="OuterBorder"
+                CornerRadius="4"
+                Margin="0,2">
+
+                <Grid >
+
+                  <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                  </Grid.RowDefinitions>
+
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                  </Grid.ColumnDefinitions>
+
+                  <!-- arrow -->
+                  <Path
+                    Name="Arrow"
+                    Grid.Row="0" Grid.Column="0"
+                    Fill="#FFF"
+                    Width="8" Height="8"
+                    Margin="4,0,6,3"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Data="M 2 0 L 6 4 L 2 8 Z"/>
+
+                  <!-- header -->
+                  <ContentPresenter
+                    Name="HeaderPresenter"
+                    Grid.Row="0" Grid.Column="1"
+                    TextElement.Foreground="#FFF"
+                    Margin="0,1,0,5"
+                    ContentSource="Header"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    RecognizesAccessKey="True" />
+
+                  <!-- header background (for cursor) -->
+                  <Border
+                    Name="Border"
+                    Grid.Row="0" Grid.ColumnSpan="2"
+                    Background="#0000"
+                    Cursor="Hand" />
+
+                  <!-- content-->
+                  <ListBox
+                    
+                    x:Name="Snippets"
+                    Margin="0,0,0,0"
+                    Grid.Row="1" Grid.ColumnSpan="2"
+                    ItemsSource="{Binding Snippets}"
+                    FocusVisualStyle="{x:Null}"
+                    Visibility="Collapsed"
+                    OverridesDefaultStyle="True"
+                    TextElement.Foreground="#FFF" >
+
+
+                    <!-- ListBox Template -->
+                    <ListBox.Template>
+                      <ControlTemplate TargetType="{x:Type ListBox}">
+                        <StackPanel Margin="0" IsItemsHost="true" />
+                      </ControlTemplate>
+                    </ListBox.Template>
+
+                    <!-- ListBoxItem Template -->
+                    <ListBox.ItemContainerStyle>
+                      <Style TargetType="{x:Type ListBoxItem}">
+                        <Setter Property="Cursor" Value="Hand" />
+                        <Setter Property="Margin" Value="0" />
+                        <Setter Property="HorizontalAlignment" Value="Stretch" />
+                        <Setter Property="ContextMenu" Value="{DynamicResource SnippetContextMenu}" />
+                        <Setter Property="OverridesDefaultStyle" Value="True" />
+                        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+                        <Setter Property="Foreground" Value="#C8C8C8" />
+                        <Setter Property="Template">
+                          <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                              <Border HorizontalAlignment="Stretch" Name="Border" SnapsToDevicePixels="True" Background="Transparent" >
+                                  <ContentPresenter VerticalAlignment="Center" Margin="18,4,5,4" />
+                              </Border>
+
+                              <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                  <Setter TargetName="Border" Property="Background" Value="#20FFFFFF" />
+                                  <Setter Property="Foreground" Value="#FFFFFF" />
+                                </Trigger>
+                              </ControlTemplate.Triggers>
+
+                            </ControlTemplate>
+
+                          </Setter.Value>
+                        </Setter>
+                      </Style>
+                    </ListBox.ItemContainerStyle>
+                  </ListBox>
+
+                </Grid>
+              </Border>
+
+              <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                  <Setter TargetName="Arrow" Property="Fill" Value="#FFF" />
+                </Trigger>
+                <Trigger Property="IsSelected" Value="True">
+                  <Setter TargetName="Arrow" Property="Fill" Value="#FFF" />
+                  <Setter TargetName="Snippets" Property="Visibility" Value="Visible" />
+                  <Setter TargetName="Arrow" Property="Data" Value="M 0 2 L 4 6 L 8 2 Z" />
+                </Trigger>
+              </ControlTemplate.Triggers>
+
+
+            </ControlTemplate>
+          </Setter.Value>
+        </Setter>
+      </Style>
+
+
+    </Grid.Resources>
+
+    <TabControl Name="SnippetCategoriesTabControl" ItemsSource="{Binding ElementName=SnippetsMain,Path=SnippetCategories}">
+    </TabControl>
+
+  </Grid>
+</UserControl>

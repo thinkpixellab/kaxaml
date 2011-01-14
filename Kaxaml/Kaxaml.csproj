@@ -1,0 +1,376 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FF5B3F61-822A-4154-9215-43D4A835EDF4}</ProjectGuid>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <RootNamespace>Kaxaml</RootNamespace>
+    <AssemblyName>Kaxaml</AssemblyName>
+    <WarningLevel>4</WarningLevel>
+    <OutputType>winexe</OutputType>
+    <MinFrameworkVersionRequired>3.0</MinFrameworkVersionRequired>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>false</MapFileExtensions>
+    <ApplicationVersion>1.0.0.*</ApplicationVersion>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <PublishUrl>Publish\</PublishUrl>
+    <TargetFrameworkVersion>v3.0</TargetFrameworkVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <ApplicationIcon>kaxaml.ico</ApplicationIcon>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>.\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>.\bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ICSharpCode.TextEditor, Version=2.1.0.2429, Culture=neutral, PublicKeyToken=4d61825e8dd49f1a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Reference Assemblies\ICSharpCode.TextEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="mscorlib" />
+    <Reference Include="PresentationFramework.Aero" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="UIAutomationProvider">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="ReachFramework" />
+    <Reference Include="System.Printing" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="WindowsFormsIntegration" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="CodeCompletion\CodeCompletionPopup.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CodeCompletion\StringBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\KaxamlTextEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\XamlEditorDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DocumentViews\AgDocumentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Plugins\About.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Plugins\Find.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Plugins\FontChooser.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Plugins\Settings.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Plugins\SnippetEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Plugins\Snippets.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Brushes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\EditorTabControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\MainMenu.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\PluginTheme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\DocumentsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DocumentViews\WpfDocumentView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MenuView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PluginView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\StatusView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CodeCompletion\CodeCompletionPopup.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>CodeCompletionPopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CodeCompletion\StringBox.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>StringBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\XamlEditorDialog.xaml.cs">
+      <DependentUpon>XamlEditorDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ZoomFrame.cs" />
+    <Compile Include="Controls\RenderHelper.cs" />
+    <Compile Include="Controls\KaxamlTextEditor.xaml.cs">
+      <DependentUpon>KaxamlTextEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\IndexingStackPanel.cs" />
+    <Compile Include="Controls\Reveal.cs" />
+    <Compile Include="CodeCompletion\XmlCompletionData.cs" />
+    <Compile Include="CodeCompletion\XmlCompletionDataCollection.cs" />
+    <Compile Include="CodeCompletion\XmlCompletionProvider.cs" />
+    <Compile Include="CodeCompletion\XmlFoldingStrategy.cs" />
+    <Compile Include="CodeCompletion\XmlParser.cs" />
+    <Compile Include="CodeCompletion\XmlSchemaCompletionData.cs" />
+    <Compile Include="Converters.cs" />
+    <Compile Include="Documents\AgDocument.cs" />
+    <Compile Include="Documents\WpfDocument.cs" />
+    <Compile Include="DocumentViews\AgDocumentView.xaml.cs">
+      <DependentUpon>AgDocumentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DocumentViews\IXamlDocumentView.cs" />
+    <Compile Include="Plugin.cs" />
+    <Compile Include="Plugins\About.xaml.cs">
+      <DependentUpon>About.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Plugins\Find.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>Find.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Plugins\FontChooser.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>FontChooser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Plugins\Settings.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>Settings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Plugins\SnippetEditor.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>SnippetEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Plugins\Snippets.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>Snippets.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Resource Include="Fonts\Miramo.ttf" />
+    <Resource Include="Fonts\Miramob.ttf" />
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Schemas\XamlPresentation2006.xsd">
+      <SubType>
+      </SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Settings.cs" />
+    <Compile Include="Silverlight\SilverlightBridge.cs" />
+    <Compile Include="Silverlight\SocketServer.cs" />
+    <Compile Include="Views\DocumentsView.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>DocumentsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DocumentViews\WpfDocumentView.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>WpfDocumentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MenuView.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>MenuView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PluginView.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>PluginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Documents\XamlDocument.cs" />
+    <Compile Include="Views\StatusView.xaml.cs">
+      <DependentUpon>StatusView.xaml</DependentUpon>
+    </Compile>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\snippet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\KaxamlPlugins\KaxamlPlugins.csproj">
+      <Project>{F6B1B201-8293-4729-842C-0BB54F89FFA7}</Project>
+      <Name>KaxamlPlugins</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="KaxamlSnippets.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Resource Include="Schemas\XamlPresentation2006.xsx">
+      <DependentUpon>XamlPresentation2006.xsd</DependentUpon>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\cog.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\connect.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\find.png" />
+    <EmbeddedResource Include="Images\image.png" />
+    <EmbeddedResource Include="Images\information.png" />
+    <EmbeddedResource Include="Images\page_lightning.png" />
+    <EmbeddedResource Include="Images\palette.png" />
+    <EmbeddedResource Include="Images\picture.png" />
+    <EmbeddedResource Include="Images\plugin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\emb_tag.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\resultset_next.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\resultset_previous.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\page_copy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="kaxaml.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\kaxaml.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\basick.png" />
+    <None Include="Assets\kaxaml.ico" />
+    <None Include="Assets\kaxaml.png" />
+    <None Include="Assets\kaxaml2.png" />
+    <None Include="Assets\kaxamlfile.ico" />
+    <None Include="Assets\shadow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Reference Assemblies\ICSharpCode.TextEditor.dll" />
+    <None Include="Schemas\wpfe.xsd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\slpage_small.png" />
+    <Resource Include="Images\wpfpage_small.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\page_white_edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\pencil.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>

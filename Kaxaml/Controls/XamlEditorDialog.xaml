@@ -1,0 +1,67 @@
+﻿<Window
+  x:Name="This"
+  x:Class="Kaxaml.Controls.XamlEditorDialog"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:c="clr-namespace:Kaxaml.Controls"
+  xmlns:settings="clr-namespace:Kaxaml.Properties"
+  Title="Xaml Editor"
+  Height="480"
+  MinHeight="160"
+  Width="640"
+  MinWidth="360"
+  WindowStartupLocation="CenterOwner" 
+  WindowState="Normal"
+  Background="#303030"
+  WindowStyle="ToolWindow"
+  FontSize="7.5pt"
+  FontFamily="Verdana"
+  Foreground="#DDD">
+
+  <Window.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="\Resources\PluginTheme.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </Window.Resources>
+
+  <Grid SnapsToDevicePixels="True">
+
+    <Grid.RowDefinitions>
+      <RowDefinition Height="*" />
+      <RowDefinition Height="10" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="7" />
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="7" />
+      <ColumnDefinition MaxWidth="200" Width="*" />
+      <ColumnDefinition MaxWidth="200" Width="*" />
+      <ColumnDefinition Width="0.1*" />
+      <ColumnDefinition Width="Auto" />
+      <ColumnDefinition Width="Auto" />
+      <ColumnDefinition Width="7" />
+    </Grid.ColumnDefinitions>
+
+    <c:KaxamlTextEditor
+      x:Name="Editor"
+      Grid.Row="0"
+      Grid.ColumnSpan="7"
+      FontFamily="{Binding Source={x:Static settings:Settings.Default}, Path=EditorFontFamily, Mode=TwoWay}"
+      FontSize="{Binding Source={x:Static settings:Settings.Default}, Path=EditorFontSize, Mode=TwoWay}"
+      ConvertTabs="{Binding Source={x:Static settings:Settings.Default}, Path=ConvertTabs}"
+      ConvertTabsCount="{Binding Source={x:Static settings:Settings.Default}, Path=ConvertTabsCount}"
+      ShowLineNumbers="{Binding Source={x:Static settings:Settings.Default}, Path=ShowLineNumbers}"
+      EnableSyntaxHighlighting="{Binding Source={x:Static settings:Settings.Default}, Path=EnableSyntaxHighlighting}"
+      EnableXmlFolding="{Binding Source={x:Static settings:Settings.Default}, Path=EnableXmlFolding}"
+      IsCodeCompletionEnabled="{Binding Source={x:Static settings:Settings.Default}, Path=EnableCodeCompletion}"
+      Text="{Binding ElementName=This, Path=Text, Mode=TwoWay}" />
+
+    <Button Click="DoCancel"  Grid.Column="4" Grid.Row="3" VerticalAlignment="Bottom" Margin="0,0,0,0" IsCancel="True" >Cancel</Button>
+    <Button Click="DoDone"  Grid.Column="5" Grid.Row="3" VerticalAlignment="Bottom" Margin="10,0,0,0" IsDefault="True" >Done</Button>
+
+  </Grid>
+
+</Window>

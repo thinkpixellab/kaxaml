@@ -1,0 +1,146 @@
+<UserControl
+  x:Name="This"
+  x:Class="Kaxaml.Views.PluginView"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:c="clr-namespace:Kaxaml.Controls"
+  xmlns:a="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero">
+
+  <UserControl.Resources>
+
+    <ResourceDictionary>
+
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="\Resources\PluginTheme.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+
+      <Style x:Key="PluginTabItem" TargetType="{x:Type TabItem}">
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Foreground" Value="#FFF" />
+        <Setter Property="Template">
+          <Setter.Value>
+            <ControlTemplate TargetType="{x:Type TabItem}">
+              <Expander
+                  Foreground="{TemplateBinding Foreground}"
+                  IsExpanded="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsSelected, Mode=TwoWay}"
+                  Header="{TemplateBinding Header}"
+                  Content="{TemplateBinding Content}">
+                <Expander.Template>
+                  <ControlTemplate TargetType="{x:Type Expander}">
+                    <Grid x:Name="OuterGrid">
+                      <Grid.RowDefinitions>
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="Auto" />
+                      </Grid.RowDefinitions>
+
+                      <Border x:Name="Border" Background="#00FFFFFF" ToolTip="{Binding Description}">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="7,0,0,0">
+                          <Image Source="{Binding Icon}" Width="16" Height="16" Margin="0,0,6,0" VerticalAlignment="Center" />
+                          <TextBlock Text="{Binding Name}" VerticalAlignment="Center" />
+                        </StackPanel>
+                      </Border>
+
+                      <!--<Border Height="1" BorderBrush="#00000000" BorderThickness="1,1,1,0" CornerRadius="0" SnapsToDevicePixels="True" VerticalAlignment="Top" />
+                      <Border Height="1" BorderBrush="#00FFFFFF" BorderThickness="1,1,1,0" CornerRadius="0" SnapsToDevicePixels="True" VerticalAlignment="Top" Margin="0,1,0,0"  />-->
+
+                      <Path
+                        SnapsToDevicePixels="True"
+                        IsHitTestVisible="False"
+                        Name="Arrow"
+                        Margin="8,0,8,0"
+                        Fill="#0FFF"
+                        RenderTransformOrigin="0.5,0.5"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Data="M 0 0 L 0 8 L 5 4 Z"
+                        Stroke="{TemplateBinding Foreground}"
+                        StrokeThickness="0.5">
+                        <Path.RenderTransform>
+                          <RotateTransform Angle="0" />
+                        </Path.RenderTransform>
+                      </Path>
+
+                      <c:Reveal x:Name="ContentReveal" Grid.Row="1" VerticalReveal="FromTopToBottom" HorizontalReveal="None">
+                        <!-- the extra border here is required because Reveal doesn't account for margins -->
+                        <Border>
+                          <Border BorderThickness="0.5,1,0,0" BorderBrush="#6000" Background="#10FFFFFF" CornerRadius="2,3,2,2" HorizontalAlignment="Center" SnapsToDevicePixels="True" Width="250" Margin="7,0,7,6" >
+                            <Border BorderThickness="0,0,0.5,1" BorderBrush="#20FFFFFF" CornerRadius="2,3,2,2">
+                              <ContentPresenter x:Name="PART_ContentPresenter" Content="{TemplateBinding Content}"  Width="250" ToolTipService.IsEnabled="False" />
+                            </Border>
+                          </Border>
+                        </Border>
+                      </c:Reveal>
+
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                      <MultiTrigger>
+                        <MultiTrigger.Conditions>
+                          <Condition SourceName="Border" Property="IsMouseOver" Value="True" />
+                          <Condition Property="IsExpanded" Value="False" />
+                        </MultiTrigger.Conditions>
+                        <Setter TargetName="Border" Property="Background" Value="#20FFFFFF" />
+                        <Setter TargetName="Border" Property="Cursor" Value="Hand" />
+                      </MultiTrigger>
+                      <Trigger Property="IsExpanded" Value="True">
+                        <Trigger.EnterActions>
+                          <BeginStoryboard>
+                            <Storyboard>
+                              <DoubleAnimation BeginTime="0:0:0.2"  Storyboard.TargetName="ContentReveal" Storyboard.TargetProperty="AnimationProgress" Duration="0:0:0.2" To="1" DecelerationRatio="1" />
+                              <DoubleAnimation Storyboard.TargetName="Arrow" Storyboard.TargetProperty="(FrameworkElement.RenderTransform).(RotateTransform.Angle)" Duration="0:0:0.2" To="90" DecelerationRatio="1" />
+                              <ColorAnimation Storyboard.TargetName="Arrow" Storyboard.TargetProperty="(Path.Fill).(SolidColorBrush.Color)" Duration="0:0:0.2" To="#FFF" DecelerationRatio="1" />
+                            </Storyboard>
+                          </BeginStoryboard>
+                        </Trigger.EnterActions>
+                        <Trigger.ExitActions>
+                          <BeginStoryboard>
+                            <Storyboard>
+                              <DoubleAnimation Storyboard.TargetName="ContentReveal" Storyboard.TargetProperty="AnimationProgress" Duration="0:0:0.2" AccelerationRatio="1" />
+                              <DoubleAnimation  Storyboard.TargetName="Arrow" Storyboard.TargetProperty="(FrameworkElement.RenderTransform).(RotateTransform.Angle)" Duration="0:0:0.2" AccelerationRatio="1" />
+                              <ColorAnimation Storyboard.TargetName="Arrow" Storyboard.TargetProperty="(Path.Fill).(SolidColorBrush.Color)" Duration="0:0:0.2" AccelerationRatio="1" />
+                            </Storyboard>
+                          </BeginStoryboard>
+                        </Trigger.ExitActions>
+                      </Trigger>
+                    </ControlTemplate.Triggers>
+                  </ControlTemplate>
+                </Expander.Template>
+              </Expander>
+            </ControlTemplate>
+          </Setter.Value>
+        </Setter>
+      </Style>
+
+      <Style x:Key="PluginTabControl" TargetType="{x:Type TabControl}">
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="ItemContainerStyle" Value="{StaticResource PluginTabItem}" />
+        <Setter Property="Template">
+          <Setter.Value>
+            <ControlTemplate TargetType="{x:Type TabControl}">
+              <ScrollViewer
+                  VerticalScrollBarVisibility="Auto"
+                  HorizontalScrollBarVisibility="Hidden" >
+                <StackPanel IsItemsHost="True" />
+              </ScrollViewer>
+            </ControlTemplate>
+          </Setter.Value>
+        </Setter>
+      </Style>
+
+    </ResourceDictionary>
+
+  </UserControl.Resources>
+
+  <TabControl x:Name="PluginTabControl" Style="{StaticResource PluginTabControl}" ItemsSource="{Binding ElementName=This, Path=Plugins}">
+    <TabControl.ItemContainerStyle>
+      <Style TargetType="{x:Type TabItem}" BasedOn="{StaticResource PluginTabItem}">
+        <Setter Property="Header" Value="{Binding .}" />
+        <Setter Property="Content" Value="{Binding Root}" />
+      </Style>
+    </TabControl.ItemContainerStyle>
+  </TabControl>
+
+</UserControl>

@@ -1,0 +1,112 @@
+﻿<Window
+  x:Name="This"
+  x:Class="Kaxaml.MainWindow"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:a="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
+  xmlns:c="clr-namespace:Kaxaml.Controls"
+  xmlns:v="clr-namespace:Kaxaml.Views"
+  xmlns:k="clr-namespace:Kaxaml"
+  WindowState="Maximized"
+  SnapsToDevicePixels="True"
+  FontSize="7.75pt"
+  Foreground="#DDD"
+  FontFamily="Verdana"
+  AllowDrop="True">
+  <Window.Title>
+    <Binding ElementName="DocumentsView" Path="SelectedDocument.Filename" ConverterParameter=" - Kaxaml">
+      <Binding.Converter>
+        <c:AppendTextConverter />
+      </Binding.Converter>
+    </Binding>
+  </Window.Title>
+  
+  <Window.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="\Resources\Brushes.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+      <c:AddConverter x:Key="AddConverter" />
+    </ResourceDictionary>
+  </Window.Resources>
+
+  <Grid Background="#101010">
+
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition x:Name="PluginsColumn" Width="Auto" />
+      <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>
+
+    <Grid Margin="0,5,0,5">
+
+      <Border BorderBrush="#484848" BorderThickness="0,0,1,0" CornerRadius="0,4,4,0" >
+        <Border.Background>
+          <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Offset="0.0" Color="#484848" />
+            <GradientStop Offset="1.0" Color="#282828" />
+          </LinearGradientBrush>
+        </Border.Background>
+      </Border>
+
+      <Border BorderBrush="#777" BorderThickness="0,1,0,0" CornerRadius="0,4,0,0" VerticalAlignment="Top" Height="25">
+        <Border.Background>
+          <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Offset="0.0" Color="#505050" />
+            <GradientStop Offset="1.0" Color="#282828" />
+          </LinearGradientBrush>
+        </Border.Background>
+      </Border>
+
+      <Border BorderBrush="#777" BorderThickness="0,1,0,0" CornerRadius="0,4,4,0" />
+      <Border BorderBrush="#404040" BorderThickness="0,0,0,1" CornerRadius="0,4,4,0" />
+      <Border CornerRadius="0,0,4,0" VerticalAlignment="Bottom" Height="33" BorderBrush="#40FFFFFF" BorderThickness="0,1,0,0">
+        <Border.Background>
+          <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#10FFFFFF" Offset="0" />
+            <GradientStop Color="#00FFFFFF" Offset="1" />
+          </LinearGradientBrush>
+        </Border.Background>
+        
+      </Border>
+
+    </Grid>
+
+    <!-- 
+    *******************************************************************
+    Main Menu
+    ********************************************************************
+    -->
+
+    <v:MenuView Grid.Column="0" VerticalAlignment="Top" Height="24" Margin="0,6,1,0"/>
+
+    <!-- 
+    *******************************************************************
+    PluginView
+    ********************************************************************
+    -->
+
+    <v:PluginView x:Name="PluginView" Grid.Column="0" Margin="0,29,0,38"  />
+
+    <!-- 
+    *******************************************************************
+    StatusBar
+    ********************************************************************
+    -->
+
+    <v:StatusView  
+      x:Name="StatusView"
+      Grid.Column="0" VerticalAlignment="Bottom" Margin="8,0,8,4" 
+      Scale="{Binding ElementName=DocumentsView, Path=SelectedView.Scale, Mode=TwoWay}"
+      CurrentLineNumber="{Binding ElementName=DocumentsView, Path=SelectedView.TextEditor.LineNumber, Converter={StaticResource AddConverter}, ConverterParameter=1}" 
+      CurrentLinePosition="{Binding ElementName=DocumentsView, Path=SelectedView.TextEditor.LinePosition, Converter={StaticResource AddConverter}, ConverterParameter=1}" />
+
+    <!-- 
+    *******************************************************************
+    DocumentsView
+    ********************************************************************
+    -->
+
+    <v:DocumentsView x:Name="DocumentsView" Grid.Column="1" XamlDocuments="{Binding ElementName=This, Path=XamlDocuments}" Margin="5" />
+
+  </Grid>
+</Window>

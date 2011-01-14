@@ -1,0 +1,258 @@
+<UserControl 
+  x:Class="Kaxaml.Plugins.Settings"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:sys="clr-namespace:System;assembly=mscorlib"
+  xmlns:settings="clr-namespace:Kaxaml.Properties"
+  xmlns:l="clr-namespace:Kaxaml.Plugins.Default"
+  xmlns:c="clr-namespace:Kaxaml.Controls"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <UserControl.Resources>
+
+    <c:RemoveLineBreaksConverter x:Key="RemoveLineBreaksConverter" />
+
+    <Style x:Key="TextBoxOverlayStyle"  TargetType="{x:Type l:TextBoxOverlay}" >
+      <Setter Property="SnapsToDevicePixels" Value="True"/>
+      <Setter Property="OverridesDefaultStyle" Value="True"/>
+      <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+      <Setter Property="Foreground"	Value="#FF33393C"/>
+      <Setter Property="FocusVisualStyle"	Value="{x:Null}"/>
+      <Setter Property="Padding" Value="1"/>
+      <Setter Property="AllowDrop" Value="true"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="{x:Type TextBoxBase}">
+            <Border
+              Name="Border"
+              Padding="{TemplateBinding Padding}"
+              Background="#505050"
+              BorderThickness="1" >
+              <ScrollViewer Margin="0" x:Name="PART_ContentHost"/>
+            </Border>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
+  </UserControl.Resources>
+
+  <TabControl Margin="0,0,1,0">
+    <TabItem Header="Editor">
+      <Grid  Margin="10">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="12" />
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="12" />
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="12" />
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="12" />
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="12" />
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="12" />
+          <RowDefinition Height="Auto" />
+          <!--<RowDefinition Height="12" />
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="12" />
+          <RowDefinition Height="Auto" />-->
+        </Grid.RowDefinitions>
+
+        <!-- Editor Font Settings -->
+        <TextBlock TextElement.Foreground="#FFF" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,0">Font:</TextBlock>
+
+        <ComboBox
+          Grid.Row="0" 
+          Width="140" 
+          HorizontalAlignment="Left" 
+          VerticalAlignment="Center" 
+          Margin="35,0,0,0"
+          SelectedItem="{Binding Source={x:Static settings:Settings.Default}, Path=EditorFontFamily, Mode=TwoWay}"
+          ItemsSource="{Binding Source={x:Static Fonts.SystemFontFamilies}}"  />
+
+        <ComboBox
+          Grid.Row="0" 
+          Width="50" 
+          MinWidth="0" 
+          HorizontalAlignment="Right" 
+          VerticalAlignment="Center"
+          SelectedItem="{Binding Source={x:Static settings:Settings.Default}, Path=EditorFontSize, Mode=TwoWay}" >
+          <sys:Int32>8</sys:Int32>
+          <sys:Int32>9</sys:Int32>
+          <sys:Int32>10</sys:Int32>
+          <sys:Int32>11</sys:Int32>
+          <sys:Int32>12</sys:Int32>
+          <sys:Int32>13</sys:Int32>
+          <sys:Int32>14</sys:Int32>
+          <sys:Int32>15</sys:Int32>
+          <sys:Int32>16</sys:Int32>
+          <sys:Int32>17</sys:Int32>
+          <sys:Int32>18</sys:Int32>
+          <sys:Int32>20</sys:Int32>
+          <sys:Int32>22</sys:Int32>
+          <sys:Int32>24</sys:Int32>
+          <sys:Int32>28</sys:Int32>
+          <sys:Int32>32</sys:Int32>
+          <sys:Int32>36</sys:Int32>
+        </ComboBox>
+
+        <!-- Default WPF XAML -->
+
+        <StackPanel Grid.Row="2">
+          <Grid>
+            <TextBlock Foreground="#FFF" Grid.Row="2" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" Margin="0,0,30,0">Default WPF XAML:</TextBlock>
+            <TextBlock Foreground="#8FFF" Grid.Row="2" VerticalAlignment="Center" Opacity="0.5" TextTrimming="CharacterEllipsis" Margin="106,0,26,0" Text="{Binding Source={x:Static settings:Settings.Default}, Path=WPFDefaultXaml, Converter={StaticResource RemoveLineBreaksConverter}}" TextWrapping="NoWrap" />
+        
+            <Button Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right" Width="20" MinWidth="0" Height="20" MinHeight="0" Click="EditWPFDefaultXaml">
+              <Image Width="12" Height="12" Source="\Images\pencil.png" />
+            </Button>
+            
+          </Grid>
+
+
+
+          <Grid Margin="0,4,0,0">
+
+
+          <TextBlock Foreground="#FFF" Grid.Row="2" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" Margin="0,0,30,0">Default Silverlight XAML:</TextBlock>
+          <TextBlock Foreground="#8FFF" Grid.Row="2" VerticalAlignment="Center" Opacity="0.5" TextTrimming="CharacterEllipsis" Margin="134,0,26,0" Text="{Binding Source={x:Static settings:Settings.Default}, Path=AgDefaultXaml, Converter={StaticResource RemoveLineBreaksConverter}}" TextWrapping="NoWrap" />
+        
+        <Button Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right" Width="20" MinWidth="0" Height="20" MinHeight="0" Click="EditAgDefaultXaml">
+          <Image Width="12" Height="12" Source="\Images\pencil.png" />
+        </Button>
+            </Grid>
+
+        </StackPanel>
+
+        <!-- Convert Tabs to Spaces -->
+
+        <CheckBox Foreground="#FFF" Grid.Row="4" VerticalAlignment="Center" IsChecked="{Binding Source={x:Static settings:Settings.Default}, Path=ConvertTabs, Mode=TwoWay}">Convert tabs to spaces</CheckBox>
+        <ComboBox 
+          SelectedValue="{Binding Source={x:Static settings:Settings.Default}, Path=ConvertTabsCount, Mode=TwoWay}"
+          Grid.Row="4" 
+          Width="80" HorizontalAlignment="Right" VerticalAlignment="Center">
+          <ComboBox.Resources>
+            <DataTemplate DataType="{x:Type sys:Int32}">
+              <TextBlock>
+                <TextBlock Text="{Binding}" />
+                <TextBlock Text="spaces" />
+              </TextBlock>
+            </DataTemplate>
+          </ComboBox.Resources>
+          <sys:Int32>1</sys:Int32>
+          <sys:Int32>2</sys:Int32>
+          <sys:Int32>3</sys:Int32>
+          <sys:Int32>4</sys:Int32>
+          <sys:Int32>5</sys:Int32>
+        </ComboBox>
+
+        <!-- EnableXAMLFolding -->
+
+        <CheckBox Foreground="#FFF" Grid.Row="6" VerticalAlignment="Center" IsChecked="{Binding Source={x:Static settings:Settings.Default}, Path=EnableXmlFolding, Mode=TwoWay}">Turn on XML node collapsing</CheckBox>
+
+        <!-- ShowLineNumbers -->
+
+        <CheckBox Foreground="#FFF" Grid.Row="8" VerticalAlignment="Center" IsChecked="{Binding Source={x:Static settings:Settings.Default}, Path=ShowLineNumbers, Mode=TwoWay}">Show editor line numbers</CheckBox>
+
+        <!-- EnableSyntaxHighlighting -->
+
+        <CheckBox Foreground="#FFF" Grid.Row="10" VerticalAlignment="Center" IsChecked="{Binding Source={x:Static settings:Settings.Default}, Path=EnableSyntaxHighlighting, Mode=TwoWay}">Turn on syntax highlighting</CheckBox>
+
+        <!-- Code Completion -->
+
+        <CheckBox Foreground="#FFF" Grid.Row="12" VerticalAlignment="Center" IsChecked="{Binding Source={x:Static settings:Settings.Default}, Path=EnableCodeCompletion, Mode=TwoWay}">
+          <TextBlock TextWrapping="Wrap">
+            Turn on code completion features (like Tag Completion and Intellisense)
+          </TextBlock>
+        </CheckBox>
+
+
+      </Grid>
+    </TabItem>
+
+    <TabItem Header="Parser">
+      <Grid  Margin="10"  TextElement.Foreground="#D0D0D0">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="12" />
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="12" />
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="12" />
+          <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Auto Parse -->
+
+        <CheckBox Foreground="#FFF" Grid.Row="0" VerticalAlignment="Center" IsChecked="{Binding Source={x:Static settings:Settings.Default}, Path=EnableAutoParse, Mode=TwoWay}">Automatic parsing after</CheckBox>
+        <ComboBox
+          Grid.ColumnSpan="2"
+          SelectedValue="{Binding Source={x:Static settings:Settings.Default}, Path=AutoParseTimeout, Mode=TwoWay}"
+          Grid.Row="0" Width="80" HorizontalAlignment="Right" VerticalAlignment="Center">
+          <ComboBox.Resources>
+            <DataTemplate DataType="{x:Type sys:Int32}">
+              <TextBlock>
+            <TextBlock Text="{Binding}" />
+            <TextBlock Text="sec" />
+          </TextBlock>
+            </DataTemplate>
+          </ComboBox.Resources>
+          <sys:Int32>1</sys:Int32>
+          <sys:Int32>2</sys:Int32>
+          <sys:Int32>3</sys:Int32>
+          <sys:Int32>4</sys:Int32>
+          <sys:Int32>5</sys:Int32>
+        </ComboBox>
+
+        <!-- Auto Backup -->
+
+        <CheckBox Foreground="#FFF" Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Center" IsChecked="{Binding Source={x:Static settings:Settings.Default}, Path=EnableAutoBackup, Mode=TwoWay}">Automatic backup on succesful parse</CheckBox>
+
+        <!-- Basic Silverlight -->
+
+        <CheckBox Foreground="#FFF" Grid.Row="4" Grid.ColumnSpan="2" VerticalAlignment="Center" IsChecked="{Binding Source={x:Static settings:Settings.Default}, Path=EnablePseudoSilverlight, Mode=TwoWay}">Enable "pseudo" Silverlight compatibility</CheckBox>
+        <TextBlock  Grid.Row="5" Grid.ColumnSpan="2" Margin="19,3,5,0" TextWrapping="Wrap" Foreground="#8FFF" Width="210">
+          With "pseudo" Silverlight compatibility enabled, Kaxaml will replace the Silverlight namespace with the WPF namespace and parse the Silverlight XAML as WPF XAML.
+        </TextBlock>
+
+      </Grid>
+    </TabItem>
+
+    <TabItem Header="Images">
+      <Grid  Margin="10"  TextElement.Foreground="#D0D0D0">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="12" />
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="12" />
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="12" />
+          <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Foreground="#8FFF" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Margin="0,0,5,0" TextWrapping="Wrap">These settings can be used to customize how Kaxaml handles images that are pasted or dropped into a page.</TextBlock>
+
+        <TextBlock Foreground="#FFF" Grid.Column="0" Grid.Row="2" Margin="0,0,5,0">Folder:</TextBlock>
+        <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Source={x:Static settings:Settings.Default}, Path=PasteImageFolder, Mode=TwoWay}" />
+
+        <TextBlock Foreground="#FFF" Grid.Column="0" Grid.Row="4" Margin="0,0,5,0">Filename:</TextBlock>
+        <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Source={x:Static settings:Settings.Default}, Path=PasteImageFile, Mode=TwoWay}" />
+
+        <TextBlock Foreground="#FFF" Grid.Column="0" Grid.Row="6" Margin="0,0,5,0">XAML:</TextBlock>
+        <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding Source={x:Static settings:Settings.Default}, Path=PasteImageXaml, Mode=TwoWay}" />
+      </Grid>
+    </TabItem>
+
+  </TabControl>
+
+</UserControl>

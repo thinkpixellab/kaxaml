@@ -1,0 +1,119 @@
+﻿<Popup
+  x:Name="This"
+  x:Class="Kaxaml.CodeCompletion.CodeCompletionPopup"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:sys="clr-namespace:System;assembly=mscorlib"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:a="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
+  xmlns:c="clr-namespace:Kaxaml.CodeCompletion"
+  Placement="Bottom"
+  StaysOpen="False"
+  PopupAnimation="None"
+  MaxHeight="250"
+  TextElement.Foreground="#DDD"
+  TextElement.FontSize="8.5pt"
+  TextElement.FontFamily="Verdana"
+  AllowsTransparency="True">
+
+  <Popup.Resources>
+
+    <!-- 
+    ******************************************************************
+    ScrollViewer
+    ******************************************************************
+    -->
+
+    <Style  TargetType="{x:Type ScrollViewer}">
+      <Setter Property="OverridesDefaultStyle" Value="True"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="{x:Type ScrollViewer}">
+            <Grid>
+
+              <ScrollContentPresenter />
+
+              <Border
+                x:Name="Bd"
+                Opacity="0.4"
+                HorizontalAlignment="Right"
+                Background="Transparent"
+                Width="24">
+                <ScrollBar Name="PART_VerticalScrollBar"
+                  HorizontalAlignment="Right"
+                  Value="{TemplateBinding VerticalOffset}"
+                  Maximum="{TemplateBinding ScrollableHeight}"
+                  ViewportSize="{TemplateBinding ViewportHeight}"/>
+              </Border>
+
+            </Grid>
+            <ControlTemplate.Triggers>
+              <Trigger SourceName="Bd" Property="IsMouseOver" Value="True">
+                <Trigger.EnterActions>
+                  <BeginStoryboard>
+                    <Storyboard>
+                      <DoubleAnimation Storyboard.TargetName="Bd" Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.2" />
+                    </Storyboard>
+                  </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                  <BeginStoryboard>
+                    <Storyboard>
+                      <DoubleAnimation Storyboard.TargetName="Bd" Storyboard.TargetProperty="Opacity" Duration="0:0:0.4" />
+                    </Storyboard>
+                  </BeginStoryboard>
+                </Trigger.ExitActions>
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
+  </Popup.Resources>
+
+
+  <Grid>
+
+    <!--
+    <a:SystemDropShadowChrome  x:Name="Description" Opacity="0" CornerRadius="4"  Margin="165,10,5,15"  HorizontalAlignment="Stretch" VerticalAlignment="Top" >
+      <Border CornerRadius="4" Background="#e8e8e8" >
+
+        <StackPanel  Margin="20,10,5,10">
+
+          <TextBlock Margin="0,0,0,3" FontWeight="Bold">SomeAttributeName</TextBlock>
+          <TextBlock Text="This is the description of some property and it needs to be of a certain length so that we can see how it reacts to long text." TextWrapping="Wrap" />
+        </StackPanel>
+      </Border>
+    </a:SystemDropShadowChrome>
+    -->
+
+    <a:SystemDropShadowChrome
+      CornerRadius="4"
+      Margin="-4,-4,6,6"
+      Color="#A000"
+      VerticalAlignment="Top"
+      HorizontalAlignment="Left" >
+      <Border
+        CornerRadius="4"
+        BorderThickness="0,0,1,1"
+        BorderBrush="#8000"
+        SnapsToDevicePixels="True"
+        Margin="4,4,0,0">
+        <Border.Background>
+          <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <!--
+            OLD GREEN
+            <GradientStop Offset="0.0" Color="#C0606E6F" />
+            <GradientStop Offset="1.0" Color="#C0303E3F" />
+            -->
+            <GradientStop Offset="0.0" Color="#C0404040" />
+            <GradientStop Offset="1.0" Color="#C0202020" />
+          </LinearGradientBrush>
+        </Border.Background>
+        <c:StringBox x:Name="CompletionListBox"  CompletionItems="{Binding ElementName=This, Path=CompletionItems}" MouseDoubleClick="DoubleClick" />
+      </Border>
+    </a:SystemDropShadowChrome>
+
+
+  </Grid>
+</Popup>

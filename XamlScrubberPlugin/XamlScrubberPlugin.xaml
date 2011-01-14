@@ -1,0 +1,137 @@
+<UserControl 
+  x:Class="Kaxaml.Plugins.XamlScrubber.XamlScrubberPlugin"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:sys="clr-namespace:System;assembly=mscorlib"
+  xmlns:settings="clr-namespace:Kaxaml.Plugins.XamlScrubber.Properties">
+  <Grid TextElement.Foreground="White">
+
+    <StackPanel Margin="10">
+      <TextBlock Margin="0,0,0,12" TextWrapping="Wrap" Foreground="#8FFF">
+        Xaml Scrubber will reformat your XAML according to the options below.  Some of the
+        options are pretty nuanced so be sure to checkout the tooltips.
+      </TextBlock>
+
+      <!-- Numeric Precision -->
+      <StackPanel Margin="0,0,0,8" Orientation="Horizontal" Background="Transparent" >
+        <StackPanel.ToolTip>
+          <TextBlock TextWrapping="Wrap" Width="240">
+            Xaml Scrubber will reduce the precision of large numbers to a maximum of this number of digits beyond the decimal point.
+          </TextBlock>
+        </StackPanel.ToolTip>
+        <TextBlock VerticalAlignment="Center" Margin="0,0,4,0" Width="115">Numeric precision:</TextBlock>
+        <ComboBox Width="110" SelectedItem="{Binding Source={x:Static settings:Settings.Default}, Path=Precision, Mode=TwoWay}" VerticalAlignment="Center" >
+          <ComboBox.Resources>
+            <DataTemplate DataType="{x:Type sys:Int32}">
+              <TextBlock x:Name="text" Text="{Binding}" />
+              <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding}" Value="10000">
+                  <Setter TargetName="text" Property="Text" Value="Disabled" />
+                </DataTrigger>
+              </DataTemplate.Triggers>
+            </DataTemplate>
+          </ComboBox.Resources>
+          <sys:Int32>1</sys:Int32>
+          <sys:Int32>2</sys:Int32>
+          <sys:Int32>3</sys:Int32>
+          <sys:Int32>4</sys:Int32>
+          <sys:Int32>5</sys:Int32>
+          <sys:Int32>10</sys:Int32>
+          <sys:Int32>10000</sys:Int32>
+        </ComboBox>
+      </StackPanel>
+
+      <!-- Attribute Tolerance -->
+      <StackPanel Margin="0,0,0,12" Orientation="Horizontal" Background="Transparent" >
+        <StackPanel.ToolTip>
+          <TextBlock TextWrapping="Wrap" Width="240">
+            If more than this number of attributes are defined on an element, Xaml Scrubber will move each attribute onto its own line.
+            Some elements are always excluded (e.g. GradientStop, Trigger).
+          </TextBlock>
+        </StackPanel.ToolTip>
+        <TextBlock VerticalAlignment="Center" Margin="0,0,4,0" Width="115">Attribute tolerance:</TextBlock>
+        <ComboBox Width="110" SelectedItem="{Binding Source={x:Static settings:Settings.Default}, Path=AttributeCounteTolerance, Mode=TwoWay}" VerticalAlignment="Center" >
+          <ComboBox.Resources>
+            <DataTemplate DataType="{x:Type sys:Int32}">
+              <TextBlock x:Name="text" Text="{Binding}" />
+              <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding}" Value="10000">
+                  <Setter TargetName="text" Property="Text" Value="All on one line" />
+                </DataTrigger>
+              </DataTemplate.Triggers>
+            </DataTemplate>
+          </ComboBox.Resources>
+          <sys:Int32>0</sys:Int32>
+          <sys:Int32>1</sys:Int32>
+          <sys:Int32>2</sys:Int32>
+          <sys:Int32>3</sys:Int32>
+          <sys:Int32>4</sys:Int32>
+          <sys:Int32>5</sys:Int32>
+          <sys:Int32>10000</sys:Int32>
+        </ComboBox>
+      </StackPanel>
+
+      <!-- ReorderAttributes -->
+      <CheckBox Margin="0,0,0,12" Foreground="White" IsChecked="{Binding Source={x:Static settings:Settings.Default}, Path=ReorderAttributes, Mode=TwoWay}">
+        <CheckBox.ToolTip>
+          <TextBlock TextWrapping="Wrap" Width="320">
+            Xaml Scrubber will reorder attributes on a given element according to a predetermined and fixed (sorry) 
+            set of rules about which attributes are most important.  Roughly, attributes are ordered as follows:
+            <LineBreak />
+            <LineBreak />
+            <Run Text="&#x25CF; Key or Name" /><LineBreak />
+            <Run Text="&#x25CF; Class and Namespace" /><LineBreak />
+            <Run Text="&#x25CF; Layout (core layout then attached)" /><LineBreak />
+            <Run Text="&#x25CF; All other properties (alphabetically)" /><LineBreak />
+            <Run Text="&#x25CF; Blend properties (mc:Ingorable, the d: namespace)" /><LineBreak />
+          </TextBlock>
+        </CheckBox.ToolTip>
+        Reorder attributes by importance
+      </CheckBox>
+
+      <!-- RemoveCommonDefaultValues -->
+      <CheckBox Margin="0,0,0,12" Foreground="White" IsChecked="{Binding Source={x:Static settings:Settings.Default}, Path=RemoveCommonDefaultValues, Mode=TwoWay}">
+        <CheckBox.ToolTip>
+          <TextBlock TextWrapping="Wrap" Width="320">
+            Xaml Scrubber will remove common properties which are being set to their default values (e.g. Width=Auto, Visibility=Visible, etc.).
+          </TextBlock>
+        </CheckBox.ToolTip>
+        Remove common default values
+      </CheckBox>
+
+      <!-- Convert To Spaces -->
+      <StackPanel Margin="0,0,0,12" Orientation="Horizontal" Background="Transparent" >
+        <StackPanel.ToolTip>
+          <TextBlock TextWrapping="Wrap" Width="240">
+            If this is checked, Xaml Scrubber will indent using spaces instead of tabs
+          </TextBlock>
+        </StackPanel.ToolTip>
+        <CheckBox Foreground="White" VerticalAlignment="Center" Margin="0,0,4,0" Width="140" IsChecked="{Binding Source={x:Static settings:Settings.Default}, Path=ConvertTabsToSpaces, Mode=TwoWay}">Indent using spaces</CheckBox>
+        <ComboBox Width="85" SelectedItem="{Binding Source={x:Static settings:Settings.Default}, Path=SpaceCount, Mode=TwoWay}" VerticalAlignment="Center" >
+          <ComboBox.Resources>
+            <DataTemplate DataType="{x:Type sys:Int32}">
+              <TextBlock>
+                <TextBlock Text="{Binding}" />
+                <TextBlock Text="spaces" />
+              </TextBlock>
+            </DataTemplate>
+          </ComboBox.Resources>
+          <sys:Int32>1</sys:Int32>
+          <sys:Int32>2</sys:Int32>
+          <sys:Int32>3</sys:Int32>
+          <sys:Int32>4</sys:Int32>
+          <sys:Int32>5</sys:Int32>
+        </ComboBox>
+      </StackPanel>
+
+      <Button MinWidth="0" MinHeight="0" Width="100" Height="24" HorizontalAlignment="Center" Click="Go_Click" Margin="0,12,0,4">
+        <StackPanel Orientation="Horizontal">
+          <Image Width="16" Height="16" Source="Images\lightning.png" VerticalAlignment="Center" Margin="0,0,3,0"/>
+          <TextBlock VerticalAlignment="Center">Go</TextBlock>
+        </StackPanel>
+      </Button>
+
+    </StackPanel>
+
+  </Grid>
+</UserControl>

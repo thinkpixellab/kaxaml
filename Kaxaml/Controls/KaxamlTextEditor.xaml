@@ -1,0 +1,30 @@
+<UserControl
+  Background="White" 
+  x:Class="Kaxaml.Controls.KaxamlTextEditor"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:wfi="clr-namespace:System.Windows.Forms.Integration;assembly=WindowsFormsIntegration"
+  xmlns:cc="clr-namespace:Kaxaml.CodeCompletion"
+  xmlns:ic="clr-namespace:ICSharpCode.TextEditor;assembly=ICSharpCode.TextEditor"
+  xmlns:settings="clr-namespace:Kaxaml.Properties">
+
+  <wfi:WindowsFormsHost x:Name="FormsHost" AllowDrop="True" >
+
+    <ic:TextEditorControl
+      AllowDrop="True"
+      x:Name="TextEditor"
+      IndentStyle="Smart"
+      IsIconBarVisible="False"
+      ShowInvalidLines="False"
+      ShowEOLMarkers="False"
+      ShowLineNumbers="False"
+      ShowMatchingBracket="False"
+      ShowTabs="False"
+      ShowSpaces="False"
+      ShowHRuler="False"
+      ShowVRuler="False"
+      UseAntiAliasFont="True" />
+
+  </wfi:WindowsFormsHost>
+
+</UserControl>

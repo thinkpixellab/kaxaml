@@ -1,0 +1,120 @@
+<UserControl 
+  x:Name="This"
+  x:Class="Kaxaml.Plugins.Default.SnapshotPlugin"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:a="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
+  xmlns:p="clr-namespace:KaxamlPlugins;assembly=KaxamlPlugins">
+  <Grid>
+
+    <Grid.Resources>
+
+      <DrawingBrush x:Key="AlphaBrush" Viewbox="0,0,8,8" ViewboxUnits="Absolute" TileMode="Tile" ViewportUnits="Absolute" Viewport="0,0,8,8">
+        <DrawingBrush.Drawing>
+          <DrawingGroup>
+            <GeometryDrawing Brush="#FFFFFFFF">
+              <GeometryDrawing.Geometry>
+                <RectangleGeometry RadiusX="0" RadiusY="0" Rect="0,0,4,4"/>
+              </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+            <DrawingGroup>
+              <DrawingGroup.Transform>
+                <MatrixTransform Matrix="1,0,0,1,4,0"/>
+              </DrawingGroup.Transform>
+              <GeometryDrawing Brush="#FFAAAAAA">
+                <GeometryDrawing.Geometry>
+                  <RectangleGeometry RadiusX="0" RadiusY="0" Rect="0,0,4,4"/>
+                </GeometryDrawing.Geometry>
+              </GeometryDrawing>
+            </DrawingGroup>
+            <DrawingGroup>
+              <DrawingGroup.Transform>
+                <MatrixTransform Matrix="1,0,0,1,0,4"/>
+              </DrawingGroup.Transform>
+              <GeometryDrawing Brush="#FFAAAAAA">
+                <GeometryDrawing.Geometry>
+                  <RectangleGeometry RadiusX="0" RadiusY="0" Rect="0,0,4,4"/>
+                </GeometryDrawing.Geometry>
+              </GeometryDrawing>
+            </DrawingGroup>
+            <DrawingGroup>
+              <DrawingGroup.Transform>
+                <MatrixTransform Matrix="1,0,0,1,4,4"/>
+              </DrawingGroup.Transform>
+              <GeometryDrawing Brush="#FFFFFFFF">
+                <GeometryDrawing.Geometry>
+                  <RectangleGeometry RadiusX="0" RadiusY="0" Rect="0,0,4,4"/>
+                </GeometryDrawing.Geometry>
+              </GeometryDrawing>
+            </DrawingGroup>
+          </DrawingGroup>
+        </DrawingBrush.Drawing>
+      </DrawingBrush>
+
+    </Grid.Resources>
+    
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+
+    <a:SystemDropShadowChrome Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center">
+      <Border BorderBrush="#EEE" BorderThickness="3" MinWidth="20" MinHeight="20" MaxHeight="200" Background="{StaticResource AlphaBrush}" Margin="0,0,2,2">
+        <Image x:Name="RenderImage" Stretch="Uniform" />
+      </Border>
+    </a:SystemDropShadowChrome>
+
+    <!--<Button Margin="10,0,10,10" Grid.Row="1" Click="Copy" ToolTip="Refresh preview image" MinWidth="0" MinHeight="0" Height="23" Width="23" HorizontalAlignment="Left">
+      <Image Source="Images\camera_light.png" Width="16" Height="16" Margin="2,2,0,0">
+      </Image>
+    </Button>-->
+    
+    <StackPanel Orientation="Horizontal" Margin="0,0,10,10" Grid.Row="1" HorizontalAlignment="Right">
+      
+      <Button Click="Copy" ToolTip="Copy to the clipboard" MinWidth="0" MinHeight="0" Height="23" Width="23" Margin="0,0,4,0" HorizontalContentAlignment="Left" VerticalContentAlignment="Top">
+        <Image Source="Images\page_copy.png" Width="12" Height="12" Margin="6,5,0,0">
+        </Image>
+      </Button>
+
+      <Button Click="Save" ToolTip="Save to a file"  MinWidth="0" MinHeight="0" Height="23" Width="23" Margin="0,0,0,0" HorizontalContentAlignment="Left" VerticalContentAlignment="Top">
+        <Image Source="Images\disk.png" Width="12" Height="12" Margin="6,5,0,0">
+        </Image>
+      </Button>
+
+    </StackPanel>
+    
+    <!--<Grid Margin="0,0,0,8" Grid.Row="1" HorizontalAlignment="Center" >
+      
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="Auto" />
+      </Grid.ColumnDefinitions>
+      
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+      </Grid.RowDefinitions>
+
+      <TextBlock Grid.Column="0" Margin="0,0,5,0" VerticalAlignment="Center">Size:</TextBlock>
+      <TextBox Grid.Column="1" Width="50" MinWidth="0" Margin="0,0,5,0" VerticalAlignment="Center" Text="{Binding ElementName=This, Path=ImageWidth}" />
+      <TextBlock Grid.Column="2" Margin="0,0,5,0" VerticalAlignment="Center">x</TextBlock>
+      <TextBox Grid.Column="3" Width="50" MinWidth="0" Margin="0,0,5,0" VerticalAlignment="Center" Text="{Binding ElementName=This, Path=ImageHeight}" />
+      <TextBlock Grid.Column="4" Margin="0,0,5,0" VerticalAlignment="Center">at</TextBlock>
+      <TextBox Grid.Column="5" Width="36" MinWidth="0" Margin="0,0,5,0" VerticalAlignment="Center" Text="{Binding ElementName=This, Path=DPI}" />
+      <TextBlock Grid.Column="6" Margin="0,0,5,0" VerticalAlignment="Center">DPI</TextBlock>
+
+      <TextBlock Grid.Row="1" Grid.Column="1" Margin="0,0,0,0" VerticalAlignment="Center" Foreground="#808080">Width</TextBlock>
+
+      <TextBlock Grid.Row="1" Grid.Column="3" Margin="0,0,0,0" VerticalAlignment="Center" Foreground="#808080">Height</TextBlock>
+    </Grid>-->
+
+    
+      
+
+    </Grid>
+</UserControl>

@@ -1,0 +1,336 @@
+<UserControl
+  x:Name="This"
+  SnapsToDevicePixels="True"
+  x:Class="Kaxaml.DocumentViews.WPFDocumentView"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:c="clr-namespace:Kaxaml.Controls"
+  xmlns:a="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
+  xmlns:settings="clr-namespace:Kaxaml.Properties">
+
+  <UserControl.Resources>
+    <ResourceDictionary>
+
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="\Resources\Brushes.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+
+      <!--
+      *************************************************************************
+      Data
+      *************************************************************************
+      -->
+
+      <c:NotConverter x:Key="NotConverter" />
+      <c:GreaterThanConverter x:Key="GreaterThanConverter" />
+
+      <!--
+      *************************************************************************
+      Animations
+      *************************************************************************
+      -->
+
+      <DoubleAnimation 
+        x:Key="ShowErrorOverlay" 
+        Storyboard.TargetName="ErrorOverlay" 
+        Storyboard.TargetProperty="Opacity"
+        To="1"
+        Duration="0:0:0.15" />
+
+      <DoubleAnimation 
+        x:Key="HideErrorOverlay"
+        Storyboard.TargetName="ErrorOverlay" 
+        Storyboard.TargetProperty="Opacity"
+        Duration="0:0:0.15" />
+
+    </ResourceDictionary>
+  </UserControl.Resources>
+
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+
+    <!-- Content -->
+
+    <c:ZoomFrame
+      x:Name="ContentArea"
+      AllowDrop="True"
+      Background="White"
+      ClipToBounds="True" 
+      SnapsToDevicePixels="True"
+      Grid.Row="1"
+      Scale="{Binding ElementName=This, Path=Scale}"
+      ContentRendered="ContentAreaRendered">
+      <c:ZoomFrame.Template>
+        <ControlTemplate TargetType="{x:Type c:ZoomFrame}">
+          <Grid>
+            <Grid RenderTransformOrigin="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ScaleOrigin}">
+              <Thumb x:Name="PART_Thumb" Background="{TemplateBinding Background}">
+                <Thumb.Template>
+                  <ControlTemplate TargetType="{x:Type Thumb}">
+                    <Border x:Name="Border" Background="{TemplateBinding Background}" />
+                  </ControlTemplate>
+                </Thumb.Template>
+              </Thumb>
+              <ContentPresenter x:Name="ContentHost" SnapsToDevicePixels="True" AllowDrop="True" />
+              <Grid.RenderTransform>
+                <ScaleTransform ScaleX="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Scale}" ScaleY="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Scale}" />
+              </Grid.RenderTransform>
+            </Grid>
+
+            <a:SystemDropShadowChrome
+              x:Name="DraggingButtonArea"
+              Visibility="Collapsed"
+              Margin="5"
+              CornerRadius="4"
+              Color="#A000"
+              VerticalAlignment="Top"
+              HorizontalAlignment="Left" >
+              <Border
+                CornerRadius="4"
+                BorderThickness="0,0,1,1"
+                BorderBrush="#8000"
+                SnapsToDevicePixels="True"
+                Margin="4,4,0,0">
+                <Border.Background>
+                  <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Offset="0.0" Color="#C0707070" />
+                    <GradientStop Offset="1.0" Color="#C0505050" />
+                  </LinearGradientBrush>
+                </Border.Background>
+                <Grid>
+                  <Grid.Resources>
+                    <ResourceDictionary>
+                      <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source="\Resources\PluginTheme.xaml" />
+                      </ResourceDictionary.MergedDictionaries>
+                    </ResourceDictionary>
+                  </Grid.Resources>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                  </Grid.ColumnDefinitions>
+
+                  <ToggleButton 
+                    Cursor="Arrow"
+                    Margin="5,5,5,4"
+                    MinWidth="0" 
+                    MinHeight="0" 
+                    IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsDraggable, Mode=TwoWay}">
+                    <ToggleButton.ToolTip>
+                      <TextBlock>
+                        <Run FontWeight="Bold">Pan</Run><LineBreak />Toggle by pressing the Alt key
+                      </TextBlock>
+                    </ToggleButton.ToolTip>
+
+                    <Path Width="22" Height="22" Margin="4,4,4,2" Stretch="Fill" Data="F1 M80.5,0.5 L160.5,80.5 112,80.5 112,145.5 176.5,145.5 176.5,97 256.5,177 176.5,257 176.5,208.5 112,208.5 112,273.5 160.5,273.5 80.5,353.5 0.50000119,273.5 49.000004,273.5 49.000004,208.5 -15.000002,208.5 -15.000002,257 -95,177 -15.000002,97 -15.000002,145.5 49.000004,145.5 49.000004,80.5 0.50000119,80.5&#xd;&#xa;80.5,0.5 z">
+                      <Path.Fill>
+                        <LinearGradientBrush EndPoint="0,0" StartPoint="1,1">
+                          <GradientStop Color="#FF4C8FAD" Offset="0"/>
+                          <GradientStop Color="#FFD1F1FF" Offset="1"/>
+                        </LinearGradientBrush>
+                      </Path.Fill>
+                      <Path.Stroke>
+                        <LinearGradientBrush EndPoint="0,0" StartPoint="1,1">
+                          <GradientStop Color="#BF000000" Offset="0"/>
+                          <GradientStop Color="#5F000000" Offset="0.5"/>
+                          <GradientStop Color="#19000000" Offset="1"/>
+                        </LinearGradientBrush>
+                      </Path.Stroke>
+                    </Path>
+
+                  </ToggleButton>
+
+                </Grid>
+              </Border>
+            </a:SystemDropShadowChrome>
+
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="IsDraggable" Value="True">
+              <Setter TargetName="ContentHost" Property="IsHitTestVisible" Value="False" />
+              <Setter Property="Cursor" Value="SizeAll" />
+            </Trigger>
+            <Trigger Property="IsDragUIVisible" Value="True">
+              <Setter TargetName="DraggingButtonArea" Property="Visibility" Value="Visible" />
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </c:ZoomFrame.Template>
+    </c:ZoomFrame>
+
+    <Border x:Name="ErrorOverlay" Grid.Row="1" Opacity="0" IsHitTestVisible="False">
+      <Image x:Name="ErrorOverlayImage" Stretch="None" Source="{Binding Path=XamlDocument.PreviewImage}" />
+    </Border>
+
+
+    <!-- Error Display -->
+
+    <Expander SnapsToDevicePixels="True" x:Name="ErrorDisplay" Grid.Row="1" VerticalAlignment="Top" IsExpanded="{Binding ElementName=This, Path=IsValidXaml, Converter={StaticResource NotConverter}}">
+      <Expander.Template>
+        <ControlTemplate TargetType="{x:Type Expander}">
+          <Grid ClipToBounds="True">
+            <Grid x:Name="OuterContainer" Margin="0,-150,0,0" VerticalAlignment="Top">
+              <Border
+                x:Name="OuterBorder"
+                Margin="0,0,0,4" 
+                VerticalAlignment="Top"
+                BorderBrush="#909090"
+                BorderThickness="0,1,0,0"
+                SnapsToDevicePixels="True">
+                <Border.Background>
+                  <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#787878" Offset="0" />
+                    <GradientStop Color="#585858" Offset="1" />
+                  </LinearGradientBrush>
+                </Border.Background>
+                <Border
+                  BorderBrush="#333"
+                  BorderThickness="0,0,0,1">
+                  <ContentPresenter Margin="0,0,0,-1" />
+                </Border>
+              </Border>
+              <Rectangle VerticalAlignment="Bottom" Height="4">
+                <Rectangle.Fill>
+                  <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Offset="0" Color="#6000" />
+                    <GradientStop Offset="1" Color="#0000" />
+                  </LinearGradientBrush>
+                </Rectangle.Fill>
+              </Rectangle>
+            </Grid>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="IsExpanded" Value="True">
+              <Trigger.EnterActions>
+                <BeginStoryboard>
+                  <Storyboard>
+                    <ThicknessAnimation DecelerationRatio="0.9" Storyboard.TargetName="OuterContainer" Storyboard.TargetProperty="Margin" BeginTime="0:0:0.15" Duration="0:0:0.15" To="0,0,0,0" />
+                  </Storyboard>
+                </BeginStoryboard>
+              </Trigger.EnterActions>
+              <Trigger.ExitActions>
+                <BeginStoryboard>
+                  <Storyboard>
+                    <ThicknessAnimation AccelerationRatio="0.9" Storyboard.TargetName="OuterContainer" Storyboard.TargetProperty="Margin" Duration="0:0:0.15"  />
+                  </Storyboard>
+                </BeginStoryboard>
+              </Trigger.ExitActions>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Expander.Template>
+
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Exclamation -->
+        <TextBlock
+            Grid.Column="0"
+            Grid.RowSpan="2"
+            FontWeight="Bold"
+            Foreground="#FFFFBF00"
+            FontFamily="Courier New"
+            FontSize="44"
+            Text="!"
+            Margin="4,0,0,0"/>
+
+        <!-- Error Message -->
+        <TextBlock
+           Grid.Column="1"
+           Grid.Row="0"
+           Margin="4,8,4,2"
+           Foreground="#EEE"
+           TextWrapping="Wrap"
+           Text="{Binding ElementName=This, Path=ErrorText}" />
+
+        <!-- Line Number -->
+        <Button
+          Grid.Column="1"
+          Grid.Row="1"
+          Margin="4,0,4,7"
+          Foreground="#FFFFBF00"
+          Cursor="Hand"
+          HorizontalAlignment="Left" 
+          Click="LineNumberClick" 
+          MinWidth="0"
+          MinHeight="0">
+          <Button.Template>
+            <ControlTemplate TargetType="{x:Type Button}">
+              <Border Background="Transparent">
+                <StackPanel Orientation="Horizontal">
+                  <ContentPresenter VerticalAlignment="Center" />
+                  <Path x:Name="Arrow" Fill="White" Margin="8,0,0,0" Stretch="Fill" Opacity="0.2" VerticalAlignment="Center" Width="5" Height="9" Data="M200,200 L200,280 256,240 z"/>
+                </StackPanel>
+              </Border>
+              <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                  <Setter TargetName="Arrow" Property="Opacity" Value="1" />
+                  <Setter TargetName="Arrow" Property="Fill" Value="#FFFFBF00" />
+                </Trigger>
+                <MultiDataTrigger>
+                  <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding ElementName=This, Path=ErrorLineNumber}" Value="0" />
+                    <Condition Binding="{Binding ElementName=This, Path=ErrorLinePosition}" Value="0" />
+                  </MultiDataTrigger.Conditions>
+                  <Setter Property="Visibility" Value="Collapsed" />
+                </MultiDataTrigger>
+              </ControlTemplate.Triggers>
+            </ControlTemplate>
+          </Button.Template>
+          <TextBlock>
+            Line
+            <TextBlock Text="{Binding ElementName=This, Path=ErrorLineNumber}" />,
+            Position
+            <TextBlock Text="{Binding ElementName=This, Path=ErrorLinePosition}" />
+          </TextBlock>
+        </Button>
+      </Grid>
+    </Expander>
+
+    <GridSplitter
+      Grid.Row="2"
+      Height="6" 
+      DragStarted="SplitterDragStarted" 
+      DragCompleted="SplitterDragCompleted" 
+      ResizeDirection="Rows"
+      ResizeBehavior="PreviousAndNext"
+      SnapsToDevicePixels="True"
+      VerticalAlignment="Bottom"
+      HorizontalAlignment="Stretch">
+      <GridSplitter.Template>
+        <ControlTemplate TargetType="{x:Type GridSplitter}">
+          <Border Background="#20FFFFFF" />
+        </ControlTemplate>
+      </GridSplitter.Template>
+    </GridSplitter>
+
+
+    <c:KaxamlTextEditor
+      x:Name="Editor"
+      Grid.Row="3"
+      FontFamily="{Binding Source={x:Static settings:Settings.Default}, Path=EditorFontFamily, Mode=TwoWay}"
+      FontSize="{Binding Source={x:Static settings:Settings.Default}, Path=EditorFontSize, Mode=TwoWay}"
+      ConvertTabs="{Binding Source={x:Static settings:Settings.Default}, Path=ConvertTabs}"
+      ConvertTabsCount="{Binding Source={x:Static settings:Settings.Default}, Path=ConvertTabsCount}" 
+      ShowLineNumbers="{Binding Source={x:Static settings:Settings.Default}, Path=ShowLineNumbers}" 
+      EnableSyntaxHighlighting="{Binding Source={x:Static settings:Settings.Default}, Path=EnableSyntaxHighlighting}" 
+      EnableXmlFolding="{Binding Source={x:Static settings:Settings.Default}, Path=EnableXmlFolding}" 
+      IsCodeCompletionEnabled="{Binding Source={x:Static settings:Settings.Default}, Path=EnableCodeCompletion}" 
+      Text="{Binding Path=SourceText, Mode=TwoWay}"
+      TextChanged="EditorTextChanged" />
+
+  </Grid>
+
+</UserControl>
