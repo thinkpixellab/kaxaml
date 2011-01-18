@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kaxaml", "Kaxaml\Kaxaml.csproj", "{FF5B3F61-822A-4154-9215-43D4A835EDF4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KaxamlPlugins", "KaxamlPlugins\KaxamlPlugins.csproj", "{F6B1B201-8293-4729-842C-0BB54F89FFA7}"

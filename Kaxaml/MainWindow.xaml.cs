@@ -1015,7 +1015,8 @@ namespace Kaxaml
         {
             string[] filenames = (string[])e.Data.GetData("FileDrop", true);
 
-            if (filenames.Length > 0)
+            if ((null != filenames) &&
+                (filenames.Length > 0))
             {
                 XamlDocument first = null;
                 foreach (string f in filenames)

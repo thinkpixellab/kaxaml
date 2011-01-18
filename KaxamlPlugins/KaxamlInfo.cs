@@ -10,7 +10,7 @@ using System.ComponentModel;
 
 namespace KaxamlPlugins
 {
-    public class KaxamlInfo 
+    public static class KaxamlInfo 
     {
         public delegate void EditSelectionChangedDelegate(string SelectedText);
         public static event EditSelectionChangedDelegate EditSelectionChanged;
