@@ -1,15 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using KaxamlPlugins;
 
 namespace Kaxaml.Plugins.Default
@@ -48,7 +40,11 @@ namespace Kaxaml.Plugins.Default
 
         private void Copy(object sender, RoutedEventArgs e)
         {
-            Clipboard.SetImage(RenderContent());
+            var bitmap = this.RenderContent();
+            if (null != bitmap)
+            {
+                Clipboard.SetImage(bitmap);
+            }
         }
 
         private BitmapSource RenderContent()
@@ -79,17 +75,20 @@ namespace Kaxaml.Plugins.Default
 
         private void Save(object sender, RoutedEventArgs e)
         {
-            Microsoft.Win32.SaveFileDialog sfd = new Microsoft.Win32.SaveFileDialog();
-            sfd.Filter = "Image files (*.png)|*.png|All files (*.*)|*.*";
-
-            if (sfd.ShowDialog(KaxamlInfo.MainWindow) == true)
+            BitmapSource rtb = RenderContent();
+            if (null != rtb)
             {
-                using (System.IO.FileStream fs = new System.IO.FileStream(sfd.FileName, System.IO.FileMode.Create))
+                Microsoft.Win32.SaveFileDialog sfd = new Microsoft.Win32.SaveFileDialog();
+                sfd.Filter = "Image files (*.png)|*.png|All files (*.*)|*.*";
+
+                if (sfd.ShowDialog(KaxamlInfo.MainWindow) == true)
                 {
-                    BitmapSource rtb = RenderContent();
-                    PngBitmapEncoder encoder = new PngBitmapEncoder();
-                    encoder.Frames.Add(BitmapFrame.Create(rtb));
-                    encoder.Save(fs);
+                    using (System.IO.FileStream fs = new System.IO.FileStream(sfd.FileName, System.IO.FileMode.Create))
+                    {
+                        PngBitmapEncoder encoder = new PngBitmapEncoder();
+                        encoder.Frames.Add(BitmapFrame.Create(rtb));
+                        encoder.Save(fs);
+                    }
                 }
             }
         }

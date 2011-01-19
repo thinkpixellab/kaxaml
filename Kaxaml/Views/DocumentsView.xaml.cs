@@ -105,7 +105,7 @@ namespace Kaxaml.Views
         #region SelectedView (DependencyProperty)
 
         /// <summary>
-        /// The view associated with the currently selected dcument.
+        /// The view associated with the currently selected document.
         /// </summary>
         public IXamlDocumentView SelectedView
         {
