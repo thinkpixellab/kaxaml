@@ -75,7 +75,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>..\Kaxaml\bin\x86\Debug\AgHost\</OutputPath>
+    <OutputPath>..\Kaxaml\bin\Debug\AgHost\</OutputPath>
     <DefineConstants>DEBUG;TRACE;SILVERLIGHT</DefineConstants>
     <NoStdLib>true</NoStdLib>
     <DebugType>full</DebugType>
@@ -92,7 +92,7 @@
     <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
-    <OutputPath>..\Kaxaml\bin\x86\Release\AgHost\</OutputPath>
+    <OutputPath>..\Kaxaml\bin\Release\AgHost\</OutputPath>
     <DefineConstants>TRACE;SILVERLIGHT</DefineConstants>
     <Optimize>true</Optimize>
     <NoStdLib>true</NoStdLib>
