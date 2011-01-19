@@ -75,12 +75,20 @@ namespace KaxamlPlugins
 
         public static void Parse()
         {
-            ParseRequested();
+            var handler = ParseRequested;
+            if (null != handler)
+            {
+                handler();
+            }
         }
 
         public static void RaiseContentLoaded()
         {
-            ContentLoaded();
+            var handler = ContentLoaded;
+            if (null != handler)
+            {
+                handler();
+            }
         }
 
 

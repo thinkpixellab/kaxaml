@@ -6,7 +6,6 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:c="clr-namespace:Kaxaml.Controls"
   xmlns:a="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
-  xmlns:wfi="clr-namespace:System.Windows.Forms.Integration;assembly=WindowsFormsIntegration"
   xmlns:forms="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
   xmlns:settings="clr-namespace:Kaxaml.Properties">
 
@@ -58,9 +57,7 @@
 
     <!-- Content -->
 
-    <wfi:WindowsFormsHost x:Name="FormsHost" Grid.Row="1">
-      <forms:WebBrowser x:Name="ContentArea" />
-    </wfi:WindowsFormsHost>
+    <WebBrowser x:Name="ContentArea" Grid.Row="1" />
 
     <Image x:Name="ColorOverlayImage" Stretch="None" Grid.Row="1" />
     

@@ -27,6 +27,36 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_22C9EB664C0965718AC463AC3480BBAC"
+        "OwnerKey" = "8:_A516574B2C7D48B5B78E0CD1B9E559E0"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_317E87588B67EA9C9E14C2C2E07AFF4B"
+        "OwnerKey" = "8:_02FD9A7BDC76401F8B627A5E508E7978"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_317E87588B67EA9C9E14C2C2E07AFF4B"
+        "OwnerKey" = "8:_A516574B2C7D48B5B78E0CD1B9E559E0"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_317E87588B67EA9C9E14C2C2E07AFF4B"
+        "OwnerKey" = "8:_9232CAABD31549F7BD699902D1D32A13"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_317E87588B67EA9C9E14C2C2E07AFF4B"
+        "OwnerKey" = "8:_35EE320EDED74648A73E5422E7F60B36"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_35EE320EDED74648A73E5422E7F60B36"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -51,30 +81,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_55B6E61430E7F8E6D1BB53F46F9EBF37"
-        "OwnerKey" = "8:_02FD9A7BDC76401F8B627A5E508E7978"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_55B6E61430E7F8E6D1BB53F46F9EBF37"
-        "OwnerKey" = "8:_A516574B2C7D48B5B78E0CD1B9E559E0"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_55B6E61430E7F8E6D1BB53F46F9EBF37"
-        "OwnerKey" = "8:_9232CAABD31549F7BD699902D1D32A13"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_55B6E61430E7F8E6D1BB53F46F9EBF37"
-        "OwnerKey" = "8:_35EE320EDED74648A73E5422E7F60B36"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_5BDD604F64DE471887BB4FA30691542D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -83,12 +89,6 @@
         {
         "MsmKey" = "8:_76F96F95D3D44DA6A1923FDA11DBC6B8"
         "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_8E39851E2643D3D8092C78D5AEED57F6"
-        "OwnerKey" = "8:_A516574B2C7D48B5B78E0CD1B9E559E0"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -130,12 +130,6 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_8E39851E2643D3D8092C78D5AEED57F6"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_9232CAABD31549F7BD699902D1D32A13"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -149,12 +143,6 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_02FD9A7BDC76401F8B627A5E508E7978"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_55B6E61430E7F8E6D1BB53F46F9EBF37"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -184,10 +172,10 @@
             "ComponentsUrl" = "8:"
                 "Items"
                 {
-                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Net.Framework.3.5"
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.0,Profile=Client"
                     {
-                    "Name" = "8:.NET Framework 3.5"
-                    "ProductCode" = "8:Microsoft.Net.Framework.3.5"
+                    "Name" = "8:Microsoft .NET Framework 4 Client Profile (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.0,Profile=Client"
                     }
                     "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Windows.Installer.3.1"
                     {
@@ -254,7 +242,7 @@
                 {
                 "Name" = "8:.NET Framework"
                 "Message" = "8:[VSDNETMSG]"
-                "Version" = "8:3.0.4506"
+                "FrameworkVersion" = "8:3.0.4506"
                 "AllowLaterVersions" = "11:FALSE"
                 "InstallUrl" = "8:http://go.microsoft.com/fwlink/?LinkId=76617"
                 }
@@ -342,37 +330,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_55B6E61430E7F8E6D1BB53F46F9EBF37"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:KaxamlPlugins, Version=1.0.3209.37032, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_55B6E61430E7F8E6D1BB53F46F9EBF37"
-                    {
-                    "Name" = "8:KaxamlPlugins.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:KaxamlPlugins.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_9FBA00038DEC47B2B1596D3657FAC9AD"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5BDD604F64DE471887BB4FA30691542D"
             {
             "SourcePath" = "8:Assets\\install.vbs"
@@ -411,37 +368,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_8E39851E2643D3D8092C78D5AEED57F6"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:ICSharpCode.TextEditor, Version=2.2.1.2648, Culture=neutral, PublicKeyToken=4d61825e8dd49f1a, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_8E39851E2643D3D8092C78D5AEED57F6"
-                    {
-                    "Name" = "8:ICSharpCode.TextEditor.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:ICSharpCode.TextEditor.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_9FBA00038DEC47B2B1596D3657FAC9AD"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9FEBF4D3BD6F49819C28F30F8A3D5960"
@@ -618,6 +544,7 @@
         "ProductCode" = "8:{BD78969D-86BF-4218-B07C-A38EA0630F96}"
         "PackageCode" = "8:{C609E86C-BB61-486F-A39E-D5855D8D26A6}"
         "UpgradeCode" = "8:{A9FD92DB-1580-4889-B7C3-C00AAF75264A}"
+        "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:TRUE"
@@ -1551,7 +1478,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_02FD9A7BDC76401F8B627A5E508E7978"
             {
-            "SourcePath" = "8:..\\XamlScrubberPlugin\\obj\\Debug\\XamlScrubberPlugin.dll"
+            "SourcePath" = "8:..\\XamlScrubberPlugin\\obj\\x86\\Debug\\XamlScrubberPlugin.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_04FC3D89DFE7498BABF0B3E70CBC89D7"
@@ -1579,7 +1506,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_35EE320EDED74648A73E5422E7F60B36"
             {
-            "SourcePath" = "8:..\\ColorPickerPlugin\\obj\\Debug\\ColorPickerPlugin.dll"
+            "SourcePath" = "8:..\\ColorPickerPlugin\\obj\\x86\\Debug\\ColorPickerPlugin.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_04FC3D89DFE7498BABF0B3E70CBC89D7"
@@ -1607,7 +1534,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_9232CAABD31549F7BD699902D1D32A13"
             {
-            "SourcePath" = "8:..\\SnapshotPlugin\\obj\\Debug\\SnapshotPlugin.dll"
+            "SourcePath" = "8:..\\SnapshotPlugin\\obj\\x86\\Debug\\SnapshotPlugin.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_04FC3D89DFE7498BABF0B3E70CBC89D7"
@@ -1635,7 +1562,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_A516574B2C7D48B5B78E0CD1B9E559E0"
             {
-            "SourcePath" = "8:..\\Kaxaml\\obj\\Debug\\Kaxaml.exe"
+            "SourcePath" = "8:..\\Kaxaml\\obj\\x86\\Debug\\Kaxaml.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_9FBA00038DEC47B2B1596D3657FAC9AD"

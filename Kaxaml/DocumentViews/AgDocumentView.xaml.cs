@@ -42,8 +42,7 @@ namespace Kaxaml.DocumentViews
 
 
             string dir = new FileInfo(System.Reflection.Assembly.GetExecutingAssembly().Location).DirectoryName;
-            ContentArea.Url = new Uri("file://" + dir.Replace("\\", "/") + "/AgHost/AgHost.html");
-            ContentArea.Refresh();
+            ContentArea.Source = new Uri(string.Format("file://{0}/AgHost/AgHost.html", dir.Replace("\\", "/")));
 
             KaxamlInfo.Frame = null;
 
@@ -313,8 +312,8 @@ namespace Kaxaml.DocumentViews
             {
                 if (XamlDocument.SourceText != null)
                 {
-                    HtmlDocument doc = ContentArea.Document;
-                    bool parseSuccess = (bool)doc.InvokeScript("ParseXaml", new object[] { XamlDocument.SourceText });
+                    bool parseSuccess = false;
+                    parseSuccess = (bool)this.ContentArea.InvokeScript("ParseXaml", new object[] { XamlDocument.SourceText });
 
                     if (parseSuccess)
                     {
@@ -334,9 +333,9 @@ namespace Kaxaml.DocumentViews
                     else
                     {
 
-                        ErrorText = (string)doc.InvokeScript("GetLastErrorMessage", null);
-                        ErrorLineNumber = int.Parse((string)doc.InvokeScript("GetLastErrorLineNumber", null));
-                        ErrorLinePosition = int.Parse((string)doc.InvokeScript("GetLastErrorLinePos", null));
+                        ErrorText = (string)this.ContentArea.InvokeScript("GetLastErrorMessage", null);
+                        ErrorLineNumber = int.Parse((string)this.ContentArea.InvokeScript("GetLastErrorLineNumber", null));
+                        ErrorLinePosition = int.Parse((string)this.ContentArea.InvokeScript("GetLastErrorLinePos", null));
 
                         ErrorText = ErrorText.Replace("\r", "");
                         ErrorText = ErrorText.Replace("\n", "");
@@ -440,7 +439,7 @@ namespace Kaxaml.DocumentViews
 
 
             ColorOverlayImage.Visibility = Visibility.Visible;
-            FormsHost.Visibility = Visibility.Hidden;
+            ContentArea.Visibility = Visibility.Collapsed;
 
             DoubleAnimation d = (DoubleAnimation)this.FindResource("ShowErrorOverlay");
             //d.Completed += new EventHandler(ErrorOverlayAnimationCompleted);
@@ -474,7 +473,7 @@ namespace Kaxaml.DocumentViews
         void d_Completed(object sender, EventArgs e)
         {
             ColorOverlayImage.Visibility = Visibility.Hidden;
-            FormsHost.Visibility = Visibility.Visible;
+            ContentArea.Visibility = Visibility.Visible;
         }
 
         #endregion
