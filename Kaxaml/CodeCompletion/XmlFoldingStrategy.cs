@@ -115,7 +115,6 @@ namespace Kaxaml.CodeCompletion
             showAttributesWhenFolded = true;
 
             List<FoldMarker> foldMarkers = new List<FoldMarker>();
-            Stack stack = new Stack();
 
             try
             {
@@ -126,6 +125,7 @@ namespace Kaxaml.CodeCompletion
                     {
                         while (reader.Read())
                         {
+                            var stack = new Stack();
                             switch (reader.NodeType)
                             {
                                 case XmlNodeType.Element:
