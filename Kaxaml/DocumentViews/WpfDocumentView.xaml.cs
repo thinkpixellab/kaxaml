@@ -364,9 +364,6 @@ namespace Kaxaml.DocumentViews
             {
                 if (XamlDocument.SourceText != null)
                 {
-                    MemoryStream ms = null;
-                    StreamWriter sw = null;
-
                     // handle the in place preparsing (this actually updates the source in the editor)
                     int index = TextEditor.CaretIndex;
                     XamlDocument.SourceText = PreParse(XamlDocument.SourceText);
@@ -380,26 +377,32 @@ namespace Kaxaml.DocumentViews
 
                     try
                     {
-                        ms = new MemoryStream(str.Length);
-                        sw = new StreamWriter(ms);
-                        sw.Write(str);
-                        sw.Flush();
+                        object content = null;
+                        using (var ms = new MemoryStream(str.Length))
+                        {
+                            using (var sw = new StreamWriter(ms))
+                            {
+                                sw.Write(str);
+                                sw.Flush();
 
-                        ms.Seek(0, SeekOrigin.Begin);
+                                ms.Seek(0, SeekOrigin.Begin);
 
-                        ParserContext pc = new ParserContext();
-                        pc.BaseUri = new Uri(XamlDocument.Folder != null
-                            ? XamlDocument.Folder + "/"
-                            : System.Environment.CurrentDirectory + "/");
-                        //pc.BaseUri = new Uri(XamlDocument.Folder + "/");
-                        //pc.BaseUri = new Uri(System.Environment.CurrentDirectory + "/");
+                                ParserContext pc = new ParserContext();
+                                pc.BaseUri = new Uri(XamlDocument.Folder != null
+                                    ? XamlDocument.Folder + "/"
+                                    : System.Environment.CurrentDirectory + "/");
+                                //pc.BaseUri = new Uri(XamlDocument.Folder + "/");
+                                //pc.BaseUri = new Uri(System.Environment.CurrentDirectory + "/");
 
-                        ContentArea.JournalOwnership = System.Windows.Navigation.JournalOwnership.UsesParentJournal;
-                        object content = XamlReader.Load(ms, pc);
+                                ContentArea.JournalOwnership = System.Windows.Navigation.JournalOwnership.UsesParentJournal;
+                                content = XamlReader.Load(ms, pc);
+                            }
+                        }
 
                         if (content != null && content is Window)
                         {
-                            (content as Window).Owner = Application.Current.MainWindow;
+                            var window = (Window)content;
+                            window.Owner = Application.Current.MainWindow;
 
                             if (!IsExplicit)
                             {
@@ -423,7 +426,7 @@ namespace Kaxaml.DocumentViews
                             }
                             else
                             {
-                                (content as Window).Show();
+                                window.Show();
                             }
                         }
                         else
@@ -450,14 +453,6 @@ namespace Kaxaml.DocumentViews
                     catch (Exception e)
                     {
                         ReportError(e);
-                    }
-
-                    finally
-                    {
-                        if (sw != null)
-                        {
-                            sw.Close();
-                        }
                     }
                 }
             }
