@@ -1,0 +1,11 @@
+
+*.suo
+ColorPickerPlugin/obj
+Kaxaml/bin
+Kaxaml/obj
+KaxamlPlugins/obj
+SnapshotPlugin/obj
+XamlScrubberPlugin/obj
+KaxamlSilverlightHost/obj
+*.sln.docstates
+KaxamlPlugins/bin
