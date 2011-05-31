@@ -529,23 +529,27 @@ namespace Kaxaml.CodeCompletion
 
             try
             {
-                StringReader reader = new StringReader(xml);
-                XmlTextReader xmlReader = new XmlTextReader(reader);
-                xmlReader.XmlResolver = null;
-                while (xmlReader.Read())
+                using (var reader = new StringReader(xml))
                 {
-                    switch (xmlReader.NodeType)
+                    using (var xmlReader = new XmlTextReader(reader))
                     {
-                        case XmlNodeType.Element:
-                            if (!xmlReader.IsEmptyElement)
+                        xmlReader.XmlResolver = null;
+                        while (xmlReader.Read())
+                        {
+                            switch (xmlReader.NodeType)
                             {
-                                QualifiedName elementName = new QualifiedName(xmlReader.LocalName, xmlReader.NamespaceURI, xmlReader.Prefix);
-                                path.Elements.Add(elementName);
+                                case XmlNodeType.Element:
+                                    if (!xmlReader.IsEmptyElement)
+                                    {
+                                        QualifiedName elementName = new QualifiedName(xmlReader.LocalName, xmlReader.NamespaceURI, xmlReader.Prefix);
+                                        path.Elements.Add(elementName);
+                                    }
+                                    break;
+                                case XmlNodeType.EndElement:
+                                    path.Elements.RemoveLast();
+                                    break;
                             }
-                            break;
-                        case XmlNodeType.EndElement:
-                            path.Elements.RemoveLast();
-                            break;
+                        }
                     }
                 }
             }

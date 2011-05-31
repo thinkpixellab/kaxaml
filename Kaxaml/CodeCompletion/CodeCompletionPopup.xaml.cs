@@ -161,7 +161,6 @@ namespace Kaxaml.CodeCompletion
             _CuePrefix = "";
         }
 
-        int _LastIndex = 0;
         int SearchForItem(string prefix)
         {
             int indexOfItem = -1;

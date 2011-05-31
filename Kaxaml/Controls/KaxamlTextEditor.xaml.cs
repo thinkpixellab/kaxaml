@@ -971,12 +971,10 @@ namespace Kaxaml.Controls
         }
 
         int _BeginCaretIndex = 0;
-        bool _IsOpening = false;
 
         private delegate void OneArgDelegate(object arg);
         public void ShowCompletionWindowUI(object param)
         {
-            _IsOpening = true;
             _SpaceIsValid = false;
             if (param is ArrayList)
             {
@@ -993,7 +991,6 @@ namespace Kaxaml.Controls
                 popup = CodeCompletionPopup.Show(items, new Point(editorPoint.X + caretPoint.X + borderX, editorPoint.Y + caretPoint.Y + (FontSize * 1.3) + 3));
                 popup.ResultProvided += w_ResultProvided;
             }
-            _IsOpening = false;
         }
 
         void ShowCompletionWindow(object param)
@@ -1007,8 +1004,6 @@ namespace Kaxaml.Controls
 
             if (!CodeCompletionPopup.IsOpenSomewhere)
             {
-                _IsOpening = true;
-
                 _BeginCaretIndex = beginCaretIndex;
 
                 if (param is char)

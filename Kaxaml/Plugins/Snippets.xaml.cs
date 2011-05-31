@@ -225,7 +225,6 @@ namespace Kaxaml.Plugins.Default
                 // create a new category
                 SnippetCategory sc = new SnippetCategory();
                 sc.Name = "New Category";
-                sc.Snippets = new ObservableCollection<Snippet>();
                 SnippetCategories.Add(sc);
 
                 string Text = (string)e.Data.GetData(DataFormats.Text);
@@ -330,7 +329,6 @@ namespace Kaxaml.Plugins.Default
         {
             SnippetCategory s = new SnippetCategory();
             s.Name = "New Category";
-            s.Snippets = new ObservableCollection<Snippet>();
             SnippetCategories.Add(s);
         }
 
@@ -376,7 +374,6 @@ namespace Kaxaml.Plugins.Default
                     {
                         c = new SnippetCategory();
                         c.Name = CategoryNode.Attributes["Name"].Value;
-                        c.Snippets = new ObservableCollection<Snippet>();
                         SnippetCategories.Add(c);
                     }
 
@@ -704,7 +701,7 @@ namespace Kaxaml.Plugins.Default
         #region Fields
 
 
-        private ObservableCollection<Snippet> _Snippets;
+        private readonly ObservableCollection<Snippet> _Snippets = new ObservableCollection<Snippet>();
 
         private string _Name;
 
@@ -716,7 +713,6 @@ namespace Kaxaml.Plugins.Default
         public ObservableCollection<Snippet> Snippets
         {
             get { return _Snippets; }
-            set { _Snippets = value; }
         }
 
 

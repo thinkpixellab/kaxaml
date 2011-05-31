@@ -67,9 +67,11 @@ namespace Kaxaml.CodeCompletion
         /// </summary>
         public XmlSchemaCompletionData(string baseUri, string fileName)
         {
-            StreamReader reader = new StreamReader(fileName, true);
-            ReadSchema(baseUri, reader);
-            this.fileName = fileName;
+            using (var reader = new StreamReader(fileName, true))
+            {
+                ReadSchema(baseUri, reader);
+                this.fileName = fileName;
+            }
         }
 
         /// <summary>
@@ -438,15 +440,16 @@ namespace Kaxaml.CodeCompletion
 
         void ReadSchema(string baseUri, TextReader reader)
         {
-            XmlTextReader xmlReader = new XmlTextReader(baseUri, reader);
-
-            // Setting the resolver to null allows us to
-            // load the xhtml1-strict.xsd without any exceptions if
-            // the referenced dtds exist in the same folder as the .xsd
-            // file.  If this is not set to null the dtd files are looked
-            // for in the assembly's folder.
-            xmlReader.XmlResolver = null;
-            ReadSchema(xmlReader);
+            using (var xmlReader = new XmlTextReader(baseUri, reader))
+            {
+                // Setting the resolver to null allows us to
+                // load the xhtml1-strict.xsd without any exceptions if
+                // the referenced dtds exist in the same folder as the .xsd
+                // file.  If this is not set to null the dtd files are looked
+                // for in the assembly's folder.
+                xmlReader.XmlResolver = null;
+                ReadSchema(xmlReader);
+            }
         }
 
         /// <summary>

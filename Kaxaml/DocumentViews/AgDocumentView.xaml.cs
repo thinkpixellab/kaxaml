@@ -56,7 +56,6 @@ namespace Kaxaml.DocumentViews
         #region Private Fields
 
         private static DispatcherTimer dispatcherTimer;
-        private bool UnhandledExceptionRaised;
 
         #endregion        //-------------------------------------------------------------------
         //
@@ -310,7 +309,6 @@ namespace Kaxaml.DocumentViews
                         ErrorText = null;
                         ErrorLineNumber = 0;
                         ErrorLinePosition = 0;
-                        UnhandledExceptionRaised = false;
 
                         if (Kaxaml.Properties.Settings.Default.EnableAutoBackup)
                         {
