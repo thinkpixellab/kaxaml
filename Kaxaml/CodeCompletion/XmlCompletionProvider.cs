@@ -1,37 +1,29 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
-using ICSharpCode.TextEditor.Gui.CompletionWindow;
-using ICSharpCode.TextEditor;
-using System.Collections;
-using System.Xml.Schema;
-using System.Windows.Forms;
-using System.Xml;
-using System.IO;
-using System.Windows.Threading;
-using System.Diagnostics;
 using System.Threading;
+using System.Windows.Forms;
+using ICSharpCode.TextEditor;
+using ICSharpCode.TextEditor.Gui.CompletionWindow;
 
 namespace Kaxaml.CodeCompletion
 {
     public class XmlCompletionDataProvider : ICompletionDataProvider
     {
 
-		#region Static Fields 
+        #region Static Fields
 
         static XmlSchemaCompletionData defaultSchemaCompletionData = null;
 
-		#endregion Static Fields 
+        #endregion Static Fields
 
-		#region Fields 
+        #region Fields
 
 
         protected string preSelection = null;
         string defaultNamespacePrefix = String.Empty;
 
-		#endregion Fields 
+        #endregion Fields
 
-		#region Properties 
+        #region Properties
 
 
         public static bool IsSchemaLoaded
@@ -40,9 +32,9 @@ namespace Kaxaml.CodeCompletion
         }
 
 
-		#endregion Properties 
+        #endregion Properties
 
-		#region Static Methods 
+        #region Static Methods
 
         public static void LoadSchema(string filename)
         {
@@ -68,7 +60,7 @@ namespace Kaxaml.CodeCompletion
             }
         }
 
-		#endregion Static Methods 
+        #endregion Static Methods
 
 
         #region ICompletionDataProvider Members
