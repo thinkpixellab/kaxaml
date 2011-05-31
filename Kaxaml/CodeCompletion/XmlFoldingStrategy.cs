@@ -120,28 +120,31 @@ namespace Kaxaml.CodeCompletion
             try
             {
                 string xml = document.TextContent;
-                using (var reader = new XmlTextReader(new StringReader(xml)))
+                using (var stringReader = new StringReader(xml))
                 {
-                    while (reader.Read())
+                    using (var reader = new XmlTextReader(stringReader))
                     {
-                        switch (reader.NodeType)
+                        while (reader.Read())
                         {
-                            case XmlNodeType.Element:
-                                if (!reader.IsEmptyElement)
-                                {
-                                    XmlFoldStart newFoldStart = CreateElementFoldStart(reader);
-                                    stack.Push(newFoldStart);
-                                }
-                                break;
+                            switch (reader.NodeType)
+                            {
+                                case XmlNodeType.Element:
+                                    if (!reader.IsEmptyElement)
+                                    {
+                                        XmlFoldStart newFoldStart = CreateElementFoldStart(reader);
+                                        stack.Push(newFoldStart);
+                                    }
+                                    break;
 
-                            case XmlNodeType.EndElement:
-                                XmlFoldStart foldStart = (XmlFoldStart)stack.Pop();
-                                CreateElementFold(document, foldMarkers, reader, foldStart);
-                                break;
+                                case XmlNodeType.EndElement:
+                                    XmlFoldStart foldStart = (XmlFoldStart)stack.Pop();
+                                    CreateElementFold(document, foldMarkers, reader, foldStart);
+                                    break;
 
-                            case XmlNodeType.Comment:
-                                CreateCommentFold(document, foldMarkers, reader);
-                                break;
+                                case XmlNodeType.Comment:
+                                    CreateCommentFold(document, foldMarkers, reader);
+                                    break;
+                            }
                         }
                     }
                 }
