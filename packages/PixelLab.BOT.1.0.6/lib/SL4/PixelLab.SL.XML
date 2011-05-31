@@ -1,0 +1,285 @@
+﻿<?xml version="1.0"?>
+<doc>
+  <assembly>
+    <name>PixelLab.SL</name>
+  </assembly>
+  <members>
+    <member name="M:PixelLab.SL.GridLineControl.RequestGridUpdate">
+      <summary>
+            Called internally to let us know that something has changed that requires
+            a recalculation of the grid. This method will cue up a change for the next
+            render.
+            </summary>
+    </member>
+    <member name="M:PixelLab.SL.GridLineControl.InitializeComponent">
+      <summary>
+            InitializeComponent
+            </summary>
+    </member>
+    <member name="P:PixelLab.SL.GridLineControl.MajorGridLineDistance">
+      <summary>
+            The distance between each of the major division gridlines
+            </summary>
+    </member>
+    <member name="P:PixelLab.SL.GridLineControl.MajorGridLineColor">
+      <summary>
+            The color used to draw the major grid lines
+            </summary>
+    </member>
+    <member name="P:PixelLab.SL.GridLineControl.MinorGridLineSubDivisions">
+      <summary>
+            The number of subdividing lines that occur between each major grid line.
+            </summary>
+    </member>
+    <member name="P:PixelLab.SL.GridLineControl.MinorGridLineColor">
+      <summary>
+            The color used to draw the minor / subdividing grid lines
+            </summary>
+    </member>
+    <member name="P:PixelLab.SL.GridLineControl.Scale">
+      <summary>
+            The current scale (e.g. zoom) for the grid lines
+            </summary>
+    </member>
+    <member name="P:PixelLab.SL.GridLineControl.OffsetX">
+      <summary>
+            A description of the property.
+            </summary>
+    </member>
+    <member name="P:PixelLab.SL.GridLineControl.OffsetY">
+      <summary>
+            A description of the property.
+            </summary>
+    </member>
+    <member name="M:PixelLab.SL.FlipControl.InitializeComponent">
+      <summary>
+            InitializeComponent
+            </summary>
+    </member>
+    <member name="M:PixelLab.SL.PanZoomControl.#ctor">
+      <summary>
+            Initializes a new instance of the <see cref="T:PixelLab.SL.PanZoomControl" /> class.
+            </summary>
+    </member>
+    <member name="M:PixelLab.SL.PanZoomControl.CenterContent">
+      <summary>
+            Centers the content.
+            </summary>
+    </member>
+    <member name="M:PixelLab.SL.PanZoomControl.OnMouseLeftButtonDown(System.Windows.Input.MouseButtonEventArgs)">
+      <summary>
+            Called before the <see cref="E:System.Windows.UIElement.MouseLeftButtonDown" /> event occurs.
+            </summary>
+      <param name="e">The data for the event.</param>
+    </member>
+    <member name="M:PixelLab.SL.PanZoomControl.OnMouseLeftButtonUp(System.Windows.Input.MouseButtonEventArgs)">
+      <summary>
+            Called before the <see cref="E:System.Windows.UIElement.MouseLeftButtonUp" /> event occurs.
+            </summary>
+      <param name="e">The data for the event.</param>
+    </member>
+    <member name="M:PixelLab.SL.PanZoomControl.OnMouseMove(System.Windows.Input.MouseEventArgs)">
+      <summary>
+            Called before the <see cref="E:System.Windows.UIElement.MouseMove" /> event occurs.
+            </summary>
+      <param name="e">The data for the event.</param>
+    </member>
+    <member name="M:PixelLab.SL.PanZoomControl.OnApplyTemplate">
+      <summary>
+            When overridden in a derived class, is invoked whenever application code or internal processes (such as a rebuilding layout pass) call <see cref="M:System.Windows.Controls.Control.ApplyTemplate" />. In simplest terms, this means the method is called just before a UI element displays in an application. For more information, see Remarks.
+            </summary>
+    </member>
+    <member name="M:PixelLab.SL.PanZoomControl.OffsetToRelativeOffset(System.Double,System.Double,System.Double,System.Double)">
+      <summary>
+            Computes the relative offset for a given offset
+            </summary>
+      <param name="offset">actual non-scaled offset to be converted</param>
+      <param name="scale">scale</param>
+      <param name="actual">actual width/height of the viewable area</param>
+      <param name="content">width/height of the content</param>
+      <returns />
+    </member>
+    <member name="M:PixelLab.SL.PanZoomControl.RelativeOffsetToOffset(System.Double,System.Double,System.Double,System.Double)">
+      <summary>
+            Computes the actual (non-scaled) offset for a given relative offset
+            </summary>
+      <param name="reloffset">relative offset to be converted</param>
+      <param name="scale">scale</param>
+      <param name="actual">actual width/height of the viewable area</param>
+      <param name="content">width/height of the content</param>
+      <returns />
+    </member>
+    <member name="P:PixelLab.SL.PanZoomControl.MajorGridLineColor">
+      <summary>
+            The color used to draw the major grid lines
+            </summary>
+    </member>
+    <member name="P:PixelLab.SL.PanZoomControl.MinorGridLineColor">
+      <summary>
+            The color used to draw the minor / subdividing grid lines
+            </summary>
+    </member>
+    <member name="P:PixelLab.SL.PanZoomControl.MajorGridLineDistance">
+      <summary>
+            The distance between each of the major division gridlines
+            </summary>
+    </member>
+    <member name="P:PixelLab.SL.PanZoomControl.Subdivisions">
+      <summary>
+            The number of subdivisions between the major grid lines
+            </summary>
+    </member>
+    <member name="P:PixelLab.SL.PanZoomControl.Scale">
+      <summary>
+            Indicates how the current scale (level of zoom)
+            </summary>
+    </member>
+    <member name="P:PixelLab.SL.PanZoomControl.OffsetX">
+      <summary>
+            The X offset (before scale is applied). OffsetX and OffsetY are always in the "non-scaled" 
+            coordinate space. This means that if you are scaled at 2x and update OffsetX by 1 pixel, 
+            the scaled content will appear to move 2 pixels.
+            </summary>
+    </member>
+    <!-- Badly formed XML comment ignored for member "P:PixelLab.SL.PanZoomControl.OffsetY" -->
+    <member name="P:PixelLab.SL.PanZoomControl.ClipToBounds">
+      <summary>
+            A description of the property.
+            </summary>
+    </member>
+    <member name="P:PixelLab.SL.PanZoomControl.CanPan">
+      <summary>
+            Gets or sets a value indicating whether this instance can pan.
+            </summary>
+      <value>
+        <c>True</c> if this instance can pan; otherwise, <c>false</c>.</value>
+    </member>
+    <member name="T:PixelLab.SL.EditableTextBlock">
+      <summary>
+            Represents a <see cref="T:System.Windows.Controls.TextBlock" /> control that can be edited by using a <see cref="T:System.Windows.Controls.TextBox" />.
+            </summary>
+    </member>
+    <member name="F:PixelLab.SL.EditableTextBlock.InfoTextProperty">
+      <summary>
+            Identifies the InfoText dependency property.
+            </summary>
+    </member>
+    <member name="F:PixelLab.SL.EditableTextBlock.InfoTextVisibilityProperty">
+      <summary>
+            Identifies the InfoTextVisibility dependency property.
+            </summary>
+    </member>
+    <member name="F:PixelLab.SL.EditableTextBlock.ReadOnlyForegroundProperty">
+      <summary>
+            Identifies the ReadOnlyForeground dependency property.
+            </summary>
+    </member>
+    <member name="M:PixelLab.SL.EditableTextBlock.#ctor">
+      <summary>
+            Initializes a new instance of the <see cref="T:PixelLab.SL.EditableTextBlock" /> class.
+            </summary>
+    </member>
+    <member name="M:PixelLab.SL.EditableTextBlock.OnApplyTemplate">
+      <summary>
+            When overridden in a derived class, is invoked whenever application code or 
+            internal processes (such as a rebuilding layout pass) call 
+            <see cref="M:System.Windows.Controls.Control.ApplyTemplate" />. In simplest terms, 
+            this means the method is called just before a UI element displays in an application. 
+            </summary>
+    </member>
+    <member name="M:PixelLab.SL.EditableTextBlock.OnMouseLeftButtonDown(System.Windows.Input.MouseButtonEventArgs)">
+      <summary>
+            Called before <see cref="E:System.Windows.UIElement.MouseLeftButtonDown" /> event occurs.
+            </summary>
+      <param name="e">The data for the event. The event data reports that the left mouse button was pressed.</param>
+    </member>
+    <member name="M:PixelLab.SL.EditableTextBlock.OnKeyDown(System.Windows.Input.KeyEventArgs)">
+      <summary>
+            Called when <see cref="E:System.Windows.UIElement.KeyDown" /> event occurs.
+            </summary>
+      <param name="e">The data for the event.</param>
+    </member>
+    <member name="P:PixelLab.SL.EditableTextBlock.InfoText">
+      <summary>
+            Gets or sets the info text. This is a dependency property.
+            The default value is "Click to edit".
+            </summary>
+      <value>The info text.</value>
+    </member>
+    <member name="P:PixelLab.SL.EditableTextBlock.InfoTextVisibility">
+      <summary>
+            Gets the visibility of the info text.
+            </summary>
+      <value>The visibility of the info text.</value>
+    </member>
+    <member name="P:PixelLab.SL.EditableTextBlock.ReadOnlyForeground">
+      <summary>
+            Gets or sets a brush that provides the foreground of the read-only text.
+            </summary>
+      <value>The brush that provides the foreground of the read-only text. 
+            The default is black.</value>
+    </member>
+    <member name="P:PixelLab.SL.IAsyncValue`1.Value">
+      <setter>
+        <requires>State != LoadState.Loading</requires>
+      </setter>
+    </member>
+    <member name="P:PixelLab.SL.IAsyncValue`1.LoadCommand">
+      <getter>
+        <ensures>Contract.Result&lt;ICommand&gt;() != null</ensures>
+      </getter>
+    </member>
+    <member name="M:PixelLab.SL.IAsyncValue`1.Load">
+      <requires>State != LoadState.Loading</requires>
+    </member>
+    <member name="M:PixelLab.SL.FlipControl.Config(System.Windows.Size)">
+      <requires>pageSize.IsValid()</requires>
+    </member>
+    <member name="M:PixelLab.SL.FlipControl.SetChild(System.Windows.FrameworkElement)">
+      <requires>value != null</requires>
+    </member>
+    <member name="M:PixelLab.SL.IsolatedStorage.IsolatedFileInfo.#ctor(System.IO.IsolatedStorage.IsolatedStorageFile,System.Collections.Generic.IEnumerable{System.String})">
+      <requires>!path.IsEmpty()</requires>
+    </member>
+    <member name="M:PixelLab.SL.IsolatedStorage.IsolatedFileSystemInfo.#ctor(System.IO.IsolatedStorage.IsolatedStorageFile,System.Collections.Generic.IEnumerable{System.String})">
+      <requires>isf != null</requires>
+      <requires>path != null</requires>
+    </member>
+    <member name="M:PixelLab.SL.IsolatedStorage.IsolatedFileSystemInfo.ToString">
+      <ensures inheritedFrom="M:System.Object.ToString" inheritedFromTypeName="Object">Contract.Result&lt;string&gt;() != null</ensures>
+    </member>
+    <member name="P:PixelLab.SL.AsyncValueBase`1.LoadCommand">
+      <getter>
+        <ensures inheritedFrom="M:PixelLab.SL.IAsyncValue`1.get_LoadCommand" inheritedFromTypeName="IAsyncValue">Contract.Result&lt;ICommand&gt;() != null</ensures>
+      </getter>
+    </member>
+    <member name="P:PixelLab.SL.AsyncValueBase`1.Value">
+      <setter>
+        <requires inheritedFrom="M:PixelLab.SL.IAsyncValue`1.set_Value(`0)" inheritedFromTypeName="IAsyncValue">State != LoadState.Loading</requires>
+      </setter>
+    </member>
+    <member name="M:PixelLab.SL.AsyncValueBase`1.LoadSuccessCallback(`0)">
+      <requires>State == LoadState.Loading</requires>
+    </member>
+    <member name="M:PixelLab.SL.AsyncValueBase`1.LoadFailCallback(System.Exception)">
+      <requires>State == LoadState.Loading</requires>
+    </member>
+    <member name="M:PixelLab.SL.AsyncValueBase`1.Load">
+      <requires inheritedFrom="M:PixelLab.SL.IAsyncValue`1.Load" inheritedFromTypeName="IAsyncValue">State != LoadState.Loading</requires>
+    </member>
+    <member name="M:PixelLab.SL.AsyncValue`1.#ctor(System.Func{System.Action{`0},System.Action{System.Exception},System.IAsyncResult})">
+      <requires>callBack != null</requires>
+    </member>
+    <member name="M:PixelLab.SL.Helpers.CopyPixels(System.Windows.Media.Imaging.WriteableBitmap,System.Windows.Media.Imaging.WriteableBitmap,System.Int32,System.Int32)">
+      <requires>source != null</requires>
+      <requires>target != null</requires>
+      <requires>startX &gt;= 0</requires>
+      <requires>startX + target.PixelWidth &lt;= source.PixelWidth</requires>
+      <requires>startY &gt;= 0</requires>
+      <requires>startY + target.PixelHeight &lt;= source.PixelHeight</requires>
+    </member>
+    <member name="M:PixelLab.SL.AsyncValue`2.#ctor(`1,System.Func{`1,System.Action{`0},System.Action{System.Exception},System.IAsyncResult})">
+      <requires>callBack != null</requires>
+    </member>
+  </members>
+</doc>

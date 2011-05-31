@@ -1,0 +1,215 @@
+﻿<?xml version="1.0"?>
+<doc>
+  <assembly>
+    <name>PixelLab.Common</name>
+  </assembly>
+  <members>
+    <member name="M:PixelLab.Common.GeoHelper.ScaleToFit(System.Windows.Size,System.Windows.Size)">
+      <summary>
+                Returns the scale factor by which an object of size <paramref name="source" />
+                should be scaled to fit within an object of size <param name="target" />.
+            </summary>
+      <param name="target">The target size.</param>
+      <param name="size2">The source size.</param>
+      <requires>target.IsValid()</requires>
+      <requires>source.IsValid()</requires>
+      <requires>target.Width &gt; 0</requires>
+      <requires>source.Width &gt; 0</requires>
+    </member>
+    <member name="T:PixelLab.Common.DemoCollection`1">
+      <remarks>
+                The members of this class are only safe to use via one thread (usually the UI thread in a WPF application).
+                Any cross-thread changes will cause undesired behavior.
+            </remarks>
+      <invariant>m_random != null</invariant>
+      <invariant>m_sourceItems != null</invariant>
+      <invariant>m_sourceItems.Count &gt; 0</invariant>
+      <invariant>m_activeItems != null</invariant>
+      <invariant>m_addCommand != null</invariant>
+      <invariant>m_removeCommand != null</invariant>
+      <invariant>m_moveCommand != null</invariant>
+      <invariant>m_changeCommand != null</invariant>
+      <invariant>m_resetCommand != null</invariant>
+      <invariant>m_insertCommand != null</invariant>
+    </member>
+    <member name="M:PixelLab.Common.TreeHelpers.GetAncestors(System.Windows.DependencyObject)">
+      <remarks>Includes element.</remarks>
+    </member>
+    <member name="M:PixelLab.Common.Line.#ctor(System.Windows.Point,System.Windows.Point)">
+      <requires>p1.IsValid()</requires>
+      <requires>p2.IsValid()</requires>
+    </member>
+    <member name="P:PixelLab.Common.Line.P1">
+      <setter>
+        <requires>value.IsValid()</requires>
+      </setter>
+    </member>
+    <member name="P:PixelLab.Common.Line.P2">
+      <setter>
+        <requires>value.IsValid()</requires>
+      </setter>
+    </member>
+    <member name="M:PixelLab.Common.TreeHelpers.GetItemContainerFromChildElement(System.Windows.Controls.ItemsControl,System.Windows.UIElement)">
+      <requires>itemsControl != null</requires>
+      <requires>child != null</requires>
+    </member>
+    <member name="M:PixelLab.Common.TreeHelpers.HasAncestor(System.Windows.DependencyObject,System.Windows.DependencyObject)">
+      <requires>element != null</requires>
+      <requires>ancestor != null</requires>
+    </member>
+    <member name="M:PixelLab.Common.TreeHelpers.FirstVisualDescendentOfType``1(System.Windows.DependencyObject)">
+      <requires>obj != null</requires>
+    </member>
+    <member name="M:PixelLab.Common.TreeHelpers.GetVisualDescendents(System.Windows.DependencyObject)">
+      <requires>source != null</requires>
+    </member>
+    <member name="M:PixelLab.Common.TreeHelpers.VisualDescendentsOfType``1(System.Windows.DependencyObject)">
+      <requires>obj != null</requires>
+    </member>
+    <member name="T:PixelLab.Common.PathWatcher`2">
+      <invariant>m_source != null</invariant>
+      <invariant>m_path != null</invariant>
+      <invariant>m_getMethods != null</invariant>
+      <invariant>Contract.ForAll(m_getMethods, gm =&gt; gm != null)</invariant>
+      <invariant>m_values != null</invariant>
+      <invariant>m_watching != null</invariant>
+      <invariant>Contract.ForAll(m_watching, w =&gt; w != null)</invariant>
+    </member>
+    <member name="M:PixelLab.Common.PathWatcher`2.#ctor(`0,System.Linq.Expressions.Expression{System.Func{`0,`1}})">
+      <requires exception="T:System.ArgumentNullException">expression != null</requires>
+      <exception cref="T:System.ArgumentNullException">expression == null</exception>
+    </member>
+    <member name="M:PixelLab.Common.DispatcherExtensions.InvokeHandleCatch``1(System.Threading.SynchronizationContext,System.IAsyncResult,System.Func{System.IAsyncResult,``0},System.Action{``0},System.Action{System.Exception})">
+      <requires>synchronizationContext != null</requires>
+      <requires>endFunction != null</requires>
+      <requires>handler != null</requires>
+      <requires>exceptionHandler != null</requires>
+    </member>
+    <member name="M:PixelLab.Common.CompositionTargetRenderingListener.WireParentLoadedUnloaded(System.Windows.FrameworkElement)">
+      <requires>parent != null</requires>
+    </member>
+    <member name="M:PixelLab.Common.RoundDoubleConverter.convert(System.Type,System.Double,System.Int32)">
+      <requires exception="T:System.ArgumentOutOfRangeException">decimalPlaces &gt;= 0</requires>
+      <exception cref="T:System.ArgumentOutOfRangeException">decimalPlaces &lt; 0</exception>
+    </member>
+    <member name="M:PixelLab.Common.HueConverter.Convert(System.Int32,System.Int32)">
+      <requires>index &gt;= 0</requires>
+      <requires>count &gt; 0</requires>
+    </member>
+    <member name="M:PixelLab.Common.DebugTrace.WriteLine(System.String,System.Object[])">
+      <requires>format != null</requires>
+      <requires>args != null</requires>
+    </member>
+    <member name="M:PixelLab.Common.FuncValueConverter`2.#ctor(System.Func{`0,`1})">
+      <requires>func != null</requires>
+    </member>
+    <member name="M:PixelLab.Common.DemoCollection`1.Create(System.Collections.Generic.IList{`0},System.Int32,System.Int32,System.Int32)">
+      <requires>source != null</requires>
+      <requires>source.Count &gt; 0</requires>
+      <requires>initialCount &gt;= 0</requires>
+      <requires>minCount &gt;= 0</requires>
+      <requires>minCount &lt;= initialCount</requires>
+      <requires>initialCount &lt;= maxCount</requires>
+    </member>
+    <member name="M:PixelLab.Common.DemoCollection`1.#ctor(System.Collections.ObjectModel.ReadOnlyCollection{`0},PixelLab.Common.ObservableCollectionPlus{`0},System.Int32,System.Int32,System.Int32)">
+      <requires>activeItems != null</requires>
+      <requires>sourceItems != null</requires>
+      <requires>sourceItems.Count &gt; 0</requires>
+    </member>
+    <member name="M:PixelLab.Common.CommandHelpers.GetCommandString(System.Windows.FrameworkElement)">
+      <requires>element != null</requires>
+    </member>
+    <member name="M:PixelLab.Common.CommandHelpers.SetCommandParameter(System.Windows.FrameworkElement,System.Object)">
+      <requires>element != null</requires>
+    </member>
+    <member name="M:PixelLab.Common.CommandHelpers.GetCommandParameter(System.Windows.FrameworkElement)">
+      <requires>element != null</requires>
+    </member>
+    <member name="M:PixelLab.Common.CommandHelpers.SetCommand(System.Windows.FrameworkElement,System.Windows.Input.ICommand)">
+      <requires>element != null</requires>
+    </member>
+    <member name="M:PixelLab.Common.CommandHelpers.CommandState.GetCommandState(System.Windows.FrameworkElement)">
+      <requires>element != null</requires>
+    </member>
+    <member name="M:PixelLab.Common.CommandHelpers.CommandState.#ctor(System.Windows.FrameworkElement)">
+      <requires>owner != null</requires>
+    </member>
+    <member name="M:PixelLab.Common.CommandHelpers.GetCommand(System.Windows.FrameworkElement)">
+      <requires>element != null</requires>
+    </member>
+    <member name="M:PixelLab.Common.CommandHelpers.TryGetCommand(PixelLab.Common.ICommandProxy,System.Windows.DependencyObject,System.String)">
+      <requires>proxy != null</requires>
+      <requires>source != null</requires>
+      <requires>!name.IsNullOrWhiteSpace()</requires>
+    </member>
+    <member name="M:PixelLab.Common.CommandHelpers.commandStringElement_loaded(System.Windows.FrameworkElement)">
+      <requires>element != null</requires>
+    </member>
+    <member name="M:PixelLab.Common.PageFlipper.#ctor(System.Windows.Size,System.Windows.UIElement,System.Windows.UIElement,System.Windows.FrameworkElement,System.Windows.FrameworkElement)">
+      <requires>pageSize.IsValid()</requires>
+    </member>
+    <member name="M:PixelLab.Common.GeoHelper.BottomRight(System.Windows.Rect)">
+      <requires>!rect.IsEmpty</requires>
+      <ensures>Contract.Result&lt;Point&gt;().IsValid()</ensures>
+    </member>
+    <member name="M:PixelLab.Common.GeoHelper.IsValid(System.Windows.Point)">
+      <pure />
+    </member>
+    <member name="M:PixelLab.Common.GeoHelper.Expand(System.Windows.Rect,System.Double)">
+      <requires>amount &gt;= 0</requires>
+      <requires>!target.IsEmpty</requires>
+      <ensures>!Contract.Result&lt;Rect&gt;().IsEmpty</ensures>
+    </member>
+    <member name="M:PixelLab.Common.GeoHelper.GetVectorFromAngle(System.Double,System.Double)">
+      <requires>angleRadians.IsValid()</requires>
+      <requires>length.IsValid()</requires>
+    </member>
+    <member name="M:PixelLab.Common.GeoHelper.TopLeft(System.Windows.Rect)">
+      <requires>!rect.IsEmpty</requires>
+      <ensures>Contract.Result&lt;Point&gt;().IsValid()</ensures>
+    </member>
+    <member name="M:PixelLab.Common.GeoHelper.IsValid(System.Windows.Size)">
+      <pure />
+    </member>
+    <member name="M:PixelLab.Common.GeoHelper.Subtract(System.Windows.Point,System.Windows.Point)">
+      <requires>point.IsValid()</requires>
+      <requires>other.IsValid()</requires>
+      <ensures>Contract.Result&lt;Vector&gt;().IsValid()</ensures>
+    </member>
+    <member name="M:PixelLab.Common.GeoHelper.BottomLeft(System.Windows.Rect)">
+      <requires>!rect.IsEmpty</requires>
+      <ensures>Contract.Result&lt;Point&gt;().IsValid()</ensures>
+    </member>
+    <member name="M:PixelLab.Common.GeoHelper.TopRight(System.Windows.Rect)">
+      <requires>!rect.IsEmpty</requires>
+      <ensures>Contract.Result&lt;Point&gt;().IsValid()</ensures>
+    </member>
+    <member name="M:PixelLab.Common.GeoHelper.IsValid(System.Double)">
+      <pure />
+    </member>
+    <member name="M:PixelLab.Common.GeoHelper.Subtract(System.Windows.Size,System.Windows.Size)">
+      <requires>size.IsValid()</requires>
+      <requires>other.IsValid()</requires>
+      <ensures>Contract.Result&lt;Vector&gt;().IsValid()</ensures>
+    </member>
+    <member name="M:PixelLab.Common.GeoHelper.GetCenter(System.Windows.Rect)">
+      <requires>!value.IsEmpty</requires>
+      <ensures>Contract.Result&lt;Point&gt;().IsValid()</ensures>
+    </member>
+    <member name="M:PixelLab.Common.GeoHelper.IsValid(System.Windows.Vector)">
+      <pure />
+    </member>
+    <member name="M:PixelLab.Common.GeoHelper.Size(System.Windows.Rect)">
+      <requires>!rect.IsEmpty</requires>
+    </member>
+    <member name="M:PixelLab.Common.ColorHelper.ParseHexColor(System.String)">
+      <requires description="colorString">!colorString.IsNullOrWhiteSpace()</requires>
+      <requires description="colorString">((colorString.Length == 4) || (colorString.Length == 5) || (colorString.Length == 7) || (colorString.Length == 9)) &amp;&amp; (colorString[0] == '#')</requires>
+    </member>
+    <member name="M:PixelLab.Common.ColorHelper.HsbToRgb(System.Single,System.Single,System.Single)">
+      <requires>hue &gt;= 0f &amp;&amp; hue &lt;= 1f</requires>
+      <requires>saturation &gt;= 0f &amp;&amp; saturation &lt;= 1f</requires>
+      <requires>brightness &gt;= 0f &amp;&amp; brightness &lt;= 1f</requires>
+    </member>
+  </members>
+</doc>

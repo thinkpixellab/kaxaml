@@ -1,0 +1,308 @@
+﻿<?xml version="1.0"?>
+<doc>
+  <assembly>
+    <name>PixelLab.Wpf</name>
+  </assembly>
+  <members>
+    <member name="T:PixelLab.Wpf.TreeMap3DUserControl">
+      <summary>
+            TreeMap3DUserControl
+            </summary>
+    </member>
+    <member name="M:PixelLab.Wpf.TreeMap3DUserControl.InitializeComponent">
+      <summary>
+            InitializeComponent
+            </summary>
+    </member>
+    <member name="P:PixelLab.Wpf.TreeMap3DUserControl.ItemsSource">
+      <remarks>
+                This is a weak ItemsSource. It does not support binding or
+                INotifyCollectionChanged.
+            </remarks>
+    </member>
+    <member name="P:PixelLab.Wpf.UIListPagerCommand.PageIndex">
+      <summary>
+            Zero-based page index. Better for people who think like developers.
+            </summary>
+    </member>
+    <member name="P:PixelLab.Wpf.UIListPagerCommand.PageNumber">
+      <summary>
+            One-based index into the page index to bind UI to. Better for people who think like mortals.
+            </summary>
+    </member>
+    <member name="M:PixelLab.Wpf.WpfUtil.DrawLine(System.Windows.Media.DrawingContext,System.Windows.Media.Pen,System.Windows.Point,System.Double,System.Double)">
+      <param name="angleRadians">The angle, in radians, from 3-o'clock going counter-clockwise.</param>
+      <requires exception="T:System.ArgumentNullException">drawingContext != null</requires>
+      <exception cref="T:System.ArgumentNullException">drawingContext == null</exception>
+      <requires exception="T:System.ArgumentException">startPoint.IsValid()</requires>
+      <exception cref="T:System.ArgumentException">!(startPoint.IsValid())</exception>
+      <requires exception="T:System.ArgumentNullException">pen != null</requires>
+      <exception cref="T:System.ArgumentNullException">pen == null</exception>
+    </member>
+    <member name="F:PixelLab.Wpf.ReorderListBox.DurationProperty">
+      <summary>
+            Duration Dependency Property
+            </summary>
+    </member>
+    <member name="F:PixelLab.Wpf.ReorderListBox.s_dragPreviewStoryboardProperty">
+      <summary>
+            Private_DragPreviewStoryboard Read-Only Dependency Property
+            </summary>
+    </member>
+    <member name="F:PixelLab.Wpf.ReorderListBox.IsDragElementProperty">
+      <summary>
+            IsDragElement Attached Dependency Property
+            </summary>
+    </member>
+    <member name="M:PixelLab.Wpf.ReorderListBox.GetIsDragElement(System.Windows.DependencyObject)">
+      <summary>
+            Gets the IsDragElement property.  This dependency property
+            indicates ....
+            </summary>
+    </member>
+    <member name="M:PixelLab.Wpf.ReorderListBox.SetIsDragElement(System.Windows.DependencyObject,System.Boolean)">
+      <summary>
+            Sets the IsDragElement property.  This dependency property
+            indicates ....
+            </summary>
+    </member>
+    <member name="M:PixelLab.Wpf.ReorderListBox.OnIsDragElementChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+      <summary>
+            Handles changes to the IsDragElement property.
+            </summary>
+    </member>
+    <member name="F:PixelLab.Wpf.ReorderListBox.IsDraggingPropertyKey">
+      <summary>
+            IsDragging Read-Only Dependency Property
+            </summary>
+    </member>
+    <member name="M:PixelLab.Wpf.ReorderListBox.GetIsDragging(System.Windows.DependencyObject)">
+      <summary>
+            Gets the IsDragging property.  This dependency property
+            indicates ....
+            </summary>
+    </member>
+    <member name="M:PixelLab.Wpf.ReorderListBox.SetIsDragging(System.Windows.DependencyObject,System.Boolean)">
+      <summary>
+            Provides a secure method for setting the IsDragging property.
+            This dependency property indicates ....
+            </summary>
+    </member>
+    <member name="P:PixelLab.Wpf.ReorderListBox.Duration">
+      <summary>
+            Gets or sets the Duration property.  This dependency property
+            indicates ....
+            </summary>
+    </member>
+    <member name="F:PixelLab.Wpf.VerticalRevealMode.None">
+      <summary>
+                No vertical reveal animation.
+            </summary>
+    </member>
+    <member name="F:PixelLab.Wpf.VerticalRevealMode.FromTopToBottom">
+      <summary>
+                Reveal from top to bottom.
+            </summary>
+    </member>
+    <member name="F:PixelLab.Wpf.VerticalRevealMode.FromBottomToTop">
+      <summary>
+                Reveal from bottom to top.
+            </summary>
+    </member>
+    <member name="F:PixelLab.Wpf.VerticalRevealMode.FromCenterToEdge">
+      <summary>
+                Reveal from the center to the bounding edge.
+            </summary>
+    </member>
+    <member name="P:PixelLab.Wpf.ZapCommandItem.Number">
+      <remarks>
+                For public use. Most people don't like zero-base indices.
+            </remarks>
+    </member>
+    <member name="F:PixelLab.Wpf.NumericUpDown.ValueProperty">
+      <summary>
+            Identifies the Value dependency property.
+            </summary>
+    </member>
+    <member name="M:PixelLab.Wpf.NumericUpDown.OnValueChanged(System.Windows.RoutedPropertyChangedEventArgs{System.Decimal})">
+      <summary>
+            Raises the ValueChanged event.
+            </summary>
+      <param name="args">Arguments associated with the ValueChanged event.</param>
+    </member>
+    <member name="F:PixelLab.Wpf.NumericUpDown.ValueChangedEvent">
+      <summary>
+            Identifies the ValueChanged routed event.
+            </summary>
+    </member>
+    <member name="M:PixelLab.Wpf.NumericUpDown.OnMouseLeftButtonDown(System.Object,System.Windows.Input.MouseButtonEventArgs)">
+      <summary>
+            This is a class handler for MouseLeftButtonDown event.
+            The purpose of this handle is to move input focus to NumericUpDown when user pressed
+            mouse left button on any part of slider that is not focusable.
+            </summary>
+      <param name="sender" />
+      <param name="e" />
+    </member>
+    <member name="E:PixelLab.Wpf.NumericUpDown.ValueChanged">
+      <summary>
+            Occurs when the Value property changes.
+            </summary>
+    </member>
+    <member name="P:PixelLab.Wpf.TreeMap3D.ItemsSource">
+      <remarks>
+                This is a weak ItemsSource. It does not support binding or
+                INotifyCollectionChanged.
+            </remarks>
+    </member>
+    <member name="P:PixelLab.Wpf.Reveal.IsExpanded">
+      <summary>
+                Whether the child is expanded or not.
+                Note that an animation may be in progress when the value changes.
+                This is not meant to be used with AnimationProgress and can overwrite any
+                animation or values in that property.
+            </summary>
+    </member>
+    <member name="P:PixelLab.Wpf.Reveal.Duration">
+      <summary>
+                The duration in milliseconds of the reveal animation.
+                Will apply to the next animation that occurs (not to currently running animations).
+            </summary>
+    </member>
+    <member name="P:PixelLab.Wpf.Reveal.AnimationProgress">
+      <summary>
+                Value between 0 and 1 (inclusive) to move the reveal along.
+                This is not meant to be used with IsExpanded.
+            </summary>
+    </member>
+    <member name="F:PixelLab.Wpf.HorizontalRevealMode.None">
+      <summary>
+                No horizontal reveal animation.
+            </summary>
+    </member>
+    <member name="F:PixelLab.Wpf.HorizontalRevealMode.FromLeftToRight">
+      <summary>
+                Reveal from the left to the right.
+            </summary>
+    </member>
+    <member name="F:PixelLab.Wpf.HorizontalRevealMode.FromRightToLeft">
+      <summary>
+                Reveal from the right to the left.
+            </summary>
+    </member>
+    <member name="F:PixelLab.Wpf.HorizontalRevealMode.FromCenterToEdge">
+      <summary>
+                Reveal from the center to the bounding edge.
+            </summary>
+    </member>
+    <member name="M:PixelLab.Wpf.UIListPagerCommand.ToString">
+      <ensures inheritedFrom="M:System.Object.ToString" inheritedFromTypeName="Object">Contract.Result&lt;string&gt;() != null</ensures>
+    </member>
+    <member name="M:PixelLab.Wpf.TreeMapPanel.SetArea(System.Windows.DependencyObject,System.Double)">
+      <requires exception="T:System.ArgumentException">element != null</requires>
+      <exception cref="T:System.ArgumentException">element == null</exception>
+    </member>
+    <member name="M:PixelLab.Wpf.TreeMapPanel.GetArea(System.Windows.DependencyObject)">
+      <requires exception="T:System.ArgumentException">element != null</requires>
+      <exception cref="T:System.ArgumentException">element == null</exception>
+    </member>
+    <member name="M:PixelLab.Wpf.NumericUpDown.smallestForDecimalPlaces(System.Int32)">
+      <requires exception="T:System.ArgumentOutOfRangeException">decimalPlaces &gt;= 0</requires>
+      <exception cref="T:System.ArgumentOutOfRangeException">decimalPlaces &lt; 0</exception>
+    </member>
+    <member name="M:PixelLab.Wpf.ShowElement.AddItem(System.Windows.UIElement)">
+      <requires exception="T:System.ArgumentNullException">item != null</requires>
+      <exception cref="T:System.ArgumentNullException">item == null</exception>
+    </member>
+    <member name="M:PixelLab.Wpf.BlockBarRect.GetRect(System.Windows.Size,System.Int32,System.Double,System.Int32,System.Double)">
+      <requires description="targetSize">!targetSize.IsEmpty</requires>
+      <requires description="blockCount">blockCount &gt; 0</requires>
+      <requires description="blockNumber">blockCount &gt; blockNumber</requires>
+    </member>
+    <member name="M:PixelLab.Wpf.AnimatingPanel.CreateDoubleDP(System.String,System.Double,System.Windows.FrameworkPropertyMetadataOptions,System.Double,System.Boolean,System.Double,System.Boolean,System.Boolean)">
+      <requires>!double.IsNaN(minValue)</requires>
+      <requires>!double.IsNaN(maxValue)</requires>
+      <requires>maxValue &gt;= minValue</requires>
+    </member>
+    <member name="M:PixelLab.Wpf.NotifyWorkerClientExceptionEventArgs.ToString">
+      <ensures inheritedFrom="M:System.Object.ToString" inheritedFromTypeName="Object">Contract.Result&lt;string&gt;() != null</ensures>
+    </member>
+    <member name="M:PixelLab.Wpf.NotifyWorkerClientExceptionEventArgs.#ctor(System.Exception)">
+      <requires exception="T:System.ArgumentException">exception != null</requires>
+      <exception cref="T:System.ArgumentException">exception == null</exception>
+    </member>
+    <member name="M:PixelLab.Wpf.NotifyWorker.#ctor(System.Func{System.Boolean},System.Action,System.Action)">
+      <requires exception="T:System.ArgumentNullException">preWork != null</requires>
+      <exception cref="T:System.ArgumentNullException">preWork == null</exception>
+      <requires exception="T:System.ArgumentNullException">work != null</requires>
+      <exception cref="T:System.ArgumentNullException">work == null</exception>
+      <requires exception="T:System.ArgumentNullException">postWork != null</requires>
+      <exception cref="T:System.ArgumentNullException">postWork == null</exception>
+    </member>
+    <member name="M:PixelLab.Wpf.AnimatingTilePanel.SetItemWidth(System.Windows.DependencyObject,System.Double)">
+      <requires exception="T:System.ArgumentNullException">element != null</requires>
+      <exception cref="T:System.ArgumentNullException">element == null</exception>
+    </member>
+    <member name="M:PixelLab.Wpf.AnimatingTilePanel.GetItemHeight(System.Windows.DependencyObject)">
+      <requires exception="T:System.ArgumentNullException">element != null</requires>
+      <exception cref="T:System.ArgumentNullException">element == null</exception>
+    </member>
+    <member name="M:PixelLab.Wpf.AnimatingTilePanel.GetItemWidth(System.Windows.DependencyObject)">
+      <requires exception="T:System.ArgumentNullException">element != null</requires>
+      <exception cref="T:System.ArgumentNullException">element == null</exception>
+    </member>
+    <member name="M:PixelLab.Wpf.AnimatingTilePanel.SetItemHeight(System.Windows.DependencyObject,System.Double)">
+      <requires exception="T:System.ArgumentNullException">element != null</requires>
+      <exception cref="T:System.ArgumentNullException">element == null</exception>
+    </member>
+    <member name="M:PixelLab.Wpf.ListPager.PagedList.GetItem(System.Int32)">
+      <requires inheritedFrom="M:PixelLab.Common.ListBase`1.GetItem(System.Int32)" inheritedFromTypeName="ListBase">index &gt;= 0</requires>
+      <requires inheritedFrom="M:PixelLab.Common.ListBase`1.GetItem(System.Int32)" inheritedFromTypeName="ListBase">index &lt; Count</requires>
+    </member>
+    <member name="P:PixelLab.Wpf.ListPager.PagedList.Count">
+      <getter>
+        <ensures inheritedFrom="M:PixelLab.Common.ListBase`1.get_Count" inheritedFromTypeName="ListBase">Contract.Result&lt;int&gt;() &gt;= 0</ensures>
+      </getter>
+    </member>
+    <member name="M:PixelLab.Wpf.BlockBarBase.GetThreshold(System.Double,System.Int32)">
+      <requires exception="T:System.ArgumentOutOfRangeException">value &gt;= 0 &amp;&amp; value &lt;= 1</requires>
+      <exception cref="T:System.ArgumentOutOfRangeException">value &lt; 0 || value &gt; 1</exception>
+      <requires exception="T:System.ArgumentOutOfRangeException">blockCount &gt; 0</requires>
+      <exception cref="T:System.ArgumentOutOfRangeException">blockCount &lt;= 0</exception>
+    </member>
+    <member name="M:PixelLab.Wpf.ZapCommandItem.ToString">
+      <ensures inheritedFrom="M:System.Object.ToString" inheritedFromTypeName="Object">Contract.Result&lt;string&gt;() != null</ensures>
+    </member>
+    <member name="M:PixelLab.Wpf.ZapCommandItem.#ctor(PixelLab.Wpf.ZapScroller,System.Int32)">
+      <requires exception="T:System.ArgumentNullException">zapScroller != null</requires>
+      <exception cref="T:System.ArgumentNullException">zapScroller == null</exception>
+      <requires exception="T:System.ArgumentOutOfRangeException">index &gt;= 0</requires>
+      <exception cref="T:System.ArgumentOutOfRangeException">index &lt; 0</exception>
+    </member>
+    <member name="M:PixelLab.Wpf.WpfUtil.SetToVector(System.Windows.Media.TranslateTransform,System.Windows.Vector)">
+      <requires>translateTransform != null</requires>
+    </member>
+    <member name="M:PixelLab.Wpf.WpfUtil.SetToVector(System.Windows.Media.Media3D.TranslateTransform3D,System.Windows.Media.Media3D.Vector3D)">
+      <requires>translateTransform3D != null</requires>
+    </member>
+    <member name="M:PixelLab.Wpf.WpfUtil.ToPoint(System.Windows.Media.Transform)">
+      <requires>transform != null</requires>
+    </member>
+    <member name="M:PixelLab.Wpf.WpfUtil.ToVector(System.Windows.Media.Transform)">
+      <requires>transform != null</requires>
+    </member>
+    <member name="M:PixelLab.Wpf.WrapperElement`1.#ctor(`0)">
+      <requires exception="T:System.ArgumentNullException">element != null</requires>
+      <exception cref="T:System.ArgumentNullException">element == null</exception>
+    </member>
+    <member name="M:PixelLab.Wpf.ReorderEventArgs.ToString">
+      <ensures inheritedFrom="M:System.Object.ToString" inheritedFromTypeName="Object">Contract.Result&lt;string&gt;() != null</ensures>
+    </member>
+    <member name="M:PixelLab.Wpf.ReorderEventArgs.#ctor(System.Windows.DependencyObject,System.Windows.DependencyObject)">
+      <requires exception="T:System.ArgumentNullException">itemContainer != null</requires>
+      <exception cref="T:System.ArgumentNullException">itemContainer == null</exception>
+      <requires exception="T:System.ArgumentNullException">toContainer != null</requires>
+      <exception cref="T:System.ArgumentNullException">toContainer == null</exception>
+    </member>
+  </members>
+</doc>

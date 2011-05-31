@@ -1,0 +1,721 @@
+﻿<?xml version="1.0"?>
+<doc>
+  <assembly>
+    <name>PixelLab.Core</name>
+  </assembly>
+  <members>
+    <member name="M:PixelLab.Common.Changeable.UpdateProperty``1(System.String,``0@,``0)">
+      <summary>
+            Helper method for raising the PropertyChanged event.
+            </summary>
+      <typeparam name="T">The type of the property that has changed.</typeparam>
+      <param name="propertyName">The name of the property that has changed.</param>
+      <param name="propertyValue">The original value of the property that has changed.</param>
+      <param name="value">The new value of the property that has changed.</param>
+      <returns>
+        <c>True</c> if the property was update; otherwise <c>false</c>.</returns>
+    </member>
+    <member name="T:PixelLab.Common.Util">
+      <summary>
+                Contains general helper methods.
+            </summary>
+    </member>
+    <member name="M:PixelLab.Common.Util.GetHashCode(System.Object[])">
+      <summary>
+            Returns an hash aggregation of an array of elements.
+            </summary>
+      <param name="items">An array of elements from which to create a hash.</param>
+    </member>
+    <member name="M:PixelLab.Common.Util.InterlockedSetIfNotNull``1(``0@,``0)">
+      <summary>
+                Wraps <see cref="M:System.Threading.Interlocked.CompareExchange``1(``0@,``0,``0)" />
+                for atomically setting null fields.
+            </summary>
+      <typeparam name="T">The type of the field to set.</typeparam>
+      <param name="location">
+                The field that, if null, will be set to <paramref name="value" />.
+            </param>
+      <param name="value">
+                If <paramref name="location" /> is null, the object to set it to.
+            </param>
+      <returns>true if <paramref name="location" /> was null and has now been set; otherwise, false.</returns>
+      <requires>value != null</requires>
+    </member>
+    <!-- Badly formed XML comment ignored for member "M:PixelLab.Common.Util.IsCriticalException(System.Exception)" -->
+    <member name="T:PixelLab.Common.PropertyChangeWatcher">
+      <remarks>In order to be 'safe' this method uses reflection on every 'watch' to ensure the property exists.
+            In order to be thread safe, this class uses lock. (Sadly, read/write locks don't exist in Silverlight.)
+            So be careful using this in preformance-critical contexts.
+            </remarks>
+    </member>
+    <member name="T:PixelLab.Common.WeakEnumerable`1">
+      <summary>
+            Keeps a collection of items 'weakly'. On enumeration, valid references to items are returned. Invalid references are cleaned up.
+            </summary>
+      <typeparam name="T">Any class. Silly to have weak references to value types, no?</typeparam>
+    </member>
+    <member name="T:PixelLab.Common.ActionOnDispose">
+      <summary>
+                Provides a wrapper over <see cref="T:System.IDisposable" /> that
+                invokes the provided delegate when <see cref="M:System.IDisposable.Dispose" />
+                is called.
+            </summary>
+      <example>
+        <code>
+            SqlConnection conn = new SqlConnection(connectionString);
+            using(new ActionOnDispose(new Action(conn.Close))
+            {
+                // Do work here...
+                // For cases where you want the connection closed
+                // but not disposed
+            }
+            </code>
+      </example>
+    </member>
+    <member name="M:PixelLab.Common.ActionOnDispose.#ctor(System.Action)">
+      <summary>
+                Creats a new <see cref="T:PixelLab.Common.ActionOnDispose" />
+                using the provided <see cref="T:System.Action" />.
+            </summary>
+      <param name="unlockAction">
+                The <see cref="T:System.Action" /> to invoke when <see cref="M:PixelLab.Common.ActionOnDispose.Dispose" /> is called.
+            </param>
+      <exception cref="T:System.ArgumentNullException">if <paramref name="unlockAction" /> is null.</exception>
+      <requires>unlockAction != null</requires>
+    </member>
+    <member name="M:PixelLab.Common.ActionOnDispose.Dispose">
+      <summary>
+                Calls the provided Action if it has not been called;
+                otherwise, throws an <see cref="T:System.Exception" />.
+            </summary>
+      <exception cref="T:System.InvalidOperationException">If <see cref="M:PixelLab.Common.ActionOnDispose.Dispose" /> has already been called.</exception>
+    </member>
+    <member name="T:PixelLab.Common.CastList`2">
+      <summary>
+                A wrapper around an <see cref="T:System.Collections.Generic.IList`1" />
+                which projects the contents as a read-only <see cref="T:System.Collections.Generic.IList`1" />.
+            </summary>
+      <typeparam name="TFrom">The type of the source <see cref="T:System.Collections.Generic.IList`1" />.</typeparam>
+      <typeparam name="TTo">
+                The type of the target <see cref="T:System.Collections.Generic.IList`1" />
+                Must be assignable from <paramref name="TFrom" />.
+            </typeparam>
+      <remarks>
+                Like <see cref="T:System.Collections.ObjectModel.ReadOnlyCollection`1" />, this class
+                is a wrapper. Changes to the source collection will
+                be reflected.
+            </remarks>
+      <invariant>m_source != null</invariant>
+    </member>
+    <member name="T:PixelLab.Common.ListBase`1">
+      <summary>
+                Serves as a base implemetation of <see cref="T:System.Collections.Generic.IList`1" />.
+            </summary>
+      <typeparam name="T">The type of the item in the list.</typeparam>
+    </member>
+    <member name="M:PixelLab.Common.CastList`2.#ctor(System.Collections.Generic.IList{`0})">
+      <summary>
+                Creats a new <see cref="T:PixelLab.Common.CastList`2" />.
+            </summary>
+      <param name="from">The source collection.</param>
+      <requires>from != null</requires>
+    </member>
+    <member name="M:PixelLab.Common.CastList`2.GetItem(System.Int32)">
+      <summary>
+                Gets the element at the specified index.
+            </summary>
+      <requires inheritedFrom="M:PixelLab.Common.ListBase`1.GetItem(System.Int32)" inheritedFromTypeName="ListBase">index &gt;= 0</requires>
+      <requires inheritedFrom="M:PixelLab.Common.ListBase`1.GetItem(System.Int32)" inheritedFromTypeName="ListBase">index &lt; Count</requires>
+    </member>
+    <member name="P:PixelLab.Common.CastList`2.Count">
+      <summary>
+                Gets the number of contained elements.
+            </summary>
+      <getter>
+        <ensures inheritedFrom="M:PixelLab.Common.ListBase`1.get_Count" inheritedFromTypeName="ListBase">Contract.Result&lt;int&gt;() &gt;= 0</ensures>
+      </getter>
+    </member>
+    <member name="M:PixelLab.Common.ObservableCollectionPlus`1.AddRange(System.Collections.Generic.IEnumerable{`0})">
+      <remarks>It's recommended that you use this method within BeginMultiUpdate</remarks>
+      <requires>source != null</requires>
+    </member>
+    <member name="T:PixelLab.Common.DBUtil">
+      <summary>
+                Utility classes for dealing with databases.
+            </summary>
+    </member>
+    <member name="M:PixelLab.Common.DBUtil.CreateSqlCommandWithParameters(System.String,System.Object[])">
+      <summary>
+                Creates a SQL command from a command format string and
+                parameters to avoid SQL injection attacks.
+            </summary>
+      <param name="commandFormatString">
+                SQL command string with format substitution points for
+                parameters.
+            </param>
+      <param name="parameters">Parameters to substitute into the SQL command string.</param>
+      <returns>
+        <see cref="T:System.Data.SqlClient.SqlCommand" /> using parameters.</returns>
+      <requires exception="T:System.ArgumentNullException">commandFormatString != null</requires>
+      <exception cref="T:System.ArgumentNullException">commandFormatString == null</exception>
+      <requires exception="T:System.ArgumentNullException">parameters != null</requires>
+      <exception cref="T:System.ArgumentNullException">parameters == null</exception>
+    </member>
+    <member name="M:PixelLab.Common.CollectionExtensions.CountForEach``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0,System.Int32})">
+      <summary>
+            Calls the provided action on each item, providing the item and its index into the source.
+            </summary>
+      <pure />
+      <requires>source != null</requires>
+      <requires>action != null</requires>
+    </member>
+    <member name="M:PixelLab.Common.CollectionExtensions.AllUnique``1(System.Collections.Generic.IList{``0})">
+      <summary>
+                Returns true if all items in the list are unique using
+                <see cref="P:System.Collections.Generic.EqualityComparer`1.Default">EqualityComparer&lt;T&gt;.Default</see>.
+            </summary>
+      <exception cref="T:System.ArgumentNullException">if <param name="source" /> is null.</exception>
+      <pure />
+      <requires exception="T:System.ArgumentNullException">source != null</requires>
+      <exception cref="T:System.ArgumentNullException">source == null</exception>
+    </member>
+    <member name="M:PixelLab.Common.CollectionExtensions.TrueForAllPairs``1(System.Collections.Generic.IList{``0},System.Func{``0,``0,System.Boolean})">
+      <summary>
+                Returns true if <paramref name="compare" /> returns
+                true for every pair of items in <paramref name="source" />.
+            </summary>
+      <pure />
+      <requires>source != null</requires>
+      <requires>compare != null</requires>
+    </member>
+    <member name="M:PixelLab.Common.CollectionExtensions.TrueForAllAdjacentPairs``1(System.Collections.Generic.IList{``0},System.Func{``0,``0,System.Boolean})">
+      <summary>
+                Returns true if <paramref name="compare" /> returns true of every
+                adjacent pair of items in the <paramref name="source" />.
+            </summary>
+      <remarks>
+        <para>
+                If there are n items in the collection, n-1 comparisons are done.
+            </para>
+        <para>
+                Every valid [i] and [i+1] pair are passed into <paramref name="compare" />.
+            </para>
+        <para>
+                If <paramref name="source" /> has 0 or 1 items, true is returned.
+            </para>
+      </remarks>
+      <pure />
+      <requires>source != null</requires>
+      <requires>compare != null</requires>
+    </member>
+    <member name="M:PixelLab.Common.CollectionExtensions.AllNotNullOrEmpty(System.Collections.Generic.IEnumerable{System.String})">
+      <summary>
+                Returns true if all of the items in <paramref name="source" /> are not
+                null or empty.
+            </summary>
+      <exception cref="T:System.ArgumentNullException">if <param name="source" /> is null.</exception>
+      <pure />
+      <requires>source != null</requires>
+    </member>
+    <member name="M:PixelLab.Common.CollectionExtensions.AllExistIn``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0})">
+      <summary>
+                Returns true if all items in <paramref name="source" /> exist
+                in <paramref name="set" />.
+            </summary>
+      <exception cref="T:System.ArgumentNullException">if <param name="source" /> or <param name="set" /> are null.</exception>
+      <pure />
+      <requires>source != null</requires>
+      <requires>set != null</requires>
+    </member>
+    <member name="M:PixelLab.Common.CollectionExtensions.IsEmpty``1(System.Collections.Generic.IEnumerable{``0})">
+      <summary>
+                Returns true if <paramref name="source" /> has no items in it; otherwise, false.
+            </summary>
+      <remarks>
+        <para>
+                If an <see cref="T:System.Collections.Generic.ICollection`1" /> is provided,
+                <see cref="P:System.Collections.Generic.ICollection`1.Count" /> is used.
+            </para>
+        <para>
+                Yes, this does basically the same thing as the
+                <see cref="M:System.Linq.Enumerable.Any``1(System.Collections.Generic.IEnumerable{``0})" />
+                extention. The differences: 'IsEmpty' is easier to remember and it leverages
+                <see cref="P:System.Collections.Generic.ICollection`1.Count">ICollection.Count</see> if it exists.
+            </para>
+      </remarks>
+      <pure />
+      <requires>source != null</requires>
+    </member>
+    <member name="M:PixelLab.Common.CollectionExtensions.IndexOf``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean})">
+      <summary>
+                Returns the index of the first item in <paramref name="source" />
+                for which <paramref name="predicate" /> returns true. If none, -1.
+            </summary>
+      <param name="source">The source enumerable.</param>
+      <param name="predicate">The function to evaluate on each element.</param>
+      <pure />
+      <requires>source != null</requires>
+      <requires>predicate != null</requires>
+    </member>
+    <member name="M:PixelLab.Common.CollectionExtensions.ToReadOnlyCollection``1(System.Collections.Generic.IEnumerable{``0})">
+      <summary>
+                Returns a new <see cref="T:System.Collections.ObjectModel.ReadOnlyCollection`1" /> using the
+                contents of <paramref name="source" />.
+            </summary>
+      <remarks>
+                The contents of <paramref name="source" /> are copied to
+                an array to ensure the contents of the returned value
+                don't mutate.
+            </remarks>
+      <requires>source != null</requires>
+      <ensures>Contract.Result&lt;ReadOnlyCollection&lt;TSource&gt;&gt;() != null</ensures>
+    </member>
+    <member name="M:PixelLab.Common.CollectionExtensions.ForEach``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0})">
+      <summary>
+                Performs the specified <paramref name="action" />
+                on each element of the specified <paramref name="source" />.
+            </summary>
+      <typeparam name="TSource">The type of the elements of <paramref name="source" />.</typeparam>
+      <param name="source">The sequence to which is applied the specified <paramref name="action" />.</param>
+      <param name="action">The action applied to each element in <paramref name="source" />.</param>
+      <requires>source != null</requires>
+      <requires>action != null</requires>
+    </member>
+    <member name="M:PixelLab.Common.CollectionExtensions.RemoveLast``1(System.Collections.Generic.IList{``0})">
+      <summary>
+                Removes the last element from <paramref name="source" />.
+            </summary>
+      <typeparam name="TSource">The type of the elements of <paramref name="source" />.</typeparam>
+      <param name="source">The list from which to remove the last element.</param>
+      <returns>The last element.</returns>
+      <remarks>
+        <paramref name="source" /> must have at least one element and allow changes.</remarks>
+      <requires>source != null</requires>
+      <requires>source.Count &gt; 0</requires>
+    </member>
+    <member name="M:PixelLab.Common.CollectionExtensions.EmptyIfNull``1(System.Collections.Generic.IEnumerable{``0})">
+      <summary>
+                If <paramref name="source" /> is null, return an empty <see cref="T:System.Collections.Generic.IEnumerable`1" />;
+                otherwise, return <paramref name="source" />.
+            </summary>
+    </member>
+    <member name="M:PixelLab.Common.CollectionExtensions.SelectRecursive``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Collections.Generic.IEnumerable{``0}})">
+      <summary>
+                Recursively projects each nested element to an <see cref="T:System.Collections.Generic.IEnumerable`1" />
+                and flattens the resulting sequences into one sequence.
+            </summary>
+      <typeparam name="TSource">The type of the elements of <paramref name="source" />.</typeparam>
+      <param name="source">A sequence of values to project.</param>
+      <param name="recursiveSelector">A transform to apply to each element.</param>
+      <returns>
+                An <see cref="T:System.Collections.Generic.IEnumerable`1" /> whose elements are the
+                result of recursively invoking the recursive transform function
+                on each element and nested element of the input sequence.
+            </returns>
+    </member>
+    <member name="M:PixelLab.Common.CollectionExtensions.ToObservableCollection``1(System.Collections.Generic.IEnumerable{``0})">
+      <summary>
+            Creates an <see cref="!:ObservableCollection" /> from the <see cref="!:IEnumerable" />.
+            </summary>
+      <typeparam name="T">The type of the source elements.</typeparam>
+      <param name="source">The <see cref="!:IEnumerable" /> to create the <see cref="!:ObservableCollection" /> from.</param>
+      <returns>An <see cref="!:ObservableCollection" /> that contains elements from the input sequence.</returns>
+      <requires>source != null</requires>
+    </member>
+    <member name="T:PixelLab.Common.LockHelper">
+      <summary>
+                Provides services of <see cref="T:System.Threading.Monitor" />, but while allowing better debugging of deadlocks.
+            </summary>
+    </member>
+    <member name="M:PixelLab.Common.LockHelper.#ctor(System.String)">
+      <summary>
+                Creates a new instance of <see cref="T:PixelLab.Common.LockHelper" />.
+            </summary>
+      <param name="name">The name to give the helper. Cannot be null or empty.</param>
+      <exception cref="T:System.ArgumentNullException">If <paramref name="name" /> is null.</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">If <paramref name="name" /> is empty.</exception>
+      <requires>!name.IsNullOrWhiteSpace()</requires>
+    </member>
+    <member name="M:PixelLab.Common.LockHelper.GetLock">
+      <summary>
+                Aquires the lock.
+            </summary>
+      <returns>An <see cref="T:System.IDisposable" /> that can be used in a C# 'lock' block.</returns>
+      <example>
+        <code>
+            using(lockHelper.GetLock()
+            {
+                //do work here
+            }</code>
+      </example>
+    </member>
+    <member name="M:PixelLab.Common.LockHelper.Pulse">
+      <summary>
+                Proxy for the <see cref="M:System.Threading.Monitor.Pulse(System.Object)" /> method on the current instance.
+            </summary>
+    </member>
+    <member name="M:PixelLab.Common.LockHelper.Wait">
+      <summary>
+                Proxy for the <see cref="M:System.Threading.Monitor.Wait(System.Object)" /> method on the current instance.
+            </summary>
+    </member>
+    <member name="M:PixelLab.Common.LockHelper.CheckAccess">
+      <summary>
+                Check to see if the calling thread hold this lock on this <see cref="T:PixelLab.Common.LockHelper" />.
+            </summary>
+      <returns>true if it holds the lock; otherwies, false.</returns>
+    </member>
+    <member name="M:PixelLab.Common.LockHelper.VerifyAccess">
+      <summary>
+                Throws an exception if <see cref="M:PixelLab.Common.LockHelper.CheckAccess" /> would returns false.
+            </summary>
+      <exception cref="T:System.Exception">If <see cref="M:PixelLab.Common.LockHelper.CheckAccess" /> would returns false.</exception>
+    </member>
+    <member name="M:PixelLab.Common.InstanceFactory.CreateInstance``1(System.Object[])">
+      <summary>
+            A generic convenience method to create the provided type.
+            </summary>
+    </member>
+    <member name="M:PixelLab.Common.InstanceFactory.CreateInstance(System.Type,System.Object[])">
+      <summary>
+            A convenience extension method for Type that calls Activator.CreateInstance
+            </summary>
+      <returns>A new instance of the provided object.</returns>
+    </member>
+    <member name="T:PixelLab.Common.Extensions">
+      <summary>
+                Contains general purpose extention methods.
+            </summary>
+    </member>
+    <member name="M:PixelLab.Common.Extensions.VerifyPropertyNamesOnChange(System.ComponentModel.INotifyPropertyChanged)">
+      <summary>
+            Verifies that a property name exists in this ViewModel. This method
+            can be called before the property is used, for instance before
+            calling RaisePropertyChanged. It avoids errors when a property name
+            is changed but some places are missed.
+            <para>This method is only active in DEBUG mode.</para></summary>
+      <param name="element">The object to watch.</param>
+      <remarks>Thanks to Laurent Bugnion for the idea.</remarks>
+      <requires>element != null</requires>
+    </member>
+    <member name="M:PixelLab.Common.Extensions.GetCustomAttributes``1(System.Reflection.ICustomAttributeProvider,System.Boolean)">
+      <requires>attributeProvider != null</requires>
+    </member>
+    <member name="M:PixelLab.Common.Extensions.FuncComparer`1.#ctor(System.Func{`0,`0,System.Int32})">
+      <requires>func != null</requires>
+    </member>
+    <member name="M:PixelLab.Common.Extensions.HasPublicInstanceProperty(System.Reflection.IReflect,System.String)">
+      <pure />
+      <requires>type != null</requires>
+    </member>
+    <member name="M:PixelLab.Common.Extensions.DoFormat(System.String,System.Object[])">
+      <requires>source != null</requires>
+      <requires>args != null</requires>
+    </member>
+    <member name="M:PixelLab.Common.Extensions.ToComparer``1(System.Comparison{``0})">
+      <requires>compareFunction != null</requires>
+    </member>
+    <member name="M:PixelLab.Common.Extensions.EnsureItem``2(System.Collections.Generic.IDictionary{``0,``1},``0,System.Func{``1})">
+      <requires>dictionary != null</requires>
+      <requires>valueFactory != null</requires>
+    </member>
+    <member name="M:PixelLab.Common.Extensions.ToEqualityComparer``1(System.Func{``0,``0,System.Boolean})">
+      <requires>func != null</requires>
+    </member>
+    <member name="M:PixelLab.Common.Extensions.ComparisonComparer`1.#ctor(System.Comparison{`0})">
+      <requires>func != null</requires>
+    </member>
+    <member name="M:PixelLab.Common.Extensions.IsNullOrWhiteSpace(System.String)">
+      <pure />
+    </member>
+    <member name="M:PixelLab.Common.Extensions.ToComparer``1(System.Func{``0,``0,System.Int32})">
+      <requires>compareFunction != null</requires>
+    </member>
+    <member name="M:PixelLab.Common.Extensions.NextBool(System.Random)">
+      <requires>rnd != null</requires>
+    </member>
+    <member name="T:PixelLab.Common.Extensions.FuncEqualityComparer`1">
+      <invariant>m_func != null</invariant>
+    </member>
+    <member name="M:PixelLab.Common.Extensions.FuncEqualityComparer`1.#ctor(System.Func{`0,`0,System.Boolean})">
+      <requires>func != null</requires>
+    </member>
+    <member name="M:PixelLab.Common.SortHelper.QuickSort``1(System.Collections.Generic.IList{``0},System.Collections.Generic.IComparer{``0})">
+      <requires>list != null</requires>
+      <requires>comparer != null</requires>
+    </member>
+    <member name="M:PixelLab.Common.SortHelper.QuickSort``1(System.Collections.Generic.IList{``0})">
+      <requires>list != null</requires>
+    </member>
+    <member name="M:PixelLab.Common.SortHelper.swapIfGreaterWithItems``1(System.Collections.Generic.IList{``0},System.Collections.Generic.IComparer{``0},System.Int32,System.Int32)">
+      <requires>comparer != null</requires>
+      <requires>keys != null</requires>
+      <requires>a &gt;= 0</requires>
+      <requires>a &lt; keys.Count</requires>
+      <requires>a &gt;= 0</requires>
+      <requires>b &lt; keys.Count</requires>
+    </member>
+    <member name="M:PixelLab.Common.SortHelper.QuickSort``1(System.Collections.Generic.IList{``0},System.Func{``0,``0,System.Int32})">
+      <requires>list != null</requires>
+      <requires>comparer != null</requires>
+    </member>
+    <member name="M:PixelLab.Common.SortHelper.QuickSort``1(System.Collections.Generic.IList{``0},System.Comparison{``0})">
+      <requires>list != null</requires>
+      <requires>comparison != null</requires>
+    </member>
+    <member name="M:PixelLab.Common.SortHelper.quickSort``1(System.Collections.Generic.IList{``0},System.Int32,System.Int32,System.Collections.Generic.IComparer{``0})">
+      <requires>comparer != null</requires>
+      <requires>keys != null</requires>
+      <requires>left &gt;= 0</requires>
+      <requires>left &lt; keys.Count</requires>
+      <requires>right &gt;= 0</requires>
+      <requires>right &lt; keys.Count</requires>
+    </member>
+    <member name="M:PixelLab.Common.SortHelper.Sort``1(System.Collections.Generic.IList{``0},System.Int32,System.Int32,System.Collections.Generic.IComparer{``0})">
+      <requires>comparer != null</requires>
+      <requires>keys != null</requires>
+    </member>
+    <member name="T:PixelLab.Common.WrappedLock`1">
+      <invariant>m_stack != null</invariant>
+      <invariant>m_actionOnLock != null</invariant>
+      <invariant>m_actionOnUnlock != null</invariant>
+    </member>
+    <member name="M:PixelLab.Common.WrappedLock`1.GetLock(`0)">
+      <ensures>Contract.Result&lt;IDisposable&gt;() != null</ensures>
+    </member>
+    <member name="P:PixelLab.Common.Util.Rnd">
+      <getter>
+        <ensures>Contract.Result&lt;Random&gt;() != null</ensures>
+      </getter>
+    </member>
+    <member name="M:PixelLab.Common.ListReorderUtil.Reorder(System.Collections.Generic.IList{System.Int32},System.Int32,PixelLab.Common.ReorderDirection)">
+      <requires description="indicies cannot be null">indicies != null</requires>
+      <requires description="the target length cannot be negative">length &gt;= 0</requires>
+      <requires description="cannot have more indicies than the target length">indicies.Count &lt;= length</requires>
+      <requires description="All indicies must be non-negative">Contract.ForAll(indicies, i =&gt; i &gt;= 0)</requires>
+      <requires description="All indicies must be less than the target length">Contract.ForAll(indicies, i =&gt; i &lt; length)</requires>
+    </member>
+    <member name="M:PixelLab.Common.ReaderWriterLockHelper.BeginReadLock(System.Threading.ReaderWriterLockSlim)">
+      <requires>slimLock != null</requires>
+    </member>
+    <member name="M:PixelLab.Common.ReaderWriterLockHelper.BeginWriteLock(System.Threading.ReaderWriterLockSlim)">
+      <requires>slimLock != null</requires>
+    </member>
+    <member name="M:PixelLab.Common.FuncEnumerable`1.#ctor(System.Func{System.Collections.Generic.IEnumerator{`0}})">
+      <requires exception="T:System.ArgumentNullException">func != null</requires>
+      <exception cref="T:System.ArgumentNullException">func == null</exception>
+    </member>
+    <member name="M:PixelLab.Common.FuncEnumerable`1.System#Collections#IEnumerable#GetEnumerator">
+      <ensures inheritedFrom="M:System.Collections.IEnumerable.GetEnumerator" inheritedFromTypeName="IEnumerable">Contract.Result&lt;IEnumerator&gt;() != null</ensures>
+      <ensures inheritedFrom="M:System.Collections.IEnumerable.GetEnumerator" inheritedFromTypeName="IEnumerable">Contract.Result&lt;IEnumerator&gt;().Model == this.Model</ensures>
+      <ensures inheritedFrom="M:System.Collections.IEnumerable.GetEnumerator" inheritedFromTypeName="IEnumerable">Contract.Result&lt;IEnumerator&gt;().CurrentIndex == -1</ensures>
+    </member>
+    <member name="M:PixelLab.Common.FuncEnumerable`1.GetEnumerator">
+      <ensures inheritedFrom="M:System.Collections.Generic.IEnumerable`1.GetEnumerator" inheritedFromTypeName="IEnumerable">Contract.Result&lt;IEnumerator&lt;T&gt;&gt;() != null</ensures>
+      <ensures inheritedFrom="M:System.Collections.Generic.IEnumerable`1.GetEnumerator" inheritedFromTypeName="IEnumerable">Contract.Result&lt;IEnumerator&lt;T&gt;&gt;().Model == ((IEnumerable)this).Model</ensures>
+    </member>
+    <member name="M:PixelLab.Common.ListBase`1.System#Collections#IList#set_Item(System.Int32,System.Object)">
+      <requires inheritedFrom="M:System.Collections.IList.set_Item(System.Int32,System.Object)" inheritedFromTypeName="IList">index &gt;= 0</requires>
+      <requires inheritedFrom="M:System.Collections.IList.set_Item(System.Int32,System.Object)" inheritedFromTypeName="IList">index &lt; this.Count</requires>
+    </member>
+    <member name="P:PixelLab.Common.ListBase`1.Count">
+      <getter>
+        <ensures>Contract.Result&lt;int&gt;() &gt;= 0</ensures>
+        <ensures inheritedFrom="M:System.Collections.Generic.ICollection`1.get_Count" inheritedFromTypeName="ICollection">Contract.Result&lt;int&gt;() &gt;= 0</ensures>
+        <ensures inheritedFrom="M:System.Collections.ICollection.get_Count" inheritedFromTypeName="ICollection">Contract.Result&lt;int&gt;() &gt;= 0</ensures>
+      </getter>
+    </member>
+    <member name="M:PixelLab.Common.ListBase`1.CopyTo(`0[],System.Int32)">
+      <requires inheritedFrom="M:System.Collections.Generic.ICollection`1.CopyTo(`0[],System.Int32)" inheritedFromTypeName="ICollection">array != null</requires>
+      <requires inheritedFrom="M:System.Collections.Generic.ICollection`1.CopyTo(`0[],System.Int32)" inheritedFromTypeName="ICollection">arrayIndex &gt;= 0</requires>
+      <requires inheritedFrom="M:System.Collections.Generic.ICollection`1.CopyTo(`0[],System.Int32)" inheritedFromTypeName="ICollection">arrayIndex + this.Count  &lt;= array.Length</requires>
+    </member>
+    <member name="M:PixelLab.Common.ListBase`1.CopyTo(System.Array,System.Int32)">
+      <requires inheritedFrom="M:System.Collections.ICollection.CopyTo(System.Array,System.Int32)" inheritedFromTypeName="ICollection">array != null</requires>
+      <requires inheritedFrom="M:System.Collections.ICollection.CopyTo(System.Array,System.Int32)" inheritedFromTypeName="ICollection">array.Rank == 1</requires>
+      <requires inheritedFrom="M:System.Collections.ICollection.CopyTo(System.Array,System.Int32)" inheritedFromTypeName="ICollection">index &gt;= 0</requires>
+      <requires inheritedFrom="M:System.Collections.ICollection.CopyTo(System.Array,System.Int32)" inheritedFromTypeName="ICollection">index &lt;= array.Length + this.Count</requires>
+    </member>
+    <member name="M:PixelLab.Common.ListBase`1.IndexOf(`0)">
+      <ensures inheritedFrom="M:System.Collections.Generic.IList`1.IndexOf(`0)" inheritedFromTypeName="IList">Contract.Result&lt;int&gt;() &gt;= -1</ensures>
+      <ensures inheritedFrom="M:System.Collections.Generic.IList`1.IndexOf(`0)" inheritedFromTypeName="IList">Contract.Result&lt;int&gt;() &lt; @this.Count</ensures>
+    </member>
+    <member name="M:PixelLab.Common.ListBase`1.System#Collections#Generic#IList{T}#set_Item(System.Int32,`0)">
+      <requires inheritedFrom="M:System.Collections.Generic.IList`1.set_Item(System.Int32,`0)" inheritedFromTypeName="IList">index &gt;= 0</requires>
+      <requires inheritedFrom="M:System.Collections.Generic.IList`1.set_Item(System.Int32,`0)" inheritedFromTypeName="IList">index &lt; @this.Count</requires>
+    </member>
+    <member name="M:PixelLab.Common.ListBase`1.System#Collections#IList#Insert(System.Int32,System.Object)">
+      <requires inheritedFrom="M:System.Collections.IList.Insert(System.Int32,System.Object)" inheritedFromTypeName="IList">index &gt;= 0</requires>
+    </member>
+    <member name="M:PixelLab.Common.ListBase`1.System#Collections#IList#Clear">
+      <ensures inheritedFrom="M:System.Collections.IList.Clear" inheritedFromTypeName="IList">this.IsSynchronized || this.Count == 0</ensures>
+    </member>
+    <member name="M:PixelLab.Common.ListBase`1.System#Collections#Generic#IList{T}#get_Item(System.Int32)">
+      <requires inheritedFrom="M:System.Collections.Generic.IList`1.get_Item(System.Int32)" inheritedFromTypeName="IList">index &gt;= 0</requires>
+      <requires inheritedFrom="M:System.Collections.Generic.IList`1.get_Item(System.Int32)" inheritedFromTypeName="IList">index &lt; @this.Count</requires>
+    </member>
+    <member name="M:PixelLab.Common.ListBase`1.System#Collections#Generic#ICollection{T}#Clear">
+      <ensures inheritedFrom="M:System.Collections.Generic.ICollection`1.Clear" inheritedFromTypeName="ICollection">this.Count == 0</ensures>
+    </member>
+    <member name="M:PixelLab.Common.ListBase`1.System#Collections#Generic#IList{T}#Insert(System.Int32,`0)">
+      <requires inheritedFrom="M:System.Collections.Generic.IList`1.Insert(System.Int32,`0)" inheritedFromTypeName="IList">index &gt;= 0</requires>
+    </member>
+    <member name="P:PixelLab.Common.ListBase`1.System#Collections#ICollection#SyncRoot">
+      <getter>
+        <ensures inheritedFrom="M:System.Collections.ICollection.get_SyncRoot" inheritedFromTypeName="ICollection">Contract.Result&lt;object&gt;() != null</ensures>
+      </getter>
+    </member>
+    <member name="M:PixelLab.Common.ListBase`1.GetEnumerator">
+      <ensures inheritedFrom="M:System.Collections.Generic.IEnumerable`1.GetEnumerator" inheritedFromTypeName="IEnumerable">Contract.Result&lt;IEnumerator&lt;T&gt;&gt;() != null</ensures>
+      <ensures inheritedFrom="M:System.Collections.Generic.IEnumerable`1.GetEnumerator" inheritedFromTypeName="IEnumerable">Contract.Result&lt;IEnumerator&lt;T&gt;&gt;().Model == ((IEnumerable)this).Model</ensures>
+    </member>
+    <member name="M:PixelLab.Common.ListBase`1.System#Collections#Generic#ICollection{T}#Add(`0)">
+      <ensures inheritedFrom="M:System.Collections.Generic.ICollection`1.Add(`0)" inheritedFromTypeName="ICollection">this.Count &gt;= Contract.OldValue(this.Count)</ensures>
+    </member>
+    <member name="M:PixelLab.Common.ListBase`1.System#Collections#IList#Add(System.Object)">
+      <ensures inheritedFrom="M:System.Collections.IList.Add(System.Object)" inheritedFromTypeName="IList">Contract.Result&lt;int&gt;() &gt;= -1</ensures>
+      <ensures inheritedFrom="M:System.Collections.IList.Add(System.Object)" inheritedFromTypeName="IList">this.IsSynchronized || Contract.Result&lt;int&gt;() &lt; this.Count</ensures>
+      <ensures inheritedFrom="M:System.Collections.IList.Add(System.Object)" inheritedFromTypeName="IList">this.IsSynchronized || Contract.Result&lt;int&gt;() &lt; 0 &amp;&amp; this.Count == Contract.OldValue(this.Count) || this.Count == Contract.OldValue(this.Count) + 1</ensures>
+    </member>
+    <member name="M:PixelLab.Common.ListBase`1.System#Collections#IList#get_Item(System.Int32)">
+      <requires inheritedFrom="M:System.Collections.IList.get_Item(System.Int32)" inheritedFromTypeName="IList">index &gt;= 0</requires>
+      <requires inheritedFrom="M:System.Collections.IList.get_Item(System.Int32)" inheritedFromTypeName="IList">index &lt; this.Count</requires>
+    </member>
+    <member name="P:PixelLab.Common.ListBase`1.System#Collections#IList#Item(System.Int32)">
+      <getter>
+        <requires inheritedFrom="M:System.Collections.IList.get_Item(System.Int32)" inheritedFromTypeName="IList">index &gt;= 0</requires>
+        <requires inheritedFrom="M:System.Collections.IList.get_Item(System.Int32)" inheritedFromTypeName="IList">index &lt; this.Count</requires>
+      </getter>
+      <setter>
+        <requires inheritedFrom="M:System.Collections.IList.set_Item(System.Int32,System.Object)" inheritedFromTypeName="IList">index &gt;= 0</requires>
+        <requires inheritedFrom="M:System.Collections.IList.set_Item(System.Int32,System.Object)" inheritedFromTypeName="IList">index &lt; this.Count</requires>
+      </setter>
+    </member>
+    <member name="M:PixelLab.Common.ListBase`1.Contains(`0)">
+      <pure />
+      <ensures inheritedFrom="M:System.Collections.Generic.ICollection`1.Contains(`0)" inheritedFromTypeName="ICollection">!Contract.Result&lt;bool&gt;() || this.Count &gt; 0</ensures>
+    </member>
+    <member name="P:PixelLab.Common.ListBase`1.System#Collections#Generic#IList{T}#Item(System.Int32)">
+      <getter>
+        <requires inheritedFrom="M:System.Collections.Generic.IList`1.get_Item(System.Int32)" inheritedFromTypeName="IList">index &gt;= 0</requires>
+        <requires inheritedFrom="M:System.Collections.Generic.IList`1.get_Item(System.Int32)" inheritedFromTypeName="IList">index &lt; @this.Count</requires>
+      </getter>
+      <setter>
+        <requires inheritedFrom="M:System.Collections.Generic.IList`1.set_Item(System.Int32,`0)" inheritedFromTypeName="IList">index &gt;= 0</requires>
+        <requires inheritedFrom="M:System.Collections.Generic.IList`1.set_Item(System.Int32,`0)" inheritedFromTypeName="IList">index &lt; @this.Count</requires>
+      </setter>
+    </member>
+    <member name="M:PixelLab.Common.ListBase`1.System#Collections#ICollection#get_SyncRoot">
+      <ensures inheritedFrom="M:System.Collections.ICollection.get_SyncRoot" inheritedFromTypeName="ICollection">Contract.Result&lt;object&gt;() != null</ensures>
+    </member>
+    <member name="M:PixelLab.Common.ListBase`1.GetItem(System.Int32)">
+      <requires>index &gt;= 0</requires>
+      <requires>index &lt; Count</requires>
+    </member>
+    <member name="M:PixelLab.Common.ListBase`1.System#Collections#Generic#IList{T}#RemoveAt(System.Int32)">
+      <requires inheritedFrom="M:System.Collections.Generic.IList`1.RemoveAt(System.Int32)" inheritedFromTypeName="IList">index &gt;= 0</requires>
+      <requires inheritedFrom="M:System.Collections.Generic.IList`1.RemoveAt(System.Int32)" inheritedFromTypeName="IList">index &lt; @this.Count</requires>
+      <ensures inheritedFrom="M:System.Collections.Generic.IList`1.RemoveAt(System.Int32)" inheritedFromTypeName="IList">@this.Count == Contract.OldValue(@this.Count) - 1</ensures>
+    </member>
+    <member name="M:PixelLab.Common.ListBase`1.System#Collections#IEnumerable#GetEnumerator">
+      <ensures inheritedFrom="M:System.Collections.IEnumerable.GetEnumerator" inheritedFromTypeName="IEnumerable">Contract.Result&lt;IEnumerator&gt;() != null</ensures>
+      <ensures inheritedFrom="M:System.Collections.IEnumerable.GetEnumerator" inheritedFromTypeName="IEnumerable">Contract.Result&lt;IEnumerator&gt;().Model == this.Model</ensures>
+      <ensures inheritedFrom="M:System.Collections.IEnumerable.GetEnumerator" inheritedFromTypeName="IEnumerable">Contract.Result&lt;IEnumerator&gt;().CurrentIndex == -1</ensures>
+    </member>
+    <member name="M:PixelLab.Common.ListBase`1.System#Collections#IList#IndexOf(System.Object)">
+      <ensures inheritedFrom="M:System.Collections.IList.IndexOf(System.Object)" inheritedFromTypeName="IList">Contract.Result&lt;int&gt;() &gt;= -1</ensures>
+      <ensures inheritedFrom="M:System.Collections.IList.IndexOf(System.Object)" inheritedFromTypeName="IList">this.IsSynchronized || Contract.Result&lt;int&gt;() &lt; this.Count</ensures>
+    </member>
+    <member name="M:PixelLab.Common.ListBase`1.System#Collections#IList#RemoveAt(System.Int32)">
+      <requires inheritedFrom="M:System.Collections.IList.RemoveAt(System.Int32)" inheritedFromTypeName="IList">index &gt;= 0</requires>
+      <requires inheritedFrom="M:System.Collections.IList.RemoveAt(System.Int32)" inheritedFromTypeName="IList">index &lt; this.Count</requires>
+    </member>
+    <member name="T:PixelLab.Common.ObservableCollectionPlus`1">
+      <invariant>m_lock != null</invariant>
+      <invariant>m_roCollection != null</invariant>
+    </member>
+    <member name="M:PixelLab.Common.ObservableCollectionPlus`1.AppendItems(System.Collections.Generic.IEnumerable{`0})">
+      <requires>source != null</requires>
+    </member>
+    <member name="M:PixelLab.Common.ObservableCollectionPlus`1.BeginMultiUpdate">
+      <ensures>Contract.Result&lt;IDisposable&gt;() != null</ensures>
+    </member>
+    <member name="M:PixelLab.Common.ObservableCollectionPlus`1.Sort(System.Func{`0,`0,System.Int32})">
+      <requires>comparer != null</requires>
+    </member>
+    <member name="M:PixelLab.Common.ObservableCollectionPlus`1.Sort(System.Comparison{`0})">
+      <requires>comparison != null</requires>
+    </member>
+    <member name="M:PixelLab.Common.ObservableCollectionPlus`1.Sort(System.Collections.Generic.IComparer{`0})">
+      <requires>comparer != null</requires>
+    </member>
+    <member name="P:PixelLab.Common.ObservableCollectionPlus`1.ReadOnly">
+      <getter>
+        <ensures>Contract.Result&lt;ReadOnlyObservableCollection&lt;T&gt;&gt;() != null</ensures>
+      </getter>
+    </member>
+    <member name="M:PixelLab.Common.CollectionExtensions.Contains``2(System.Collections.Generic.IDictionary{``0,``1},``0,``1)">
+      <pure />
+    </member>
+    <member name="M:PixelLab.Common.CollectionExtensions.AsINPC``1(System.Collections.ObjectModel.ReadOnlyObservableCollection{``0})">
+      <requires>source != null</requires>
+    </member>
+    <member name="M:PixelLab.Common.CollectionExtensions.Distinct``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``0,System.Boolean})">
+      <requires>source != null</requires>
+      <requires>comparer != null</requires>
+    </member>
+    <member name="M:PixelLab.Common.CollectionExtensions.Random``1(System.Collections.Generic.IList{``0})">
+      <requires>source != null</requires>
+      <requires>source.Count &gt; 0</requires>
+    </member>
+    <member name="M:PixelLab.Common.CollectionExtensions.ToCastList``2(System.Collections.Generic.IList{``0})">
+      <requires>source != null</requires>
+    </member>
+    <member name="M:PixelLab.Common.CollectionExtensions.CountAtLeast``1(System.Collections.Generic.IEnumerable{``0},System.Int32)">
+      <pure />
+      <requires>source != null</requires>
+    </member>
+    <member name="M:PixelLab.Common.CollectionExtensions.CountSelect``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Int32,``1})">
+      <pure />
+    </member>
+    <member name="M:PixelLab.Common.Changeable.OnPropertyChanged(System.String)">
+      <requires>!propertyName.IsNullOrWhiteSpace()</requires>
+    </member>
+    <member name="M:PixelLab.Common.Changeable.OnPropertyChanged(System.ComponentModel.PropertyChangedEventArgs)">
+      <requires>args != null</requires>
+    </member>
+    <member name="M:PixelLab.Common.PropertyChangeWatcher.#ctor(System.ComponentModel.INotifyPropertyChanged)">
+      <requires>owner != null</requires>
+    </member>
+    <member name="M:PixelLab.Common.PropertyChangeWatcher.AddWatcher(System.Collections.Generic.IList{System.String},System.Action)">
+      <requires>handler != null</requires>
+      <requires>propertyNames != null</requires>
+      <requires>propertyNames.Count &gt; 0</requires>
+      <requires>propertyNames.AllUnique()</requires>
+      <requires description="The target object does not contain one or more of the properties provided">Contract.ForAll(propertyNames, name =&gt; OwnerType.HasPublicInstanceProperty(name))</requires>
+    </member>
+    <member name="M:PixelLab.Common.DataErrorHelper.SetErrors(System.String,System.String[])">
+      <requires>!property.IsNullOrWhiteSpace()</requires>
+      <requires>errors != null</requires>
+    </member>
+    <member name="M:PixelLab.Common.DataErrorHelper.ClearErrors(System.String)">
+      <requires>!property.IsNullOrWhiteSpace()</requires>
+    </member>
+    <member name="M:PixelLab.Common.WeakEnumerable`1.Add(`0)">
+      <requires exception="T:System.ArgumentNullException">item != null</requires>
+      <exception cref="T:System.ArgumentNullException">item == null</exception>
+    </member>
+    <member name="M:PixelLab.Common.WeakEnumerable`1.WeakNode.#ctor(`0,PixelLab.Common.WeakEnumerable{`0}.WeakNode)">
+      <requires>value != null</requires>
+    </member>
+    <member name="M:PixelLab.Common.WeakEnumerable`1.GetEnumerator">
+      <ensures inheritedFrom="M:System.Collections.Generic.IEnumerable`1.GetEnumerator" inheritedFromTypeName="IEnumerable">Contract.Result&lt;IEnumerator&lt;T&gt;&gt;() != null</ensures>
+      <ensures inheritedFrom="M:System.Collections.Generic.IEnumerable`1.GetEnumerator" inheritedFromTypeName="IEnumerable">Contract.Result&lt;IEnumerator&lt;T&gt;&gt;().Model == ((IEnumerable)this).Model</ensures>
+    </member>
+    <member name="M:PixelLab.Common.WeakEnumerable`1.System#Collections#IEnumerable#GetEnumerator">
+      <ensures inheritedFrom="M:System.Collections.IEnumerable.GetEnumerator" inheritedFromTypeName="IEnumerable">Contract.Result&lt;IEnumerator&gt;() != null</ensures>
+      <ensures inheritedFrom="M:System.Collections.IEnumerable.GetEnumerator" inheritedFromTypeName="IEnumerable">Contract.Result&lt;IEnumerator&gt;().Model == this.Model</ensures>
+      <ensures inheritedFrom="M:System.Collections.IEnumerable.GetEnumerator" inheritedFromTypeName="IEnumerable">Contract.Result&lt;IEnumerator&gt;().CurrentIndex == -1</ensures>
+    </member>
+  </members>
+</doc>
