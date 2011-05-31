@@ -406,20 +406,24 @@ namespace Kaxaml.DocumentViews
 
                             if (!IsExplicit)
                             {
-                                Border bd = new Border();
-                                bd.Background = new SolidColorBrush(Color.FromRgb(0x40, 0x40, 0x40));
+                                Border bd = new Border()
+                                {
+                                    Background = new SolidColorBrush(Color.FromRgb(0x40, 0x40, 0x40))
+                                };
 
-                                TextBlock tb = new TextBlock();
-                                tb.FontFamily = new FontFamily("Segoe, Segoe UI, Verdana");
-                                tb.TextAlignment = TextAlignment.Center;
-                                tb.TextWrapping = TextWrapping.Wrap;
-                                tb.FontSize = 14;
-                                tb.Foreground = Brushes.White;
-                                tb.MaxWidth = 320;
-                                tb.Margin = new Thickness(50);
-                                tb.VerticalAlignment = VerticalAlignment.Center;
-                                tb.HorizontalAlignment = HorizontalAlignment.Center;
-                                tb.Text = "The root element of this content is of type Window.  Press F5 to show the content in a new window.";
+                                TextBlock tb = new TextBlock()
+                                {
+                                    FontFamily = new FontFamily("Segoe, Segoe UI, Verdana"),
+                                    TextAlignment = TextAlignment.Center,
+                                    TextWrapping = TextWrapping.Wrap,
+                                    FontSize = 14,
+                                    Foreground = Brushes.White,
+                                    MaxWidth = 320,
+                                    Margin = new Thickness(50),
+                                    VerticalAlignment = VerticalAlignment.Center,
+                                    HorizontalAlignment = HorizontalAlignment.Center,
+                                    Text = "The root element of this content is of type Window.  Press F5 to show the content in a new window."
+                                };
 
                                 bd.Child = tb;
                                 ContentArea.Content = bd;
