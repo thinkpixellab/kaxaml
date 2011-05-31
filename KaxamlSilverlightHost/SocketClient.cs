@@ -4,21 +4,20 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Windows;
-using System.Diagnostics;
 
 namespace KaxamlSilverlightHost
 {
     internal sealed class SocketClient : IDisposable
     {
 
-		#region Const Fields 
+        #region Const Fields
 
         private const int Receive = 1;
         private const int Send = 0;
 
-		#endregion Const Fields 
+        #endregion Const Fields
 
-		#region Static Fields 
+        #region Static Fields
 
         private static AutoResetEvent autoEvent = new AutoResetEvent(false);
         private static AutoResetEvent[] autoSendReceiveEvents = new AutoResetEvent[]
@@ -27,9 +26,9 @@ namespace KaxamlSilverlightHost
             new AutoResetEvent(false)
         };
 
-		#endregion Static Fields 
+        #endregion Static Fields
 
-		#region Fields 
+        #region Fields
 
 
         public bool IsConnected = false;
@@ -39,9 +38,9 @@ namespace KaxamlSilverlightHost
         private DnsEndPoint endPoint;
         private Socket socket;
 
-		#endregion Fields 
+        #endregion Fields
 
-		#region Constructors 
+        #region Constructors
 
         internal SocketClient(string host, int port)
         {
@@ -49,9 +48,9 @@ namespace KaxamlSilverlightHost
             socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Private Methods 
+        #region Private Methods
 
         private void ProcessError(SocketAsyncEventArgs e)
         {
@@ -75,9 +74,9 @@ namespace KaxamlSilverlightHost
             throw new SocketException((int)e.SocketError);
         }
 
-		#endregion Private Methods 
+        #endregion Private Methods
 
-		#region Methods 
+        #region Methods
 
         internal bool Connect()
         {
@@ -138,7 +137,7 @@ namespace KaxamlSilverlightHost
                 throw new SocketException((int)SocketError.NotConnected);
         }
 
-		#endregion Methods 
+        #endregion Methods
 
 
         #region Connected Event
@@ -229,26 +228,25 @@ namespace KaxamlSilverlightHost
         #endregion
     }
 
-    public delegate void RoutedEventHandler(object sender, MessageReceivedEventArgs e);
     public class MessageReceivedEventArgs : RoutedEventArgs
     {
 
-		#region Constructors 
+        #region Constructors
 
         public MessageReceivedEventArgs(string message)
         {
             Message = message;
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Properties 
+        #region Properties
 
 
         public string Message { get; set; }
 
 
-		#endregion Properties 
+        #endregion Properties
 
     }
 

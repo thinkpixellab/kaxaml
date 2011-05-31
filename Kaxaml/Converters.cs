@@ -1,11 +1,9 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Globalization;
-using System.Windows.Data;
-using System.Windows.Media.Imaging;
-using System.Windows.Media;
 using System.Windows;
+using System.Windows.Data;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace Kaxaml.Controls
 {
@@ -66,8 +64,6 @@ namespace Kaxaml.Controls
                     return value;
                 }
             }
-
-            return null;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -96,20 +92,18 @@ namespace Kaxaml.Controls
                 double v = (double)value;
                 return v + m;
             }
-            else 
+            else
             {
                 try
                 {
                     double v = double.Parse(value.ToString());
                     return v + m;
                 }
-                catch 
+                catch
                 {
                     return value;
                 }
             }
-
-            return null;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

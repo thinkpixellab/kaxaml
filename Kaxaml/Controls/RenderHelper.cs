@@ -8,7 +8,7 @@ using System.Windows.Media.Imaging;
 
 namespace Kaxaml.Controls
 {
-    public class NativeMethods
+    public static class NativeMethods
     {
 
         #region Static Methods

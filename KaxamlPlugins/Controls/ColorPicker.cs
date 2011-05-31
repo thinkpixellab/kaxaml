@@ -320,12 +320,10 @@ namespace Kaxaml.Plugins.Controls
 
         #region ColorChanged Event
 
-        public delegate void ColorChangedEventHandler(object sender, ColorChangedEventArgs e);
-
         public static readonly RoutedEvent ColorChangedEvent =
-            EventManager.RegisterRoutedEvent("ColorChanged", RoutingStrategy.Bubble, typeof(ColorChangedEventHandler), typeof(ColorPicker));
+            EventManager.RegisterRoutedEvent("ColorChanged", RoutingStrategy.Bubble, typeof(EventHandler<ColorChangedEventArgs>), typeof(ColorPicker));
 
-        public event ColorChangedEventHandler ColorChanged
+        public event EventHandler<ColorChangedEventArgs> ColorChanged
         {
             add { AddHandler(ColorChangedEvent, value); }
             remove { RemoveHandler(ColorChangedEvent, value); }

@@ -1,24 +1,13 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Collections;
 using System.Diagnostics;
-using ICSharpCode.TextEditor.Document;
+using System.Windows;
+using System.Windows.Forms;
+using System.Windows.Input;
 using System.Windows.Threading;
 using ICSharpCode.TextEditor;
-using ICSharpCode.TextEditor.Gui.CompletionWindow;
-using System.Windows.Forms;
+using ICSharpCode.TextEditor.Document;
 using Kaxaml.CodeCompletion;
-using System.Collections;
-using System.Threading;
 using Kaxaml.Plugins.Default;
 using KaxamlPlugins;
 
@@ -38,7 +27,7 @@ namespace Kaxaml.Controls
 
         #region Constructors
 
-    public static int counter = 0;
+        public static int counter = 0;
 
         public KaxamlTextEditor()
         {
@@ -552,12 +541,10 @@ namespace Kaxaml.Controls
 
         #region TextChangedEvent
 
-        public delegate void TextChangedeventHandler(object sender, TextChangedEventArgs e);
-
         public static readonly RoutedEvent TextChangedEvent =
-            EventManager.RegisterRoutedEvent("TextChanged", RoutingStrategy.Bubble, typeof(TextChangedeventHandler), typeof(KaxamlTextEditor));
+            EventManager.RegisterRoutedEvent("TextChanged", RoutingStrategy.Bubble, typeof(EventHandler<TextChangedEventArgs>), typeof(KaxamlTextEditor));
 
-        public event TextChangedeventHandler TextChanged
+        public event EventHandler<TextChangedEventArgs> TextChanged
         {
             add { AddHandler(TextChangedEvent, value); }
             remove { RemoveHandler(TextChangedEvent, value); }
@@ -1004,7 +991,7 @@ namespace Kaxaml.Controls
                 System.Drawing.Point caretPoint = TextEditor.ActiveTextAreaControl.Caret.ScreenPosition;
 
                 popup = CodeCompletionPopup.Show(items, new Point(editorPoint.X + caretPoint.X + borderX, editorPoint.Y + caretPoint.Y + (FontSize * 1.3) + 3));
-                popup.ResultProvided += new CodeCompletionPopup.ResultProvidedeventHandler(w_ResultProvided);
+                popup.ResultProvided += w_ResultProvided;
             }
             _IsOpening = false;
         }
@@ -1071,9 +1058,9 @@ namespace Kaxaml.Controls
         void w_ResultProvided(object sender, ResultProvidedEventArgs e)
         {
             // remove the event handler
-            popup.ResultProvided -= new CodeCompletionPopup.ResultProvidedeventHandler(w_ResultProvided);
+            popup.ResultProvided -= w_ResultProvided;
 
-            if (!e.Cancelled)
+            if (!e.Canceled)
             {
                 int _CurrCaretIndex = TextEditor.ActiveTextAreaControl.Caret.Offset;
                 int inputlength = (_CurrCaretIndex - _BeginCaretIndex);

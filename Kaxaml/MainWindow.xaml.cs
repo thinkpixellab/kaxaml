@@ -1,22 +1,15 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Collections.ObjectModel;
 using Kaxaml.Documents;
-using Kaxaml.Properties;
-using Microsoft.Win32;
-using System.Globalization;
-using KaxamlPlugins;
 using Kaxaml.Plugins.Default;
-using System.Windows.Controls.Primitives;
+using KaxamlPlugins;
+using Microsoft.Win32;
 
 namespace Kaxaml
 {
@@ -1075,30 +1068,6 @@ namespace Kaxaml
                 }
             }
 
-            return null;
-
-            //if (value is XamlDocument)
-            //{
-
-            //    switch ((string)parameter)
-            //    {
-            //        case "Filename":
-            //            name = values[1] + ", " + values[0];
-            //            break;
-            //        case "NeedsSave":
-            //        default:
-            //            name = values[0] + " " + values[1];
-            //            break;
-            //    }
-
-            //    XamlDocument document = (XamlDocument)value;
-
-            //    string title = document.Filename;
-            //    if (document.NeedsSave) title = title + "*";
-            //    title = title + " - Kaxaml";
-
-            //    return title;
-            //}
             return null;
         }
 

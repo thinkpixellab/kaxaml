@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.ComponentModel;
 using System.IO;
 using System.Windows.Media;
@@ -11,7 +9,7 @@ namespace Kaxaml.Documents
     public class XamlDocument : INotifyPropertyChanged
     {
 
-		#region Static Methods 
+        #region Static Methods
 
         public static XamlDocument FromFile(string fullPath)
         {
@@ -38,7 +36,7 @@ namespace Kaxaml.Documents
             return null;
         }
 
-		#endregion Static Methods 
+        #endregion Static Methods
 
 
         #region Constructors
@@ -62,9 +60,9 @@ namespace Kaxaml.Documents
         private string _Folder = "";
         public string Folder
         {
-            get 
+            get
             {
-                return _Folder; 
+                return _Folder;
             }
             set
             {
@@ -74,14 +72,13 @@ namespace Kaxaml.Documents
                     NotifyPropertyChanged("Folder");
                     NotifyPropertyChanged("FullPath");
                 }
-                FileInfo f;
             }
         }
 
         private string _Filename;
         public string Filename
         {
-            get 
+            get
             {
                 if (String.IsNullOrEmpty(_Filename))
                 {
@@ -92,7 +89,7 @@ namespace Kaxaml.Documents
                     return _Filename;
                 }
             }
-            set 
+            set
             {
                 if (_Filename != value)
                 {
@@ -106,7 +103,7 @@ namespace Kaxaml.Documents
         string _TemporaryFilename = "";
         public string TemporaryFilename
         {
-            get 
+            get
             {
                 if (string.IsNullOrEmpty(_TemporaryFilename))
                 {
@@ -122,7 +119,7 @@ namespace Kaxaml.Documents
                     _TemporaryFilename = temp;
                     TempFilenameCount++;
                 }
-                return _TemporaryFilename; 
+                return _TemporaryFilename;
             }
         }
 
@@ -146,7 +143,7 @@ namespace Kaxaml.Documents
         public bool NeedsSave
         {
             get { return _NeedsSave; }
-            private set 
+            private set
             {
                 if (_NeedsSave != value)
                 {
@@ -158,7 +155,7 @@ namespace Kaxaml.Documents
 
         public bool UsingTemporaryFilename
         {
-            get 
+            get
             {
                 return (String.IsNullOrEmpty(_Filename));
             }

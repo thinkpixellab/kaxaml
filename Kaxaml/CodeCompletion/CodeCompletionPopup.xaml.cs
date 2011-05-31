@@ -212,11 +212,9 @@ namespace Kaxaml.CodeCompletion
 
         #region ResultProvidedEvent
 
-        public delegate void ResultProvidedeventHandler(object sender, ResultProvidedEventArgs e);
+        public static readonly RoutedEvent ResultProvidedEvent = EventManager.RegisterRoutedEvent("ResultProvided", RoutingStrategy.Bubble, typeof(EventHandler<ResultProvidedEventArgs>), typeof(CodeCompletionPopup));
 
-        public static readonly RoutedEvent ResultProvidedEvent = EventManager.RegisterRoutedEvent("ResultProvided", RoutingStrategy.Bubble, typeof(ResultProvidedeventHandler), typeof(CodeCompletionPopup));
-
-        public event ResultProvidedeventHandler ResultProvided
+        public event EventHandler<ResultProvidedEventArgs> ResultProvided
         {
             add { AddHandler(ResultProvidedEvent, value); }
             remove { RemoveHandler(ResultProvidedEvent, value); }
@@ -277,13 +275,13 @@ namespace Kaxaml.CodeCompletion
 
     public class ResultProvidedEventArgs : RoutedEventArgs
     {
-        public ResultProvidedEventArgs(RoutedEvent routedEvent, ICompletionData item, string text, bool forcedAccept, bool cancelled)
+        public ResultProvidedEventArgs(RoutedEvent routedEvent, ICompletionData item, string text, bool forcedAccept, bool canceled)
         {
             this.Item = item;
             this.RoutedEvent = routedEvent;
             this.ForcedAccept = forcedAccept;
             this.Text = text;
-            this.Cancelled = cancelled;
+            this.Canceled = canceled;
         }
 
         private bool _ForcedAccept;
@@ -307,11 +305,11 @@ namespace Kaxaml.CodeCompletion
             set { _Text = value; }
         }
 
-        private bool _Cancelled;
-        public bool Cancelled
+        private bool _Canceled;
+        public bool Canceled
         {
-            get { return _Cancelled; }
-            set { _Cancelled = value; }
+            get { return _Canceled; }
+            set { _Canceled = value; }
         }
     }
 

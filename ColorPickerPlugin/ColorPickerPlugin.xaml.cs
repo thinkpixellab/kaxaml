@@ -1,21 +1,12 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Kaxaml.Plugins.Controls;
-using Kaxaml.Plugins;
-using System.Collections.ObjectModel;
-using KaxamlPlugins;
 using System.Windows.Threading;
-using Kaxaml.Plugins.ColorPicker.Properties;
+using Kaxaml.Plugins.Controls;
+using KaxamlPlugins;
 
 namespace Kaxaml.Plugins.ColorPicker
 {
@@ -67,7 +58,7 @@ namespace Kaxaml.Plugins.ColorPicker
                 Color c = (Color)ColorConverter.ConvertFromString(KaxamlInfo.Editor.SelectedText);
                 C.Color = c;
 
-                C.ColorChanged += new Kaxaml.Plugins.Controls.ColorPicker.ColorChangedEventHandler(C_ColorChanged);
+                C.ColorChanged += C_ColorChanged;
             }
             catch
             {
@@ -79,7 +70,7 @@ namespace Kaxaml.Plugins.ColorPicker
         {
             try
             {
-                C.ColorChanged -= new Kaxaml.Plugins.Controls.ColorPicker.ColorChangedEventHandler(C_ColorChanged);
+                C.ColorChanged -= C_ColorChanged;
             }
             catch
             {

@@ -1,11 +1,5 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Net.Sockets;
-using System.Net;
 using System.Diagnostics;
-using System.IO;
-using System.Configuration;
 using System.Threading;
 
 namespace Kaxaml.Silverlight
@@ -13,7 +7,7 @@ namespace Kaxaml.Silverlight
     class SilverlightBridge
     {
 
-		#region Fields 
+        #region Fields
 
 
         string _xaml;
@@ -22,18 +16,18 @@ namespace Kaxaml.Silverlight
 
         SocketServer server = new SocketServer();
 
-		#endregion Fields 
+        #endregion Fields
 
-		#region Constructors 
+        #region Constructors
 
         public SilverlightBridge()
         {
             Listen();
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Properties 
+        #region Properties
 
 
         public bool IsConnected { get; set; }
@@ -41,9 +35,9 @@ namespace Kaxaml.Silverlight
         public bool IsListening { get; set; }
 
 
-		#endregion Properties 
+        #endregion Properties
 
-		#region Event Handlers 
+        #region Event Handlers
 
         void server_Connected(object sender, EventArgs e)
         {
@@ -86,7 +80,7 @@ namespace Kaxaml.Silverlight
 
                 //client.SendReceive("ERROR|" + errorLineNumber + "|" + errorLinePos + "|" + errorMessage);
 
-                string[] errorResponse = e.Message.Split(new char[]{'|'});
+                string[] errorResponse = e.Message.Split(new char[] { '|' });
                 int errorLineNumber = int.Parse(errorResponse[1]);
                 int errorLinePos = int.Parse(errorResponse[2]);
                 string errorMessage = errorResponse[3];
@@ -98,9 +92,9 @@ namespace Kaxaml.Silverlight
             }
         }
 
-		#endregion Event Handlers 
+        #endregion Event Handlers
 
-		#region Private Methods 
+        #region Private Methods
 
         private void SendXaml()
         {
@@ -128,15 +122,15 @@ namespace Kaxaml.Silverlight
             }
         }
 
-		#endregion Private Methods 
+        #endregion Private Methods
 
-		#region Public Methods 
+        #region Public Methods
 
         public void Listen()
         {
             server.Connected += new EventHandler(server_Connected);
             server.Listening += new EventHandler(server_Listening);
-            server.MessageReceived += new MessageReceivedEventHandler(server_MessageReceived);
+            server.MessageReceived += server_MessageReceived;
             server.BeginListen("127.0.0.1", NextPort);
         }
 
@@ -148,18 +142,18 @@ namespace Kaxaml.Silverlight
             thread.Start();
         }
 
-		#endregion Public Methods 
+        #endregion Public Methods
 
 
-        #region Port Server 
+        #region Port Server
 
         static SocketServer portServer = new SocketServer();
 
-       static SilverlightBridge()
+        static SilverlightBridge()
         {
             portServer.Connected += new EventHandler(portServer_Connected);
             portServer.Listening += new EventHandler(portServer_Listening);
-            portServer.MessageReceived += new MessageReceivedEventHandler(portServer_MessageReceived);
+            portServer.MessageReceived += portServer_MessageReceived;
             portServer.BeginListen("127.0.0.1", 4505);
         }
 
@@ -216,13 +210,14 @@ namespace Kaxaml.Silverlight
 
         #region ParseCompleted
 
-        public event ParseCompletedEventHandler ParseCompleted;
+        public event EventHandler<ParseCompletedEventArgs> ParseCompleted;
 
         private void RaiseParseCompleted(bool isValidXaml, string errorMessage, int errorLineNumber, int errorLinePosition)
         {
-            if (ParseCompleted != null)
+            var handler = ParseCompleted;
+            if (handler != null)
             {
-                ParseCompleted(this, new ParseCompletedEventArgs(isValidXaml, errorMessage, errorLineNumber, errorLinePosition));
+                handler(this, new ParseCompletedEventArgs(isValidXaml, errorMessage, errorLineNumber, errorLinePosition));
             }
         }
 
@@ -230,12 +225,10 @@ namespace Kaxaml.Silverlight
     }
 
 
-    public delegate void ParseCompletedEventHandler(object sender, ParseCompletedEventArgs e);
-
     public class ParseCompletedEventArgs : EventArgs
     {
 
-		#region Constructors 
+        #region Constructors
 
         public ParseCompletedEventArgs(bool isValidXaml, string errorMessage, int errorLineNumber, int errorLinePosition)
         {
@@ -245,9 +238,9 @@ namespace Kaxaml.Silverlight
             ErrorLinePosition = errorLinePosition;
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Properties 
+        #region Properties
 
 
         public string ErrorMessage { get; set; }
@@ -260,9 +253,9 @@ namespace Kaxaml.Silverlight
         public int ErrorLinePosition { get; set; }
 
 
-		#endregion Properties 
+        #endregion Properties
 
     }
-    
+
 
 }
