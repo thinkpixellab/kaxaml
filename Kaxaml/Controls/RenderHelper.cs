@@ -1,6 +1,5 @@
 using System;
 using System.Diagnostics;
-using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
@@ -8,56 +7,8 @@ using System.Windows.Media.Imaging;
 
 namespace Kaxaml.Controls
 {
-    public static class NativeMethods
+    public static class RenderHelper
     {
-
-        #region Static Methods
-
-        [DllImport("gdi32.dll")]
-        public static extern bool BitBlt(IntPtr hdc, int nXDest, int nYDest, int nWidth,
-           int nHeight, IntPtr hdcSrc, int nXSrc, int nYSrc, uint dwRop);
-
-        [DllImport("gdi32.dll")]
-        public static extern IntPtr CreateCompatibleBitmap(IntPtr hdc, int nWidth, int nHeight);
-
-        [DllImport("gdi32.dll", SetLastError = true)]
-        public static extern IntPtr CreateCompatibleDC(IntPtr hdc);
-
-        [DllImport("gdi32.dll")]
-        public static extern bool DeleteDC(IntPtr hdc);
-
-        [DllImport("gdi32.dll")]
-        public static extern bool DeleteObject(IntPtr hObject);
-
-        [DllImport("user32.dll")]
-        public static extern IntPtr GetWindowDC(IntPtr hWnd);
-
-        [DllImport("user32.dll")]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern bool GetWindowRect(IntPtr hWnd, out RECT lpRect);
-
-        [DllImport("user32.dll")]
-        public static extern int ReleaseDC(IntPtr hWnd, IntPtr hDC);
-
-        [DllImport("gdi32.dll", ExactSpelling = true, PreserveSig = true, SetLastError = true)]
-        public static extern IntPtr SelectObject(IntPtr hdc, IntPtr hgdiobj);
-
-        #endregion Static Methods
-        [StructLayout(LayoutKind.Sequential)]
-        public struct RECT
-        {
-            public int Left;
-            public int Top;
-            public int Right;
-            public int Bottom;
-        }
-
-    }
-
-
-    public class RenderHelper
-    {
-
         #region Static Methods
 
         public static BitmapSource ElementToBitmap(FrameworkElement e)
@@ -217,58 +168,5 @@ namespace Kaxaml.Controls
         }
 
         #endregion Static Methods
-
-    }
-
-    public class GrayscaleParameters
-    {
-
-        #region Fields
-
-
-        private double _RedDistribution = 0.30;
-        private double _GreenDistribution = 0.59;
-        private double _BlueDistribution;
-        private double _Compression = 0.8;
-        private double _Washout = -0.05;
-
-        #endregion Fields
-
-        #region Properties
-
-
-        public double RedDistribution
-        {
-            get { return _RedDistribution; }
-            set { _GreenDistribution = Math.Max(0, Math.Min(1, value)); }
-        }
-
-        public double GreenDistribution
-        {
-            get { return _GreenDistribution; }
-            set { _GreenDistribution = Math.Max(0, Math.Min(1, value)); }
-        }
-
-        public double BlueDistribution
-        {
-            get { return _BlueDistribution = 0.11; }
-            set { _BlueDistribution = Math.Max(0, Math.Min(1, value)); }
-        }
-
-        public double Compression
-        {
-            get { return _Compression; }
-            set { _Compression = Math.Max(0, Math.Min(1, value)); }
-        }
-
-        public double Washout
-        {
-            get { return _Washout; }
-            set { _Washout = Math.Max(0, Math.Min(1, value)); }
-        }
-
-
-        #endregion Properties
-
     }
 }
