@@ -1508,15 +1508,6 @@ namespace Kaxaml.CodeCompletion
             data.Add(completionData);
         }
 
-        /// <summary>
-        /// Adds an attribute value to the completion data collection.
-        /// </summary>
-        void AddAttributeValue(XmlCompletionDataCollection data, string valueText, string description)
-        {
-            XmlCompletionData completionData = new XmlCompletionData(valueText, description, XmlCompletionData.DataType.XmlAttributeValue);
-            data.Add(completionData);
-        }
-
         XmlSchemaSimpleType FindSimpleType(XmlQualifiedName name)
         {
             XmlSchemaSimpleType matchedSimpleType = null;
