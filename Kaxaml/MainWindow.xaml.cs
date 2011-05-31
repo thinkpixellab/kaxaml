@@ -10,6 +10,7 @@ using Kaxaml.Documents;
 using Kaxaml.Plugins.Default;
 using KaxamlPlugins;
 using Microsoft.Win32;
+using PixelLab.Common;
 
 namespace Kaxaml
 {
@@ -683,9 +684,12 @@ namespace Kaxaml
                             xaml = xaml.Replace("$source$", rfilename);
                             this.DocumentsView.SelectedView.TextEditor.InsertStringAtCaret(xaml);
                         }
-                        catch
+                        catch (Exception ex)
                         {
-
+                            if (ex.IsCriticalException())
+                            {
+                                throw;
+                            }
                         }
 
                     }

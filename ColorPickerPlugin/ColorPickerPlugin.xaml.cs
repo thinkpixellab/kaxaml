@@ -7,6 +7,7 @@ using System.Windows.Media;
 using System.Windows.Threading;
 using Kaxaml.Plugins.Controls;
 using KaxamlPlugins;
+using PixelLab.Common;
 
 namespace Kaxaml.Plugins.ColorPicker
 {
@@ -44,8 +45,13 @@ namespace Kaxaml.Plugins.ColorPicker
                 Color c = (Color)ColorConverter.ConvertFromString(KaxamlInfo.Editor.SelectedText);
                 SyncButton.IsEnabled = true;
             }
-            catch
+            catch (Exception ex)
             {
+                if (ex.IsCriticalException())
+                {
+                    throw;
+                }
+
                 SyncButton.IsEnabled = false;
                 SyncButton.IsChecked = false;
             }
@@ -60,8 +66,13 @@ namespace Kaxaml.Plugins.ColorPicker
 
                 C.ColorChanged += C_ColorChanged;
             }
-            catch
+            catch (Exception ex)
             {
+                if (ex.IsCriticalException())
+                {
+                    throw;
+                }
+
                 SyncButton.IsEnabled = false;
             }
         }
@@ -72,8 +83,13 @@ namespace Kaxaml.Plugins.ColorPicker
             {
                 C.ColorChanged -= C_ColorChanged;
             }
-            catch
+            catch (Exception ex)
             {
+                if (ex.IsCriticalException())
+                {
+                    throw;
+                }
+
                 SyncButton.IsEnabled = false;
             }
         }
@@ -97,7 +113,13 @@ namespace Kaxaml.Plugins.ColorPicker
 
                     _ColorChangedColor = e.Color;
                 }
-                catch { }
+                catch (Exception ex)
+                {
+                    if (ex.IsCriticalException())
+                    {
+                        throw;
+                    }
+                }
             }
         }
 
@@ -243,7 +265,13 @@ namespace Kaxaml.Plugins.ColorPicker
                                 owner.Colors.Add(c);
                             }
                         }
-                        catch { }
+                        catch (Exception ex)
+                        {
+                            if (ex.IsCriticalException())
+                            {
+                                throw;
+                            }
+                        }
                     }
 
                     owner.updateinternal = false;

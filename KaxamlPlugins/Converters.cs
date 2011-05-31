@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Globalization;
-using System.Windows.Data;
-using System.Windows.Media.Imaging;
-using System.Windows.Media;
 using System.Windows;
+using System.Windows.Data;
 
 namespace KaxamlPlugins
 {
@@ -15,20 +11,17 @@ namespace KaxamlPlugins
 
         object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            try
+            double val;
+            if (value != null && double.TryParse(value.ToString(), out val))
             {
-                double v = double.Parse(value.ToString());
-                return Math.Round(v, 2);
+                return Math.Round(val, 2);
             }
-            catch
-            {
-                return value;
-            }
+            return DependencyProperty.UnsetValue;
         }
 
         object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value;
+            return DependencyProperty.UnsetValue;
         }
 
         #endregion

@@ -4,6 +4,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Windows;
+using PixelLab.Common;
 
 namespace KaxamlSilverlightHost
 {
@@ -61,8 +62,12 @@ namespace KaxamlSilverlightHost
                 {
                     s.Shutdown(SocketShutdown.Both);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    if (ex.IsCriticalException())
+                    {
+                        throw;
+                    }
                 }
                 finally
                 {

@@ -1,12 +1,10 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows;
-using System.Windows.Media;
-using System.Windows.Input;
 using System.Windows.Controls;
-using Kaxaml.Plugins;
+using System.Windows.Input;
+using System.Windows.Media;
 using KaxamlPlugins;
+using PixelLab.Common;
 
 namespace Kaxaml.Plugins.Controls
 {
@@ -96,7 +94,13 @@ namespace Kaxaml.Plugins.Controls
                 {
                     DragDrop.DoDragDrop(this, obj, DragDropEffects.Copy);
                 }
-                catch { }
+                catch (Exception ex)
+                {
+                    if (ex.IsCriticalException())
+                    {
+                        throw;
+                    }
+                }
             }
         }
 

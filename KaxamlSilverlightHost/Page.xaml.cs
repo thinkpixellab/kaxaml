@@ -1,20 +1,9 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
-using System.Net.Sockets;
-using System.IO;
-using System.Net;
-using System.Threading;
-using System.Windows.Markup;
-using System.Diagnostics;
 using System.Windows.Browser;
+using System.Windows.Controls;
+using System.Windows.Markup;
+using PixelLab.Common;
 
 namespace KaxamlSilverlightHost
 {
@@ -22,7 +11,7 @@ namespace KaxamlSilverlightHost
     public partial class Page : UserControl
     {
 
-		#region Fields 
+        #region Fields
 
 
         string errorMessage = "";
@@ -30,9 +19,9 @@ namespace KaxamlSilverlightHost
         int errorLineNumber = 0;
         int errorLinePos = 0;
 
-		#endregion Fields 
+        #endregion Fields
 
-		#region Constructors 
+        #region Constructors
 
         public Page()
         {
@@ -40,9 +29,9 @@ namespace KaxamlSilverlightHost
             HtmlPage.RegisterScriptableObject("Bridge", this);
         }
 
-		#endregion Constructors 
+        #endregion Constructors
 
-		#region Public Methods 
+        #region Public Methods
 
         public string GetLastErrorLineNumber()
         {
@@ -90,6 +79,11 @@ namespace KaxamlSilverlightHost
             }
             catch (Exception exception)
             {
+                if (exception.IsCriticalException())
+                {
+                    throw;
+                }
+
                 parseSuccess = false;
 
                 errorLineNumber = 0;
@@ -101,7 +95,7 @@ namespace KaxamlSilverlightHost
             return parseSuccess;
         }
 
-		#endregion Public Methods 
+        #endregion Public Methods
 
     }
 

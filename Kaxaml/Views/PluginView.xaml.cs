@@ -1,29 +1,21 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.IO;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.IO;
-using System.Reflection;
 using Kaxaml.Plugins;
 using Kaxaml.Plugins.Default;
+using PixelLab.Common;
 
 namespace Kaxaml.Views
 {
     /// <summary>
     /// Interaction logic for PuginView.xaml
     /// </summary>
-
-    
-
-
     public partial class PluginView : System.Windows.Controls.UserControl
     {
 
@@ -47,7 +39,7 @@ namespace Kaxaml.Views
             snippets.Icon = LoadIcon(snippets.GetType(), "Images\\emb_tag.png");
             Plugins.Add(snippets);
             (App.Current as App).Snippets = snippets.Root as Snippets;
-            
+
             //// add the find plugin 
             Plugin find = new Plugin();
             find.Root = new Find();
@@ -192,7 +184,13 @@ namespace Kaxaml.Views
                             (t.Content as FrameworkElement).MoveFocus(new TraversalRequest(FocusNavigationDirection.First));
                         }
                     }
-                    catch { }
+                    catch (Exception ex)
+                    {
+                        if (ex.IsCriticalException())
+                        {
+                            throw;
+                        }
+                    }
                 }
             }
         }
@@ -203,15 +201,15 @@ namespace Kaxaml.Views
             return _findPlugin;
         }
 
-        public Plugin SelectedPlugin 
+        public Plugin SelectedPlugin
         {
             get
             {
-                return (Plugin) PluginTabControl.SelectedItem;
+                return (Plugin)PluginTabControl.SelectedItem;
             }
             set
             {
-                PluginTabControl.SelectedItem = (Plugin) value;
+                PluginTabControl.SelectedItem = (Plugin)value;
             }
         }
 

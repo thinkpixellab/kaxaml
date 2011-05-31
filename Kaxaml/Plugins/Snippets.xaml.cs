@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Xml;
 using ICSharpCode.TextEditor.Gui.CompletionWindow;
+using PixelLab.Common;
 
 namespace Kaxaml.Plugins.Default
 {
@@ -81,7 +82,13 @@ namespace Kaxaml.Plugins.Default
                     {
                         style = (Style)this.FindResource("TextBoxOverlayStyle");
                     }
-                    catch { }
+                    catch (Exception ex)
+                    {
+                        if (ex.IsCriticalException())
+                        {
+                            throw;
+                        }
+                    }
                     _tbo.Style = style;
                 }
                 return _tbo;

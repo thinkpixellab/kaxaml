@@ -10,6 +10,7 @@ using ICSharpCode.TextEditor.Document;
 using Kaxaml.CodeCompletion;
 using Kaxaml.Plugins.Default;
 using KaxamlPlugins;
+using PixelLab.Common;
 
 namespace Kaxaml.Controls
 {
@@ -1153,7 +1154,13 @@ namespace Kaxaml.Controls
                     TextEditor.ActiveTextAreaControl.SelectionManager.SetSelection(from, to);
                 }
             }
-            catch { }
+            catch (Exception ex)
+            {
+                if (ex.IsCriticalException())
+                {
+                    throw;
+                }
+            }
         }
 
         public void SelectLine(int lineNumber)
@@ -1167,8 +1174,13 @@ namespace Kaxaml.Controls
                 TextEditor.ActiveTextAreaControl.SelectionManager.SetSelection(startPoint, endPoint);
                 TextEditor.ActiveTextAreaControl.Caret.Position = new System.Drawing.Point(0, lineNumber);
             }
-            catch { }
-
+            catch (Exception ex)
+            {
+                if (ex.IsCriticalException())
+                {
+                    throw;
+                }
+            }
         }
 
         private string _findText = "";

@@ -303,9 +303,12 @@ namespace Kaxaml.DocumentViews
                     this.XamlDocument.PreviewImage = RenderHelper.VisualToBitmap(ContentArea, (int)ContentArea.ActualWidth, (int)ContentArea.ActualHeight, null);
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                // do nothing
+                if (ex.IsCriticalException())
+                {
+                    throw;
+                }
             }
         }
 
@@ -455,9 +458,16 @@ namespace Kaxaml.DocumentViews
                         }
                     }
 
-                    catch (Exception e)
+                    catch (Exception ex)
                     {
-                        ReportError(e);
+                        if (ex.IsCriticalException())
+                        {
+                            throw;
+                        }
+                        else
+                        {
+                            ReportError(ex);
+                        }
                     }
                 }
             }

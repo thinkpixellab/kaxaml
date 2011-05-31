@@ -5,6 +5,7 @@ using System.IO;
 using System.Text;
 using System.Xml;
 using ICSharpCode.TextEditor.Document;
+using PixelLab.Common;
 
 namespace Kaxaml.CodeCompletion
 {
@@ -149,8 +150,13 @@ namespace Kaxaml.CodeCompletion
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                if (ex.IsCriticalException())
+                {
+                    throw;
+                }
+
                 // If the xml is not well formed keep the foldings 
                 // that already exist in the document.
 

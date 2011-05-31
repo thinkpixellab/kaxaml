@@ -54,21 +54,21 @@ namespace Kaxaml.Controls
             }
             else
             {
-                try
+                double v;
+                if (value != null && double.TryParse(value.ToString(), out v))
                 {
-                    double v = double.Parse(value.ToString());
-                    return v > m;
+                    return v;
                 }
-                catch
+                else
                 {
-                    return value;
+                    return DependencyProperty.UnsetValue;
                 }
             }
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return null;
+            return DependencyProperty.UnsetValue;
         }
     }
 

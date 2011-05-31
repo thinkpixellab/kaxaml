@@ -109,6 +109,21 @@
     <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Practices.Prism">
+      <HintPath>..\packages\Prism.4.0.0.0\lib\SL4\Microsoft.Practices.Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Prism.Interactivity">
+      <HintPath>..\packages\Prism.4.0.0.0\lib\SL4\Microsoft.Practices.Prism.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\packages\CommonServiceLocator.1.0\lib\SL30\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="PixelLab.Common_SL4">
+      <HintPath>..\packages\PixelLab.BOT.1.0.6\lib\SL4\PixelLab.Common_SL4.dll</HintPath>
+    </Reference>
+    <Reference Include="PixelLab.SL">
+      <HintPath>..\packages\PixelLab.BOT.1.0.6\lib\SL4\PixelLab.SL.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net" />
     <Reference Include="System.Windows" />
     <Reference Include="mscorlib" />
@@ -143,6 +158,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="Properties\AppManifest.xml" />
   </ItemGroup>
   <ItemGroup>
