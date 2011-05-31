@@ -12,6 +12,7 @@ using Kaxaml.Controls;
 using Kaxaml.Documents;
 using Kaxaml.Properties;
 using KaxamlPlugins;
+using PixelLab.Common;
 
 namespace Kaxaml.DocumentViews
 {
@@ -408,7 +409,7 @@ namespace Kaxaml.DocumentViews
                             {
                                 Border bd = new Border()
                                 {
-                                    Background = new SolidColorBrush(Color.FromRgb(0x40, 0x40, 0x40))
+                                    Background = Color.FromRgb(0x40, 0x40, 0x40).ToCachedBrush()
                                 };
 
                                 TextBlock tb = new TextBlock()
