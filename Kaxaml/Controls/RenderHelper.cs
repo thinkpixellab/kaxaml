@@ -1,20 +1,17 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows;
-using System.Windows.Media.Imaging;
-using System.Windows.Media;
-//
+using System.Diagnostics;
 using System.Runtime.InteropServices;
+using System.Windows;
 using System.Windows.Interop;
-
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace Kaxaml.Controls
 {
     public class NativeMethods
     {
 
-		#region Static Methods 
+        #region Static Methods
 
         [DllImport("gdi32.dll")]
         public static extern bool BitBlt(IntPtr hdc, int nXDest, int nYDest, int nWidth,
@@ -45,7 +42,7 @@ namespace Kaxaml.Controls
         [DllImport("gdi32.dll", ExactSpelling = true, PreserveSig = true, SetLastError = true)]
         public static extern IntPtr SelectObject(IntPtr hdc, IntPtr hgdiobj);
 
-		#endregion Static Methods 
+        #endregion Static Methods
         [StructLayout(LayoutKind.Sequential)]
         public struct RECT
         {
@@ -61,7 +58,7 @@ namespace Kaxaml.Controls
     public class RenderHelper
     {
 
-		#region Static Methods 
+        #region Static Methods
 
         public static BitmapSource ElementToBitmap(FrameworkElement e)
         {
@@ -160,7 +157,16 @@ namespace Kaxaml.Controls
             if (e == null) return null;
 
             RenderTargetBitmap src = new RenderTargetBitmap(Width, Height, 96, 96, PixelFormats.Pbgra32);
-            src.Render(e);
+            try
+            {
+                src.Render(e);
+            }
+            catch (AccessViolationException ex)
+            {
+                Debug.WriteLine("Access violation?");
+                Debug.WriteLine(ex);
+                return null;
+            }
 
             if (parameters != null)
             {
@@ -210,14 +216,14 @@ namespace Kaxaml.Controls
             return Filename;
         }
 
-		#endregion Static Methods 
+        #endregion Static Methods
 
     }
 
     public class GrayscaleParameters
     {
 
-		#region Fields 
+        #region Fields
 
 
         private double _RedDistribution = 0.30;
@@ -226,9 +232,9 @@ namespace Kaxaml.Controls
         private double _Compression = 0.8;
         private double _Washout = -0.05;
 
-		#endregion Fields 
+        #endregion Fields
 
-		#region Properties 
+        #region Properties
 
 
         public double RedDistribution
@@ -262,7 +268,7 @@ namespace Kaxaml.Controls
         }
 
 
-		#endregion Properties 
+        #endregion Properties
 
     }
 }
