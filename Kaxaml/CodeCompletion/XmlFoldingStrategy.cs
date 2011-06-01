@@ -96,10 +96,6 @@ namespace Kaxaml.CodeCompletion
         /// </summary>
         bool showAttributesWhenFolded = false;
 
-        public XmlFoldingStrategy()
-        {
-        }
-
         #region IFoldingStrategy
 
         /// <summary>
