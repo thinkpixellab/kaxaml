@@ -9,3 +9,4 @@ XamlScrubberPlugin/obj
 KaxamlSilverlightHost/obj
 *.sln.docstates
 KaxamlPlugins/bin
+*.csproj.user
