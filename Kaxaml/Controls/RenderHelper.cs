@@ -1,9 +1,9 @@
 using System;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using PixelLab.Contracts;
 
 namespace Kaxaml.Controls
 {
@@ -105,19 +105,11 @@ namespace Kaxaml.Controls
 
         public static BitmapSource VisualToBitmap(Visual e, int Width, int Height, GrayscaleParameters parameters)
         {
-            if (e == null) return null;
+            Contract.Requires(e != null);
+            e.VerifyAccess();
 
             RenderTargetBitmap src = new RenderTargetBitmap(Width, Height, 96, 96, PixelFormats.Pbgra32);
-            try
-            {
-                src.Render(e);
-            }
-            catch (AccessViolationException ex)
-            {
-                Debug.WriteLine("Access violation?");
-                Debug.WriteLine(ex);
-                return null;
-            }
+            src.Render(e);
 
             if (parameters != null)
             {
