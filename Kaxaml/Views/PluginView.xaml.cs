@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
@@ -76,23 +77,21 @@ namespace Kaxaml.Views
                 Type[] types = asm.GetExportedTypes();
                 foreach (Type typ in types)
                 {
-                    object[] atts = typ.GetCustomAttributes(typeof(PluginAttribute), false);
+                    var a = typ.GetCustomAttributes(typeof(PluginAttribute), false).Cast<PluginAttribute>().SingleOrDefault();
 
-                    if (atts != null)
+                    if (a != null && typeof(UserControl).IsAssignableFrom(typ))
                     {
-                        if (typeof(UserControl).IsAssignableFrom(typ))
+                        Plugin p = new Plugin()
                         {
-                            PluginAttribute a = (PluginAttribute)atts[0];
-                            Plugin p = new Plugin();
-                            p.Root = (UserControl)Activator.CreateInstance(typ);
-                            p.Name = a.Name;
-                            p.Description = a.Description;
-                            p.Key = a.Key;
-                            p.ModifierKeys = a.ModifierKeys;
-                            p.Icon = LoadIcon(typ, a.Icon);
+                            Root = (UserControl)Activator.CreateInstance(typ),
+                            Name = a.Name,
+                            Description = a.Description,
+                            Key = a.Key,
+                            ModifierKeys = a.ModifierKeys,
+                            Icon = LoadIcon(typ, a.Icon)
+                        };
 
-                            Plugins.Add(p);
-                        }
+                        Plugins.Add(p);
                     }
                 }
             }
