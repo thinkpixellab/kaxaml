@@ -261,11 +261,11 @@
     <member name="M:PixelLab.SL.AsyncValueBase`1.LoadSuccessCallback(`0)">
       <requires>State == LoadState.Loading</requires>
     </member>
-    <member name="M:PixelLab.SL.AsyncValueBase`1.LoadFailCallback(System.Exception)">
-      <requires>State == LoadState.Loading</requires>
-    </member>
     <member name="M:PixelLab.SL.AsyncValueBase`1.Load">
       <requires inheritedFrom="M:PixelLab.SL.IAsyncValue`1.Load" inheritedFromTypeName="IAsyncValue">State != LoadState.Loading</requires>
+    </member>
+    <member name="M:PixelLab.SL.AsyncValueBase`1.LoadFailCallback(System.Exception)">
+      <requires>State == LoadState.Loading</requires>
     </member>
     <member name="M:PixelLab.SL.AsyncValue`1.#ctor(System.Func{System.Action{`0},System.Action{System.Exception},System.IAsyncResult})">
       <requires>callBack != null</requires>

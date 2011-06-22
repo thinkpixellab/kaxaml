@@ -116,16 +116,15 @@
       <requires>sourceItems != null</requires>
       <requires>sourceItems.Count &gt; 0</requires>
     </member>
-    <member name="M:PixelLab.Common.CommandHelpers.GetCommandString(System.Windows.FrameworkElement)">
+    <member name="M:PixelLab.Common.CommandHelpers.TryGetCommand(PixelLab.Common.ICommandProxy,System.Windows.DependencyObject,System.String)">
+      <requires>proxy != null</requires>
+      <requires>source != null</requires>
+      <requires>!name.IsNullOrWhiteSpace()</requires>
+    </member>
+    <member name="M:PixelLab.Common.CommandHelpers.SetCommand(System.Windows.FrameworkElement,System.Windows.Input.ICommand)">
       <requires>element != null</requires>
     </member>
     <member name="M:PixelLab.Common.CommandHelpers.SetCommandParameter(System.Windows.FrameworkElement,System.Object)">
-      <requires>element != null</requires>
-    </member>
-    <member name="M:PixelLab.Common.CommandHelpers.GetCommandParameter(System.Windows.FrameworkElement)">
-      <requires>element != null</requires>
-    </member>
-    <member name="M:PixelLab.Common.CommandHelpers.SetCommand(System.Windows.FrameworkElement,System.Windows.Input.ICommand)">
       <requires>element != null</requires>
     </member>
     <member name="M:PixelLab.Common.CommandHelpers.CommandState.GetCommandState(System.Windows.FrameworkElement)">
@@ -134,15 +133,16 @@
     <member name="M:PixelLab.Common.CommandHelpers.CommandState.#ctor(System.Windows.FrameworkElement)">
       <requires>owner != null</requires>
     </member>
-    <member name="M:PixelLab.Common.CommandHelpers.GetCommand(System.Windows.FrameworkElement)">
+    <member name="M:PixelLab.Common.CommandHelpers.GetCommandString(System.Windows.FrameworkElement)">
       <requires>element != null</requires>
     </member>
-    <member name="M:PixelLab.Common.CommandHelpers.TryGetCommand(PixelLab.Common.ICommandProxy,System.Windows.DependencyObject,System.String)">
-      <requires>proxy != null</requires>
-      <requires>source != null</requires>
-      <requires>!name.IsNullOrWhiteSpace()</requires>
+    <member name="M:PixelLab.Common.CommandHelpers.GetCommandParameter(System.Windows.FrameworkElement)">
+      <requires>element != null</requires>
     </member>
     <member name="M:PixelLab.Common.CommandHelpers.commandStringElement_loaded(System.Windows.FrameworkElement)">
+      <requires>element != null</requires>
+    </member>
+    <member name="M:PixelLab.Common.CommandHelpers.GetCommand(System.Windows.FrameworkElement)">
       <requires>element != null</requires>
     </member>
     <member name="M:PixelLab.Common.PageFlipper.#ctor(System.Windows.Size,System.Windows.UIElement,System.Windows.UIElement,System.Windows.FrameworkElement,System.Windows.FrameworkElement)">

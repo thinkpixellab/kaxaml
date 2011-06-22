@@ -94,14 +94,17 @@
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
-    <Reference Include="PixelLab.Common">
-      <HintPath>..\packages\PixelLab.BOT.1.0.6\lib\net4\PixelLab.Common.dll</HintPath>
+    <Reference Include="PixelLab.Common, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\PixelLab.BOT.1.1.0\lib\net4\PixelLab.Common.dll</HintPath>
     </Reference>
-    <Reference Include="PixelLab.Core">
-      <HintPath>..\packages\PixelLab.BOT.1.0.6\lib\net4\PixelLab.Core.dll</HintPath>
+    <Reference Include="PixelLab.Core, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\PixelLab.BOT.1.1.0\lib\net4\PixelLab.Core.dll</HintPath>
     </Reference>
-    <Reference Include="PixelLab.Wpf">
-      <HintPath>..\packages\PixelLab.BOT.1.0.6\lib\net4\PixelLab.Wpf.dll</HintPath>
+    <Reference Include="PixelLab.Wpf, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\PixelLab.BOT.1.1.0\lib\net4\PixelLab.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />

@@ -247,11 +247,11 @@
       <requires exception="T:System.ArgumentNullException">element != null</requires>
       <exception cref="T:System.ArgumentNullException">element == null</exception>
     </member>
-    <member name="M:PixelLab.Wpf.AnimatingTilePanel.GetItemWidth(System.Windows.DependencyObject)">
+    <member name="M:PixelLab.Wpf.AnimatingTilePanel.SetItemHeight(System.Windows.DependencyObject,System.Double)">
       <requires exception="T:System.ArgumentNullException">element != null</requires>
       <exception cref="T:System.ArgumentNullException">element == null</exception>
     </member>
-    <member name="M:PixelLab.Wpf.AnimatingTilePanel.SetItemHeight(System.Windows.DependencyObject,System.Double)">
+    <member name="M:PixelLab.Wpf.AnimatingTilePanel.GetItemWidth(System.Windows.DependencyObject)">
       <requires exception="T:System.ArgumentNullException">element != null</requires>
       <exception cref="T:System.ArgumentNullException">element == null</exception>
     </member>
@@ -270,14 +270,14 @@
       <requires exception="T:System.ArgumentOutOfRangeException">blockCount &gt; 0</requires>
       <exception cref="T:System.ArgumentOutOfRangeException">blockCount &lt;= 0</exception>
     </member>
-    <member name="M:PixelLab.Wpf.ZapCommandItem.ToString">
-      <ensures inheritedFrom="M:System.Object.ToString" inheritedFromTypeName="Object">Contract.Result&lt;string&gt;() != null</ensures>
-    </member>
     <member name="M:PixelLab.Wpf.ZapCommandItem.#ctor(PixelLab.Wpf.ZapScroller,System.Int32)">
       <requires exception="T:System.ArgumentNullException">zapScroller != null</requires>
       <exception cref="T:System.ArgumentNullException">zapScroller == null</exception>
       <requires exception="T:System.ArgumentOutOfRangeException">index &gt;= 0</requires>
       <exception cref="T:System.ArgumentOutOfRangeException">index &lt; 0</exception>
+    </member>
+    <member name="M:PixelLab.Wpf.ZapCommandItem.ToString">
+      <ensures inheritedFrom="M:System.Object.ToString" inheritedFromTypeName="Object">Contract.Result&lt;string&gt;() != null</ensures>
     </member>
     <member name="M:PixelLab.Wpf.WpfUtil.SetToVector(System.Windows.Media.TranslateTransform,System.Windows.Vector)">
       <requires>translateTransform != null</requires>

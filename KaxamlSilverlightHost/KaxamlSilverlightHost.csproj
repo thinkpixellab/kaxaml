@@ -118,11 +118,13 @@
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\packages\CommonServiceLocator.1.0\lib\SL30\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
-    <Reference Include="PixelLab.Common_SL4">
-      <HintPath>..\packages\PixelLab.BOT.1.0.6\lib\SL4\PixelLab.Common_SL4.dll</HintPath>
+    <Reference Include="PixelLab.Common_SL4, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\PixelLab.BOT.1.1.0\lib\SL4\PixelLab.Common_SL4.dll</HintPath>
     </Reference>
-    <Reference Include="PixelLab.SL">
-      <HintPath>..\packages\PixelLab.BOT.1.0.6\lib\SL4\PixelLab.SL.dll</HintPath>
+    <Reference Include="PixelLab.SL, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\PixelLab.BOT.1.1.0\lib\SL4\PixelLab.SL.dll</HintPath>
     </Reference>
     <Reference Include="System.Net" />
     <Reference Include="System.Windows" />

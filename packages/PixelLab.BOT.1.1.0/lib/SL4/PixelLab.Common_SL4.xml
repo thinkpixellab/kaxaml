@@ -1,0 +1,433 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PixelLab.Common_SL4</name>
+    </assembly>
+    <members>
+        <member name="M:PixelLab.Common.Changeable.UpdateProperty``1(System.String,``0@,``0)">
+            <summary>
+            Helper method for raising the PropertyChanged event.
+            </summary>
+            <typeparam name="T">The type of the property that has changed.</typeparam>
+            <param name="propertyName">The name of the property that has changed.</param>
+            <param name="propertyValue">The original value of the property that has changed.</param>
+            <param name="value">The new value of the property that has changed.</param>
+            <returns><c>True</c> if the property was update; otherwise <c>false</c>.</returns>
+        </member>
+        <member name="T:PixelLab.Common.SelectedItemsBehavior">
+            <summary>
+            Provides an attached behavior to enable binding the selected items of a <see cref="T:System.Windows.Controls.ListBox"/>.
+            </summary>
+        </member>
+        <member name="F:PixelLab.Common.SelectedItemsBehavior.SelectedItemsProperty">
+            <summary>
+            Identifies the SelectedItems dependency property.
+            </summary>
+        </member>
+        <member name="M:PixelLab.Common.SelectedItemsBehavior.OnAttached">
+            <summary>
+            Called after the behavior is attached to an AssociatedObject.
+            </summary>
+            <remarks>Override this to hook up functionality to the AssociatedObject.</remarks>
+        </member>
+        <member name="M:PixelLab.Common.SelectedItemsBehavior.OnDetaching">
+            <summary>
+            Called when the behavior is being detached from its AssociatedObject, but before it has actually occurred.
+            </summary>
+            <remarks>Override this to unhook functionality from the AssociatedObject.</remarks>
+        </member>
+        <member name="P:PixelLab.Common.SelectedItemsBehavior.SelectedItems">
+            <summary>
+            Gets or sets the selected items. This is a dependency property.
+            </summary>
+            <value>The selected items.</value>
+        </member>
+        <member name="M:PixelLab.Common.GeoHelper.ScaleToFit(System.Windows.Size,System.Windows.Size)">
+            <summary>
+                Returns the scale factor by which an object of size <paramref name="source"/>
+                should be scaled to fit within an object of size <param name="target"/>.
+            </summary>
+            <param name="target">The target size.</param>
+            <param name="size2">The source size.</param>
+        </member>
+        <member name="T:PixelLab.Common.ActualSizePropertyProxy">
+            <summary>
+            Provides a proxy object for binding to the ActualWidth and ActualHeight of a FrameworkElement.
+            </summary>
+        </member>
+        <member name="F:PixelLab.Common.ActualSizePropertyProxy.ElementProperty">
+            <summary>
+            The associated <see cref="T:System.Windows.FrameworkElement"/>. This is a dependency property.
+            </summary>
+        </member>
+        <member name="E:PixelLab.Common.ActualSizePropertyProxy.PropertyChanged">
+            <summary>
+            Occurs when a property value changes.
+            </summary>
+        </member>
+        <member name="P:PixelLab.Common.ActualSizePropertyProxy.Element">
+            <summary>
+            Gets or sets the associated element.
+            </summary>
+            <value>The associated element.</value>
+        </member>
+        <member name="P:PixelLab.Common.ActualSizePropertyProxy.ActualHeightValue">
+            <summary>
+            Gets the actual height value.
+            </summary>
+            <value>The actual height value.</value>
+        </member>
+        <member name="P:PixelLab.Common.ActualSizePropertyProxy.ActualWidthValue">
+            <summary>
+            Gets the actual width value.
+            </summary>
+            <value>The actual width value.</value>
+        </member>
+        <member name="T:PixelLab.Common.Util">
+            <summary>
+                Contains general helper methods.
+            </summary>
+        </member>
+        <member name="M:PixelLab.Common.Util.GetHashCode(System.Object[])">
+            <summary>
+            Returns an hash aggregation of an array of elements.
+            </summary>
+            <param name="items">An array of elements from which to create a hash.</param>
+        </member>
+        <member name="M:PixelLab.Common.Util.InterlockedSetIfNotNull``1(``0@,``0)">
+            <summary>
+                Wraps <see cref="M:System.Threading.Interlocked.CompareExchange``1(``0@,``0,``0)"/>
+                for atomically setting null fields.
+            </summary>
+            <typeparam name="T">The type of the field to set.</typeparam>
+            <param name="location">
+                The field that, if null, will be set to <paramref name="value"/>.
+            </param>
+            <param name="value">
+                If <paramref name="location"/> is null, the object to set it to.
+            </param>
+            <returns>true if <paramref name="location"/> was null and has now been set; otherwise, false.</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:PixelLab.Common.Util.IsCriticalException(System.Exception)" -->
+        <member name="T:PixelLab.Common.PropertyChangeWatcher">
+            <remarks>In order to be 'safe' this method uses reflection on every 'watch' to ensure the property exists.
+            In order to be thread safe, this class uses lock. (Sadly, read/write locks don't exist in Silverlight.)
+            So be careful using this in preformance-critical contexts.
+            </remarks>
+        </member>
+        <member name="T:PixelLab.Common.WeakEnumerable`1">
+            <summary>
+            Keeps a collection of items 'weakly'. On enumeration, valid references to items are returned. Invalid references are cleaned up.
+            </summary>
+            <typeparam name="T">Any class. Silly to have weak references to value types, no?</typeparam>
+            <remarks>Very much NOT thread safe.</remarks>
+        </member>
+        <member name="M:PixelLab.Common.WeakEnumerable`1.Add(`0)">
+            <summary>
+            Adds an item to the end of the enumerable.
+            </summary>
+            <remarks>This method requires the entire collection to be enumerated.
+            If adding to the end is not required, use Prepend. It's faster.</remarks>
+        </member>
+        <member name="M:PixelLab.Common.WeakEnumerable`1.Insert(`0)">
+            <summary>
+            Adds an item to the begining (head) of the collection.
+            </summary>
+            <remarks>Potentially a lot faster than Add.</remarks>
+        </member>
+        <member name="T:PixelLab.Common.ActionOnDispose">
+            <summary>
+                Provides a wrapper over <see cref="T:System.IDisposable"/> that
+                invokes the provided delegate when <see cref="M:System.IDisposable.Dispose"/>
+                is called.
+            </summary>
+            <example>
+            <code>
+            SqlConnection conn = new SqlConnection(connectionString);
+            using(new ActionOnDispose(new Action(conn.Close))
+            {
+                // Do work here...
+                // For cases where you want the connection closed
+                // but not disposed
+            }
+            </code>
+            </example>
+        </member>
+        <member name="M:PixelLab.Common.ActionOnDispose.#ctor(System.Action)">
+            <summary>
+                Creats a new <see cref="T:PixelLab.Common.ActionOnDispose"/>
+                using the provided <see cref="T:System.Action"/>.
+            </summary>
+            <param name="unlockAction">
+                The <see cref="T:System.Action"/> to invoke when <see cref="M:PixelLab.Common.ActionOnDispose.Dispose"/> is called.
+            </param>
+            <exception cref="T:System.ArgumentNullException">if <paramref name="unlockAction"/> is null.</exception>
+        </member>
+        <member name="M:PixelLab.Common.ActionOnDispose.Dispose">
+            <summary>
+                Calls the provided Action if it has not been called;
+                otherwise, throws an <see cref="T:System.Exception"/>.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">If <see cref="M:PixelLab.Common.ActionOnDispose.Dispose"/> has already been called.</exception>
+        </member>
+        <member name="T:PixelLab.Common.CastList`2">
+            <summary>
+                A wrapper around an <see cref="T:System.Collections.Generic.IList`1"/>
+                which projects the contents as a read-only <see cref="T:System.Collections.Generic.IList`1"/>.
+            </summary>
+            <typeparam name="TFrom">The type of the source <see cref="T:System.Collections.Generic.IList`1"/>.</typeparam>
+            <typeparam name="TTo">
+                The type of the target <see cref="T:System.Collections.Generic.IList`1"/>
+                Must be assignable from <paramref name="TFrom"/>.
+            </typeparam>
+            <remarks>
+                Like <see cref="T:System.Collections.ObjectModel.ReadOnlyCollection`1"/>, this class
+                is a wrapper. Changes to the source collection will
+                be reflected.
+            </remarks>
+        </member>
+        <member name="T:PixelLab.Common.ListBase`1">
+            <summary>
+                Serves as a base implemetation of <see cref="T:System.Collections.Generic.IList`1"/>.
+            </summary>
+            <typeparam name="T">The type of the item in the list.</typeparam>
+        </member>
+        <member name="M:PixelLab.Common.CastList`2.#ctor(System.Collections.Generic.IList{`0})">
+            <summary>
+                Creats a new <see cref="T:PixelLab.Common.CastList`2"/>.
+            </summary>
+            <param name="from">The source collection.</param>
+        </member>
+        <member name="M:PixelLab.Common.CastList`2.GetItem(System.Int32)">
+            <summary>
+                Gets the element at the specified index.
+            </summary>
+        </member>
+        <member name="P:PixelLab.Common.CastList`2.Count">
+            <summary>
+                Gets the number of contained elements.
+            </summary>
+        </member>
+        <member name="T:PixelLab.Common.DemoCollection`1">
+            <remarks>
+                The members of this class are only safe to use via one thread (usually the UI thread in a WPF application).
+                Any cross-thread changes will cause undesired behavior.
+            </remarks>
+        </member>
+        <member name="M:PixelLab.Common.TreeHelpers.GetAncestors(System.Windows.DependencyObject)">
+            <remarks>Includes element.</remarks>
+        </member>
+        <member name="M:PixelLab.Common.ObservableCollectionPlus`1.AddRange(System.Collections.Generic.IEnumerable{`0})">
+            <remarks>It's recommended that you use this method within BeginMultiUpdate</remarks>
+        </member>
+        <member name="M:PixelLab.Common.CollectionExtensions.CountForEach``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0,System.Int32})">
+            <summary>
+            Calls the provided action on each item, providing the item and its index into the source.
+            </summary>
+        </member>
+        <member name="M:PixelLab.Common.CollectionExtensions.AllUnique``1(System.Collections.Generic.IList{``0})">
+            <summary>
+                Returns true if all items in the list are unique using
+                <see cref="P:System.Collections.Generic.EqualityComparer`1.Default">EqualityComparer&lt;T&gt;.Default</see>.
+            </summary>
+            <exception cref="T:System.ArgumentNullException">if <param name="source"/> is null.</exception>
+        </member>
+        <member name="M:PixelLab.Common.CollectionExtensions.TrueForAllPairs``1(System.Collections.Generic.IList{``0},System.Func{``0,``0,System.Boolean})">
+            <summary>
+                Returns true if <paramref name="compare"/> returns
+                true for every pair of items in <paramref name="source"/>.
+            </summary>
+        </member>
+        <member name="M:PixelLab.Common.CollectionExtensions.TrueForAllAdjacentPairs``1(System.Collections.Generic.IList{``0},System.Func{``0,``0,System.Boolean})">
+            <summary>
+                Returns true if <paramref name="compare"/> returns true of every
+                adjacent pair of items in the <paramref name="source"/>.
+            </summary>
+            <remarks>
+            <para>
+                If there are n items in the collection, n-1 comparisons are done.
+            </para>
+            <para>
+                Every valid [i] and [i+1] pair are passed into <paramref name="compare"/>.
+            </para>
+            <para>
+                If <paramref name="source"/> has 0 or 1 items, true is returned.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:PixelLab.Common.CollectionExtensions.AllNotNullOrEmpty(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+                Returns true if all of the items in <paramref name="source"/> are not
+                null or empty.
+            </summary>
+            <exception cref="T:System.ArgumentNullException">if <param name="source"/> is null.</exception>
+        </member>
+        <member name="M:PixelLab.Common.CollectionExtensions.AllExistIn``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+                Returns true if all items in <paramref name="source"/> exist
+                in <paramref name="set"/>.
+            </summary>
+            <exception cref="T:System.ArgumentNullException">if <param name="source"/> or <param name="set"/> are null.</exception>
+        </member>
+        <member name="M:PixelLab.Common.CollectionExtensions.IsEmpty``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+                Returns true if <paramref name="source"/> has no items in it; otherwise, false.
+            </summary>
+            <remarks>
+            <para>
+                If an <see cref="T:System.Collections.Generic.ICollection`1"/> is provided,
+                <see cref="P:System.Collections.Generic.ICollection`1.Count"/> is used.
+            </para>
+            <para>
+                Yes, this does basically the same thing as the
+                <see cref="M:System.Linq.Enumerable.Any``1(System.Collections.Generic.IEnumerable{``0})"/>
+                extention. The differences: 'IsEmpty' is easier to remember and it leverages
+                <see cref="P:System.Collections.Generic.ICollection`1.Count">ICollection.Count</see> if it exists.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:PixelLab.Common.CollectionExtensions.IndexOf``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean})">
+            <summary>
+                Returns the index of the first item in <paramref name="source"/>
+                for which <paramref name="predicate"/> returns true. If none, -1.
+            </summary>
+            <param name="source">The source enumerable.</param>
+            <param name="predicate">The function to evaluate on each element.</param>
+        </member>
+        <member name="M:PixelLab.Common.CollectionExtensions.ToReadOnlyCollection``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+                Returns a new <see cref="T:System.Collections.ObjectModel.ReadOnlyCollection`1"/> using the
+                contents of <paramref name="source"/>.
+            </summary>
+            <remarks>
+                The contents of <paramref name="source"/> are copied to
+                an array to ensure the contents of the returned value
+                don't mutate.
+            </remarks>
+        </member>
+        <member name="M:PixelLab.Common.CollectionExtensions.ForEach``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0})">
+            <summary>
+                Performs the specified <paramref name="action"/>
+                on each element of the specified <paramref name="source"/>.
+            </summary>
+            <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
+            <param name="source">The sequence to which is applied the specified <paramref name="action"/>.</param>
+            <param name="action">The action applied to each element in <paramref name="source"/>.</param>
+        </member>
+        <member name="M:PixelLab.Common.CollectionExtensions.RemoveLast``1(System.Collections.Generic.IList{``0})">
+            <summary>
+                Removes the last element from <paramref name="source"/>.
+            </summary>
+            <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
+            <param name="source">The list from which to remove the last element.</param>
+            <returns>The last element.</returns>
+            <remarks><paramref name="source"/> must have at least one element and allow changes.</remarks>
+        </member>
+        <member name="M:PixelLab.Common.CollectionExtensions.EmptyIfNull``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+                If <paramref name="source"/> is null, return an empty <see cref="T:System.Collections.Generic.IEnumerable`1"/>;
+                otherwise, return <paramref name="source"/>.
+            </summary>
+        </member>
+        <member name="M:PixelLab.Common.CollectionExtensions.SelectRecursive``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Collections.Generic.IEnumerable{``0}})">
+            <summary>
+                Recursively projects each nested element to an <see cref="T:System.Collections.Generic.IEnumerable`1"/>
+                and flattens the resulting sequences into one sequence.
+            </summary>
+            <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
+            <param name="source">A sequence of values to project.</param>
+            <param name="recursiveSelector">A transform to apply to each element.</param>
+            <returns>
+                An <see cref="T:System.Collections.Generic.IEnumerable`1"/> whose elements are the
+                result of recursively invoking the recursive transform function
+                on each element and nested element of the input sequence.
+            </returns>
+        </member>
+        <member name="M:PixelLab.Common.CollectionExtensions.ToObservableCollection``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Creates an <see cref="!:ObservableCollection"/> from the <see cref="!:IEnumerable"/>.
+            </summary>
+            <typeparam name="T">The type of the source elements.</typeparam>
+            <param name="source">The <see cref="!:IEnumerable"/> to create the <see cref="!:ObservableCollection"/> from.</param>
+            <returns>An <see cref="!:ObservableCollection"/> that contains elements from the input sequence.</returns>
+        </member>
+        <member name="P:PixelLab.Common.WrapPanel.WrappingAlignment">
+            <summary>
+            A description of the property.
+            </summary>
+        </member>
+        <member name="T:PixelLab.Common.LockHelper">
+            <summary>
+                Provides services of <see cref="T:System.Threading.Monitor"/>, but while allowing better debugging of deadlocks.
+            </summary>
+        </member>
+        <member name="M:PixelLab.Common.LockHelper.#ctor(System.String)">
+            <summary>
+                Creates a new instance of <see cref="T:PixelLab.Common.LockHelper"/>.
+            </summary>
+            <param name="name">The name to give the helper. Cannot be null or empty.</param>
+            <exception cref="T:System.ArgumentNullException">If <paramref name="name"/> is null.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">If <paramref name="name"/> is empty.</exception>
+        </member>
+        <member name="M:PixelLab.Common.LockHelper.GetLock">
+            <summary>
+                Aquires the lock.
+            </summary>
+            <returns>An <see cref="T:System.IDisposable"/> that can be used in a C# 'lock' block.</returns>
+            <example><code>
+            using(lockHelper.GetLock()
+            {
+                //do work here
+            }</code></example>
+        </member>
+        <member name="M:PixelLab.Common.LockHelper.Pulse">
+            <summary>
+                Proxy for the <see cref="M:System.Threading.Monitor.Pulse(System.Object)"/> method on the current instance.
+            </summary>
+        </member>
+        <member name="M:PixelLab.Common.LockHelper.Wait">
+            <summary>
+                Proxy for the <see cref="M:System.Threading.Monitor.Wait(System.Object)"/> method on the current instance.
+            </summary>
+        </member>
+        <member name="M:PixelLab.Common.LockHelper.CheckAccess">
+            <summary>
+                Check to see if the calling thread hold this lock on this <see cref="T:PixelLab.Common.LockHelper"/>.
+            </summary>
+            <returns>true if it holds the lock; otherwies, false.</returns>
+        </member>
+        <member name="M:PixelLab.Common.LockHelper.VerifyAccess">
+            <summary>
+                Throws an exception if <see cref="M:PixelLab.Common.LockHelper.CheckAccess"/> would returns false.
+            </summary>
+            <exception cref="T:System.Exception">If <see cref="M:PixelLab.Common.LockHelper.CheckAccess"/> would returns false.</exception>
+        </member>
+        <member name="M:PixelLab.Common.InstanceFactory.CreateInstance``1(System.Object[])">
+            <summary>
+            A generic convenience method to create the provided type.
+            </summary>
+        </member>
+        <member name="M:PixelLab.Common.InstanceFactory.CreateInstance(System.Type,System.Object[])">
+            <summary>
+            A convenience extension method for Type that calls Activator.CreateInstance
+            </summary>
+            <returns>A new instance of the provided object.</returns>
+        </member>
+        <member name="T:PixelLab.Common.Extensions">
+            <summary>
+                Contains general purpose extention methods.
+            </summary>
+        </member>
+        <member name="M:PixelLab.Common.Extensions.VerifyPropertyNamesOnChange(System.ComponentModel.INotifyPropertyChanged)">
+            <summary>
+            Verifies that a property name exists in this ViewModel. This method
+            can be called before the property is used, for instance before
+            calling RaisePropertyChanged. It avoids errors when a property name
+            is changed but some places are missed.
+            <para>This method is only active in DEBUG mode.</para>
+            </summary>
+            <param name="element">The object to watch.</param>
+            <remarks>Thanks to Laurent Bugnion for the idea.</remarks>
+        </member>
+    </members>
+</doc>
