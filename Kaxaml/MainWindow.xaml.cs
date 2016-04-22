@@ -11,6 +11,9 @@ using Kaxaml.Plugins.Default;
 using KaxamlPlugins;
 using Microsoft.Win32;
 using PixelLab.Common;
+using System.Windows.Markup;
+using System.Reflection;
+using System.Diagnostics;
 
 namespace Kaxaml
 {
@@ -175,17 +178,7 @@ namespace Kaxaml
 
             // load or create startup documents
 
-            if (App.StartupArgs.Length > 0)
-            {
-                foreach (string s in App.StartupArgs)
-                {
-                    if (System.IO.File.Exists(s))
-                    {
-                        XamlDocument doc = XamlDocument.FromFile(s);
-                        XamlDocuments.Add(doc);
-                    }
-                }
-            }
+            ParseArgs(App.StartupArgs);
 
             if (XamlDocuments.Count == 0)
             {
@@ -193,6 +186,44 @@ namespace Kaxaml
                 XamlDocuments.Add(doc);
             }
 
+        }
+
+        private void ParseArgs(string[] args)
+        {
+            if (args == null)
+                return;
+
+            for (int i = 0; i < args.Length; i++)
+            {
+                string arg = args[i];
+                string nextArg = (i < args.Length - 1) ? args[i + 1] : null;
+
+                if (arg == "-i" && nextArg != null && System.IO.File.Exists(nextArg))
+                {
+                    try
+                    {
+                        if (nextArg.EndsWith(".xaml", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            ResourceDictionary resDict = XamlReader.Load(System.IO.File.Open(nextArg, System.IO.FileMode.Open)) as ResourceDictionary;
+                            App.Current.Resources.MergedDictionaries.Add(resDict);
+                        }
+                        else if (nextArg.EndsWith(".dll", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            Assembly.LoadFile(nextArg);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex);
+                        Debug.Fail("Could not load: " + args + " " + nextArg);
+                    }
+                }
+                if (System.IO.File.Exists(arg))
+                {
+                    XamlDocument doc = XamlDocument.FromFile(arg);
+                    XamlDocuments.Add(doc);
+                }
+            }
         }
 
         void MainWindow_PreviewKeyDown(object sender, KeyEventArgs e)
