@@ -11,6 +11,10 @@ using Kaxaml.Plugins.Default;
 using KaxamlPlugins;
 using Microsoft.Win32;
 using PixelLab.Common;
+using System.Windows.Markup;
+using System.Reflection;
+using System.Diagnostics;
+using System.Collections.Generic;
 
 namespace Kaxaml
 {
@@ -175,17 +179,11 @@ namespace Kaxaml
 
             // load or create startup documents
 
-            if (App.StartupArgs.Length > 0)
-            {
-                foreach (string s in App.StartupArgs)
-                {
-                    if (System.IO.File.Exists(s))
-                    {
-                        XamlDocument doc = XamlDocument.FromFile(s);
-                        XamlDocuments.Add(doc);
-                    }
-                }
-            }
+            ParseArgs(App.StartupArgs);
+
+            InitAssemblyResolve();
+
+            AddResources(App.Current);
 
             if (XamlDocuments.Count == 0)
             {
@@ -193,6 +191,129 @@ namespace Kaxaml
                 XamlDocuments.Add(doc);
             }
 
+        }
+
+        private void ParseArgs(string[] args)
+        {
+            if (args == null)
+                return;
+
+            for (int i = 0; i < args.Length; i++)
+            {
+                string arg = args[i];
+
+                if (arg == "-i")
+                {
+                    // Handle the include command. This allows us to add dlls and static resources to the editor
+                    string nextArg = (i < args.Length - 1) ? args[i + 1] : null;
+                    if (nextArg != null)
+                    {
+                        try
+                        {
+                            if (nextArg.StartsWith("pack://"))
+                            {
+                                XamlResources.Add(nextArg);
+                            }
+                            else if (System.IO.File.Exists(nextArg))
+                            {
+                                if (nextArg.EndsWith(".xaml", StringComparison.InvariantCultureIgnoreCase))
+                                {
+                                    XamlResources.Add(nextArg);
+                                }
+                                else if (nextArg.EndsWith(".dll", StringComparison.InvariantCultureIgnoreCase))
+                                {
+                                    Assembly.LoadFile(nextArg);
+
+                                    string dir = System.IO.Path.GetDirectoryName(nextArg);
+                                    AssemblySearchDirs.Add(dir);
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex);
+                            Debug.Fail("Could not load: " + args + " " + nextArg);
+                        }
+                    }
+
+                    i++;
+                    continue;
+                }
+
+                if (System.IO.File.Exists(arg))
+                {
+                    XamlDocument doc = XamlDocument.FromFile(arg);
+                    XamlDocuments.Add(doc);
+                }
+            }
+        }
+
+        private void InitAssemblyResolve()
+        {
+            if (AssemblySearchDirs.Count > 0)
+            {
+                AppDomain currentDomain = AppDomain.CurrentDomain;
+                currentDomain.AssemblyResolve += AssemblyResolveEventHandler;
+            }
+        }
+
+        private static Assembly AssemblyResolveEventHandler(object sender, ResolveEventArgs args)
+        {
+            string[] fields = args.Name.Split(',');
+            string assemblyName = fields[0];
+            string assemblyCulture;
+            if (fields.Length < 2)
+                assemblyCulture = null;
+            else
+                assemblyCulture = fields[2].Substring(fields[2].IndexOf('=') + 1);
+            // Do the search
+            string assemblyFilePath = null;
+            foreach (string directory in AssemblySearchDirs)
+            {
+                string path = System.IO.Path.Combine(directory, assemblyName + ".dll");
+                if (System.IO.File.Exists(path))
+                {
+                    assemblyFilePath = path;
+                    break;
+                }
+            }
+            // Load the assembly from the specified path
+            Assembly assembly = null;
+            if (!string.IsNullOrEmpty(assemblyFilePath))
+                assembly = Assembly.LoadFrom(assemblyFilePath);
+            return assembly;
+        }
+
+        private static readonly List<string> AssemblySearchDirs = new List<string>();
+        private static readonly List<string> XamlResources = new List<string>();
+
+        public static void AddResources(object element)
+        {
+            foreach (string filePath in XamlResources)
+            {
+                ResourceDictionary resDict = null;
+                if (filePath.StartsWith("pack://"))
+                {
+                    resDict = new ResourceDictionary() { Source = new Uri(filePath) };
+                }
+                else
+                {
+                    resDict = XamlReader.Load(System.IO.File.Open(filePath, System.IO.FileMode.Open)) as ResourceDictionary;
+                }
+                if (resDict != null)
+                {
+                    if (element is FrameworkElement)
+                    {
+                        FrameworkElement fe = element as FrameworkElement;
+                        fe.Resources.MergedDictionaries.Add(resDict);
+                    }
+                    else if (element is Application)
+                    {
+                        Application app = element as Application;
+                        app.Resources.MergedDictionaries.Add(resDict);
+                    }
+                }
+            }
         }
 
         void MainWindow_PreviewKeyDown(object sender, KeyEventArgs e)
