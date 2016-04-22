@@ -400,6 +400,8 @@ namespace Kaxaml.DocumentViews
 
                                 ContentArea.JournalOwnership = System.Windows.Navigation.JournalOwnership.UsesParentJournal;
                                 content = XamlReader.Load(ms, pc);
+                                //content = XamlReader.Load(ms);
+                                MainWindow.AddResources(content);
                             }
                         }
 
