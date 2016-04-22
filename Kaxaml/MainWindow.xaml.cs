@@ -204,21 +204,29 @@ namespace Kaxaml
 
                 if (arg == "-i")
                 {
+                    // Handle the include command. This allows us to add dlls and static resources to the editor
                     string nextArg = (i < args.Length - 1) ? args[i + 1] : null;
-                    if (nextArg != null && System.IO.File.Exists(nextArg))
+                    if (nextArg != null)
                     {
                         try
                         {
-                            if (nextArg.EndsWith(".xaml", StringComparison.InvariantCultureIgnoreCase))
+                            if (nextArg.StartsWith("pack://"))
                             {
                                 XamlResources.Add(nextArg);
                             }
-                            else if (nextArg.EndsWith(".dll", StringComparison.InvariantCultureIgnoreCase))
+                            else if (System.IO.File.Exists(nextArg))
                             {
-                                Assembly.LoadFile(nextArg);
+                                if (nextArg.EndsWith(".xaml", StringComparison.InvariantCultureIgnoreCase))
+                                {
+                                    XamlResources.Add(nextArg);
+                                }
+                                else if (nextArg.EndsWith(".dll", StringComparison.InvariantCultureIgnoreCase))
+                                {
+                                    Assembly.LoadFile(nextArg);
 
-                                string dir = System.IO.Path.GetDirectoryName(nextArg);
-                                AssemblySearchDirs.Add(dir);
+                                    string dir = System.IO.Path.GetDirectoryName(nextArg);
+                                    AssemblySearchDirs.Add(dir);
+                                }
                             }
                         }
                         catch (Exception ex)
@@ -283,7 +291,15 @@ namespace Kaxaml
         {
             foreach (string filePath in XamlResources)
             {
-                ResourceDictionary resDict = XamlReader.Load(System.IO.File.Open(filePath, System.IO.FileMode.Open)) as ResourceDictionary;
+                ResourceDictionary resDict = null;
+                if (filePath.StartsWith("pack://"))
+                {
+                    resDict = new ResourceDictionary() { Source = new Uri(filePath) };
+                }
+                else
+                {
+                    resDict = XamlReader.Load(System.IO.File.Open(filePath, System.IO.FileMode.Open)) as ResourceDictionary;
+                }
                 if (resDict != null)
                 {
                     if (element is FrameworkElement)
